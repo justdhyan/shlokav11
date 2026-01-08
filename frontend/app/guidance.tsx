@@ -110,10 +110,19 @@ export default function GuidanceScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#8B7355" />
-          <Text style={styles.loadingText}>Loading guidance...</Text>
-        </View>
+        <ImageBackground
+          source={{ uri: 'https://images.unsplash.com/photo-1718179401998-ffc309805882?w=800' }}
+          style={styles.loadingBackground}
+          blurRadius={3}
+        >
+          <LinearGradient
+            colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
+            style={styles.loadingGradient}
+          >
+            <ActivityIndicator size="large" color="#8B7355" />
+            <Text style={styles.loadingText}>Loading guidance...</Text>
+          </LinearGradient>
+        </ImageBackground>
       </SafeAreaView>
     );
   }
@@ -135,80 +144,94 @@ export default function GuidanceScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
+    <View style={styles.container}>
+      <ImageBackground
+        source={{ uri: 'https://images.unsplash.com/photo-1707249935951-d92bf3a65b00?w=1200' }}
+        style={styles.backgroundImage}
+        resizeMode="cover"
       >
-        {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => router.back()}
-            style={styles.backButton}
-          >
-            <Text style={styles.backButtonText}>← Back</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Content */}
-        <View style={styles.content}>
-          {/* Title */}
-          <Text style={styles.title}>{guidance.title}</Text>
-
-          {/* Verse Reference */}
-          <View style={styles.verseReferenceContainer}>
-            <Text style={styles.verseReference}>{guidance.verse_reference}</Text>
-          </View>
-
-          {/* Sanskrit Verse */}
-          <View style={styles.verseContainer}>
-            <Text style={styles.verseLabel}>श्लोक (Shloka)</Text>
-            <Text style={styles.sanskritVerse}>{guidance.sanskrit_verse}</Text>
-          </View>
-
-          {/* English Translation */}
-          <View style={styles.translationContainer}>
-            <Text style={styles.translationLabel}>Translation</Text>
-            <Text style={styles.englishTranslation}>
-              {guidance.english_translation}
-            </Text>
-          </View>
-
-          {/* Guidance */}
-          <View style={styles.guidanceContainer}>
-            <Text style={styles.guidanceLabel}>Guidance for You</Text>
-            <Text style={styles.guidanceText}>{guidance.guidance_text}</Text>
-          </View>
-
-          {/* Action Buttons */}
-          <View style={styles.actionsContainer}>
-            <TouchableOpacity
-              onPress={toggleBookmark}
-              style={[
-                styles.bookmarkButton,
-                isBookmarked && styles.bookmarkButtonActive,
-              ]}
+        <LinearGradient
+          colors={['rgba(250, 247, 242, 0.9)', 'rgba(250, 247, 242, 0.95)', 'rgba(250, 247, 242, 1)']}
+          locations={[0, 0.2, 0.5]}
+          style={styles.gradient}
+        >
+          <SafeAreaView style={styles.safeArea}>
+            <ScrollView
+              contentContainerStyle={styles.scrollContent}
+              showsVerticalScrollIndicator={false}
             >
-              <Text
-                style={[
-                  styles.bookmarkButtonText,
-                  isBookmarked && styles.bookmarkButtonTextActive,
-                ]}
-              >
-                {isBookmarked ? '★ Bookmarked' : '☆ Bookmark'}
-              </Text>
-            </TouchableOpacity>
+              {/* Header */}
+              <View style={styles.header}>
+                <TouchableOpacity
+                  onPress={() => router.back()}
+                  style={styles.backButton}
+                >
+                  <Text style={styles.backButtonText}>← Back</Text>
+                </TouchableOpacity>
+              </View>
 
-            <TouchableOpacity
-              onPress={() => router.push('/')}
-              style={styles.homeButton}
-            >
-              <Text style={styles.homeButtonText}>Return Home</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+              {/* Content */}
+              <View style={styles.content}>
+                {/* Title */}
+                <Text style={styles.title}>{guidance.title}</Text>
+
+                {/* Verse Reference */}
+                <View style={styles.verseReferenceContainer}>
+                  <Text style={styles.verseReference}>{guidance.verse_reference}</Text>
+                </View>
+
+                {/* Sanskrit Verse */}
+                <View style={styles.verseContainer}>
+                  <Text style={styles.verseLabel}>श्लोक (Shloka)</Text>
+                  <Text style={styles.sanskritVerse}>{guidance.sanskrit_verse}</Text>
+                </View>
+
+                {/* English Translation */}
+                <View style={styles.translationContainer}>
+                  <Text style={styles.translationLabel}>Translation</Text>
+                  <Text style={styles.englishTranslation}>
+                    {guidance.english_translation}
+                  </Text>
+                </View>
+
+                {/* Guidance */}
+                <View style={styles.guidanceContainer}>
+                  <Text style={styles.guidanceLabel}>Guidance for You</Text>
+                  <Text style={styles.guidanceText}>{guidance.guidance_text}</Text>
+                </View>
+
+                {/* Action Buttons */}
+                <View style={styles.actionsContainer}>
+                  <TouchableOpacity
+                    onPress={toggleBookmark}
+                    style={[
+                      styles.bookmarkButton,
+                      isBookmarked && styles.bookmarkButtonActive,
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.bookmarkButtonText,
+                        isBookmarked && styles.bookmarkButtonTextActive,
+                      ]}
+                    >
+                      {isBookmarked ? '⭐ Bookmarked' : '☆ Bookmark'}
+                    </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => router.push('/')}
+                    style={styles.homeButton}
+                  >
+                    <Text style={styles.homeButtonText}>Return Home</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ScrollView>
+          </SafeAreaView>
+        </LinearGradient>
+      </ImageBackground>
+    </View>
   );
 }
 
