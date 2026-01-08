@@ -7,10 +7,15 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   SafeAreaView,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
 
+const { width, height } = Dimensions.get('window');
 const EXPO_PUBLIC_BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 
 interface Emotion {
@@ -20,6 +25,15 @@ interface Emotion {
   description: string;
   icon: string;
 }
+
+// Emotion-specific imagery
+const emotionImages = {
+  fear: 'https://images.unsplash.com/photo-1596723328596-b929cef665a9?w=800',
+  anger: 'https://images.unsplash.com/photo-1712917699335-51dd4318eac5?w=800',
+  grief: 'https://images.unsplash.com/photo-1591757311543-5fa5af831901?w=800',
+  confusion: 'https://images.unsplash.com/photo-1718179401998-ffc309805882?w=800',
+  detachment: 'https://images.unsplash.com/photo-1706005528007-8f660674a83f?w=800',
+};
 
 export default function HomeScreen() {
   const [emotions, setEmotions] = useState<Emotion[]>([]);
@@ -60,74 +74,154 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#8B7355" />
-          <Text style={styles.loadingText}>Loading...</Text>
-        </View>
+        <ImageBackground
+          source={{ uri: 'https://images.unsplash.com/photo-1707249935951-d92bf3a65b00?w=800' }}
+          style={styles.loadingBackground}
+          blurRadius={3}
+        >
+          <LinearGradient
+            colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
+            style={styles.loadingGradient}
+          >
+            <ActivityIndicator size="large" color="#8B7355" />
+            <Text style={styles.loadingText}>Loading wisdom...</Text>
+          </LinearGradient>
+        </ImageBackground>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView 
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
+    <View style={styles.container}>
+      <ImageBackground
+        source={{ uri: 'https://images.unsplash.com/photo-1660933195480-16e7eab330bb?w=1200' }}
+        style={styles.heroBackground}
+        resizeMode="cover"
       >
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.appName}>SHLOKA</Text>
-          <Text style={styles.appNameSanskrit}>श्लोक</Text>
-        </View>
-
-        {/* Main Question */}
-        <View style={styles.questionContainer}>
-          <Text style={styles.question}>What is troubling you today?</Text>
-          <Text style={styles.subQuestion}>आज आपको क्या परेशान कर रहा है?</Text>
-        </View>
-
-        {/* Emotions Grid */}
-        <View style={styles.emotionsContainer}>
-          {emotions.map((emotion) => (
-            <TouchableOpacity
-              key={emotion._id}
-              style={styles.emotionCard}
-              onPress={() => handleEmotionPress(emotion._id)}
-              activeOpacity={0.7}
+        <LinearGradient
+          colors={['rgba(139, 115, 85, 0.7)', 'rgba(250, 247, 242, 0.95)', 'rgba(250, 247, 242, 1)']}
+          locations={[0, 0.4, 0.7]}
+          style={styles.gradient}
+        >
+          <SafeAreaView style={styles.safeArea}>
+            <ScrollView 
+              contentContainerStyle={styles.scrollContent}
+              showsVerticalScrollIndicator={false}
             >
-              <View style={styles.emotionContent}>
-                <Text style={styles.emotionName}>{emotion.name_english}</Text>
-                <Text style={styles.emotionSanskrit}>{emotion.name_sanskrit}</Text>
-                <Text style={styles.emotionDescription}>{emotion.description}</Text>
+              {/* Hero Section */}
+              <View style={styles.heroSection}>
+                <View style={styles.heroContent}>
+                  <Text style={styles.appName}>SHLOKA</Text>
+                  <Text style={styles.appNameSanskrit}>श्लोक</Text>
+                  <Text style={styles.tagline}>Wisdom from the Bhagavad Gita</Text>
+                </View>
               </View>
-            </TouchableOpacity>
-          ))}
-        </View>
 
-        {/* Footer */}
-        <View style={styles.footer}>
-          <TouchableOpacity
-            onPress={() => router.push('/bookmarks')}
-            style={styles.bookmarkButton}
-          >
-            <Text style={styles.bookmarkButtonText}>View Bookmarks</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+              {/* Main Question with Lotus Decoration */}
+              <View style={styles.questionSection}>
+                <View style={styles.questionCard}>
+                  <View style={styles.decorativeLine} />
+                  <Text style={styles.question}>What is troubling you today?</Text>
+                  <Text style={styles.subQuestion}>आज आपको क्या परेशान कर रहा है?</Text>
+                  <View style={styles.decorativeLine} />
+                </View>
+                <Text style={styles.instructionText}>
+                  Select an emotion to receive guidance from Lord Krishna
+                </Text>
+              </View>
+
+              {/* Emotions Grid with Images */}
+              <View style={styles.emotionsContainer}>
+                {emotions.map((emotion, index) => (
+                  <TouchableOpacity
+                    key={emotion._id}
+                    style={styles.emotionCardWrapper}
+                    onPress={() => handleEmotionPress(emotion._id)}
+                    activeOpacity={0.8}
+                  >
+                    <ImageBackground
+                      source={{ uri: emotionImages[emotion._id as keyof typeof emotionImages] }}
+                      style={styles.emotionCardBackground}
+                      imageStyle={styles.emotionCardImage}
+                    >
+                      <LinearGradient
+                        colors={['rgba(255, 255, 255, 0.85)', 'rgba(255, 255, 255, 0.95)']}
+                        style={styles.emotionCardGradient}
+                      >
+                        <View style={styles.emotionContent}>
+                          <View style={styles.emotionHeader}>
+                            <View style={styles.emotionIconContainer}>
+                              <Text style={styles.emotionIndex}>{index + 1}</Text>
+                            </View>
+                            <View style={styles.emotionTextContainer}>
+                              <Text style={styles.emotionName}>{emotion.name_english}</Text>
+                              <Text style={styles.emotionSanskrit}>{emotion.name_sanskrit}</Text>
+                            </View>
+                          </View>
+                          <Text style={styles.emotionDescription}>{emotion.description}</Text>
+                          <View style={styles.emotionArrow}>
+                            <Text style={styles.arrowText}>→</Text>
+                          </View>
+                        </View>
+                      </LinearGradient>
+                    </ImageBackground>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              {/* Footer with Divine Quote */}
+              <View style={styles.footer}>
+                <View style={styles.quoteContainer}>
+                  <Text style={styles.quoteText}>
+                    "योगस्थः कुरु कर्माणि"
+                  </Text>
+                  <Text style={styles.quoteTranslation}>
+                    "Perform your duty with a steady mind" - Bhagavad Gita 2.48
+                  </Text>
+                </View>
+                
+                <TouchableOpacity
+                  onPress={() => router.push('/bookmarks')}
+                  style={styles.bookmarkButton}
+                >
+                  <Text style={styles.bookmarkIcon}>⭐</Text>
+                  <Text style={styles.bookmarkButtonText}>View Saved Guidance</Text>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          </SafeAreaView>
+        </LinearGradient>
+      </ImageBackground>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAF7F2',
+  },
+  heroBackground: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  gradient: {
+    flex: 1,
+  },
+  safeArea: {
+    flex: 1,
   },
   scrollContent: {
     paddingBottom: 40,
   },
-  loadingContainer: {
+  loadingBackground: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingGradient: {
+    flex: 1,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -137,94 +231,214 @@ const styles = StyleSheet.create({
     color: '#8B7355',
     fontWeight: '500',
   },
-  header: {
-    paddingTop: 32,
-    paddingBottom: 24,
+  heroSection: {
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: 'center',
-    backgroundColor: '#F4E4C1',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
+  },
+  heroContent: {
+    alignItems: 'center',
   },
   appName: {
-    fontSize: 36,
+    fontSize: 48,
     fontWeight: 'bold',
-    color: '#8B7355',
-    letterSpacing: 2,
+    color: '#FFFFFF',
+    letterSpacing: 4,
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
   appNameSanskrit: {
-    fontSize: 20,
-    color: '#A0826D',
-    marginTop: 4,
+    fontSize: 28,
+    color: '#FFFFFF',
+    marginTop: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3,
   },
-  questionContainer: {
-    paddingHorizontal: 24,
+  tagline: {
+    fontSize: 16,
+    color: '#F4E4C1',
+    marginTop: 12,
+    fontStyle: 'italic',
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+  questionSection: {
+    paddingHorizontal: 20,
     paddingVertical: 32,
     alignItems: 'center',
   },
+  questionCard: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 20,
+    padding: 24,
+    alignItems: 'center',
+    shadowColor: '#8B7355',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(212, 175, 55, 0.3)',
+  },
+  decorativeLine: {
+    width: 60,
+    height: 3,
+    backgroundColor: '#D4AF37',
+    borderRadius: 2,
+    marginVertical: 12,
+  },
   question: {
-    fontSize: 24,
-    fontWeight: '600',
+    fontSize: 26,
+    fontWeight: '700',
     color: '#5D4E37',
     textAlign: 'center',
-    lineHeight: 32,
+    lineHeight: 34,
   },
   subQuestion: {
-    fontSize: 18,
+    fontSize: 19,
     color: '#8B7355',
     marginTop: 8,
     textAlign: 'center',
+    fontWeight: '500',
+  },
+  instructionText: {
+    fontSize: 15,
+    color: '#8B7355',
+    marginTop: 20,
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
   emotionsContainer: {
     paddingHorizontal: 16,
   },
-  emotionCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 24,
-    marginBottom: 16,
+  emotionCardWrapper: {
+    marginBottom: 20,
     marginHorizontal: 8,
+    borderRadius: 20,
+    overflow: 'hidden',
+    shadowColor: '#8B7355',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+  emotionCardBackground: {
+    width: '100%',
+    minHeight: 160,
+  },
+  emotionCardImage: {
+    borderRadius: 20,
+  },
+  emotionCardGradient: {
+    flex: 1,
+    padding: 20,
+    borderRadius: 20,
+  },
+  emotionContent: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  emotionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  emotionIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#D4AF37',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  emotionIndex: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  emotionTextContainer: {
+    flex: 1,
+  },
+  emotionName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#5D4E37',
+    marginBottom: 2,
+  },
+  emotionSanskrit: {
+    fontSize: 16,
+    color: '#8B7355',
+    fontWeight: '500',
+  },
+  emotionDescription: {
+    fontSize: 16,
+    color: '#6B5D4F',
+    lineHeight: 24,
+    marginBottom: 8,
+  },
+  emotionArrow: {
+    alignSelf: 'flex-end',
+  },
+  arrowText: {
+    fontSize: 32,
+    color: '#8B7355',
+    fontWeight: 'bold',
+  },
+  footer: {
+    paddingHorizontal: 24,
+    paddingTop: 32,
+    alignItems: 'center',
+  },
+  quoteContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 24,
+    borderLeftWidth: 4,
+    borderLeftColor: '#D4AF37',
     shadowColor: '#8B7355',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 3,
-    minHeight: 120,
   },
-  emotionContent: {
-    alignItems: 'flex-start',
-  },
-  emotionName: {
-    fontSize: 22,
-    fontWeight: 'bold',
+  quoteText: {
+    fontSize: 20,
+    fontWeight: '600',
     color: '#5D4E37',
-    marginBottom: 4,
+    textAlign: 'center',
+    marginBottom: 8,
   },
-  emotionSanskrit: {
-    fontSize: 16,
+  quoteTranslation: {
+    fontSize: 14,
     color: '#8B7355',
-    marginBottom: 12,
-  },
-  emotionDescription: {
-    fontSize: 16,
-    color: '#6B5D4F',
-    lineHeight: 22,
-  },
-  footer: {
-    paddingHorizontal: 24,
-    paddingTop: 24,
-    alignItems: 'center',
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
   bookmarkButton: {
     backgroundColor: '#6B9BD1',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    minWidth: 200,
+    paddingVertical: 18,
+    paddingHorizontal: 36,
+    borderRadius: 16,
+    flexDirection: 'row',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  bookmarkIcon: {
+    fontSize: 24,
+    marginRight: 8,
   },
   bookmarkButtonText: {
     color: '#FFFFFF',
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });
