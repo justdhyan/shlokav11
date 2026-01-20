@@ -180,13 +180,23 @@ export default function HomeScreen() {
                   </Text>
                 </View>
                 
-                <TouchableOpacity
-                  onPress={() => router.push('/bookmarks')}
-                  style={styles.bookmarkButton}
-                >
-                  <Text style={styles.bookmarkIcon}>⭐</Text>
-                  <Text style={styles.bookmarkButtonText}>View Saved Guidance</Text>
-                </TouchableOpacity>
+                <View style={styles.buttonRow}>
+                  <TouchableOpacity
+                    onPress={() => router.push('/chapters')}
+                    style={[styles.actionButton, styles.chaptersButton]}
+                  >
+                    <Text style={styles.buttonIcon}>📖</Text>
+                    <Text style={styles.buttonText}>Chapter wise</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => router.push('/bookmarks')}
+                    style={[styles.actionButton, styles.bookmarksButton]}
+                  >
+                    <Text style={styles.buttonIcon}>⭐</Text>
+                    <Text style={styles.buttonText}>Saved Guidance</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </ScrollView>
           </SafeAreaView>
