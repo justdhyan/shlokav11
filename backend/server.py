@@ -119,6 +119,48 @@ async def startup_db():
             "name_sanskrit": "वैराग्य (Vairagya)",
             "description": "When you feel disconnected, empty, or without purpose",
             "icon": "😶"
+        },
+        {
+            "_id": "joy",
+            "name_english": "Joy",
+            "name_sanskrit": "आनंद (Ananda)",
+            "description": "When you feel content, peaceful, or grateful for life's blessings",
+            "icon": "😊"
+        },
+        {
+            "_id": "doubt",
+            "name_english": "Doubt",
+            "name_sanskrit": "संशय (Sanshaya)",
+            "description": "When you question your faith, beliefs, or the path you're on",
+            "icon": "🤔"
+        },
+        {
+            "_id": "pride",
+            "name_english": "Pride",
+            "name_sanskrit": "अहंकार (Ahamkara)",
+            "description": "When you feel superior, self-important, or overly confident",
+            "icon": "😤"
+        },
+        {
+            "_id": "desire",
+            "name_english": "Desire",
+            "name_sanskrit": "काम (Kama)",
+            "description": "When you experience strong cravings, wants, or material attachments",
+            "icon": "🤲"
+        },
+        {
+            "_id": "envy",
+            "name_english": "Envy",
+            "name_sanskrit": "ईर्ष्या (Irshya)",
+            "description": "When you compare yourself to others or feel jealous of their fortune",
+            "icon": "😒"
+        },
+        {
+            "_id": "despair",
+            "name_english": "Despair",
+            "name_sanskrit": "निराशा (Nirasha)",
+            "description": "When you feel hopeless, defeated, or without direction in life",
+            "icon": "😞"
         }
     ]
     
