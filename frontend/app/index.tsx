@@ -259,21 +259,18 @@ export default function HomeScreen() {
                 </View>
                 
                 <View style={styles.buttonRow}>
-                  <TouchableOpacity
+                  <AnimatedButton
                     onPress={() => router.push('/chapters')}
-                    style={[styles.actionButton, styles.chaptersButton]}
-                  >
-                    <Text style={styles.buttonIcon}>📖</Text>
-                    <Text style={styles.buttonText}>Chapter wise</Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
+                    icon="📖"
+                    text="Chapter wise"
+                    style={styles.chaptersButton}
+                  />
+                  <AnimatedButton
                     onPress={() => router.push('/bookmarks')}
-                    style={[styles.actionButton, styles.bookmarksButton]}
-                  >
-                    <Text style={styles.buttonIcon}>⭐</Text>
-                    <Text style={styles.buttonText}>Saved Guidance</Text>
-                  </TouchableOpacity>
+                    icon="⭐"
+                    text="Saved Guidance"
+                    style={styles.bookmarksButton}
+                  />
                 </View>
               </View>
             </ScrollView>
