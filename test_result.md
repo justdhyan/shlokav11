@@ -225,6 +225,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Implemented home screen with 'What is troubling you today?' question. Shows 5 emotion cards with English and Sanskrit names. Includes offline caching with AsyncStorage. Uses calm color palette (#FAF7F2, #F4E4C1, #8B7355)."
+      - working: "NA"
+        agent: "main"
+        comment: "ENHANCED - Updated emotion images mapping to include 6 new emotions: Joy, Doubt, Pride, Desire, Envy, Despair. Frontend will now display all 11 emotions automatically when fetching from API. Added beautiful, contextually relevant background images for each new emotion using Unsplash. Images selected to resonate with older adults and match emotional states."
 
   - task: "Moods Screen - Mood Selection"
     implemented: true
