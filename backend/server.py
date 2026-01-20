@@ -27,7 +27,11 @@ api_router = APIRouter(prefix="/api")
 # Helper function to convert ObjectId to string
 def str_id(obj):
     if obj and '_id' in obj:
-        obj['_id'] = str(obj['_id'])
+        # Keep _id as-is if it's already int or string, otherwise convert ObjectId to string
+        if isinstance(obj['_id'], (int, str)):
+            pass  # Keep as-is
+        else:
+            obj['_id'] = str(obj['_id'])
     return obj
 
 # Define Models
