@@ -731,12 +731,11 @@ async def startup_db():
         }
     ]
     
-    # Insert data only if not exists
-    if existing_emotions == 0:
-        await db.emotions.insert_many(emotions)
-        await db.moods.insert_many(moods)
-        await db.guidances.insert_many(guidances)
-        logger.info("Emotions, moods, and guidance data initialized")
+    # Always insert emotions, moods, and guidances (since we cleared them)
+    await db.emotions.insert_many(emotions)
+    await db.moods.insert_many(moods)
+    await db.guidances.insert_many(guidances)
+    logger.info("Emotions, moods, and guidance data initialized")
     
     if existing_chapters == 0:
         await db.chapters.insert_many(chapters)
