@@ -189,7 +189,37 @@ async def startup_db():
         # Detachment moods
         {"_id": "detachment_loneliness", "emotion_id": "detachment", "name": "Feeling Alone", "description": "Disconnected from others"},
         {"_id": "detachment_emptiness", "emotion_id": "detachment", "name": "Inner Emptiness", "description": "Nothing brings joy anymore"},
-        {"_id": "detachment_world", "emotion_id": "detachment", "name": "Withdrawn from Life", "description": "Don't care about worldly things"}
+        {"_id": "detachment_world", "emotion_id": "detachment", "name": "Withdrawn from Life", "description": "Don't care about worldly things"},
+        
+        # Joy moods
+        {"_id": "joy_gratitude", "emotion_id": "joy", "name": "Feeling Grateful", "description": "Thankful for life's blessings"},
+        {"_id": "joy_peace", "emotion_id": "joy", "name": "Inner Peace", "description": "Content and at ease with life"},
+        {"_id": "joy_acceptance", "emotion_id": "joy", "name": "Accepting What Is", "description": "At peace with how things are"},
+        
+        # Doubt moods
+        {"_id": "doubt_faith", "emotion_id": "doubt", "name": "Questioning Faith", "description": "Unsure if God exists or cares"},
+        {"_id": "doubt_teachings", "emotion_id": "doubt", "name": "Doubting the Path", "description": "Wondering if these teachings are true"},
+        {"_id": "doubt_self", "emotion_id": "doubt", "name": "Doubting Myself", "description": "Not sure if I'm doing things right"},
+        
+        # Pride moods
+        {"_id": "pride_achievement", "emotion_id": "pride", "name": "Pride in Success", "description": "Feeling superior due to accomplishments"},
+        {"_id": "pride_knowledge", "emotion_id": "pride", "name": "Pride in Knowledge", "description": "Thinking I know more than others"},
+        {"_id": "pride_status", "emotion_id": "pride", "name": "Pride in Position", "description": "Feeling important due to my status"},
+        
+        # Desire moods
+        {"_id": "desire_wealth", "emotion_id": "desire", "name": "Craving Wealth", "description": "Strong desire for money and possessions"},
+        {"_id": "desire_pleasure", "emotion_id": "desire", "name": "Seeking Pleasure", "description": "Always wanting more enjoyment"},
+        {"_id": "desire_control", "emotion_id": "desire", "name": "Need to Control", "description": "Wanting things to go my way"},
+        
+        # Envy moods
+        {"_id": "envy_success", "emotion_id": "envy", "name": "Envying Others' Success", "description": "Jealous of what others have achieved"},
+        {"_id": "envy_happiness", "emotion_id": "envy", "name": "Envying Others' Joy", "description": "Wishing I had their peace and happiness"},
+        {"_id": "envy_fortune", "emotion_id": "envy", "name": "Envying Others' Fortune", "description": "Comparing my life unfavorably to theirs"},
+        
+        # Despair moods
+        {"_id": "despair_effort", "emotion_id": "despair", "name": "Feeling It's Pointless", "description": "Nothing I do seems to matter"},
+        {"_id": "despair_alone", "emotion_id": "despair", "name": "No One Understands", "description": "Feeling isolated in my struggles"},
+        {"_id": "despair_future", "emotion_id": "despair", "name": "No Hope for Tomorrow", "description": "Can't see things getting better"}
     ]
     
     # Sample guidance (with authentic Bhagavad Gita verses)
