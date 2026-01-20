@@ -30,17 +30,8 @@ interface Emotion {
 
 // Animated Card Component
 const AnimatedEmotionCard = ({ emotion, index, onPress }: { emotion: Emotion; index: number; onPress: () => void }) => {
-  const scaleAnim = new Animated.Value(1);
-  const fadeAnim = new Animated.Value(0);
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 400,
-      delay: index * 100,
-      useNativeDriver: true,
-    }).start();
-  }, []);
+  const [scaleAnim] = useState(new Animated.Value(1));
+  const [fadeAnim] = useState(new Animated.Value(1)); // Start at 1 for immediate visibility
 
   const handlePressIn = () => {
     Animated.spring(scaleAnim, {
@@ -59,7 +50,7 @@ const AnimatedEmotionCard = ({ emotion, index, onPress }: { emotion: Emotion; in
   };
 
   return (
-    <Animated.View style={[styles.emotionCardWrapper, { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }]}>
+    <Animated.View style={[styles.emotionCardWrapper, { transform: [{ scale: scaleAnim }] }]}>
       <Pressable
         onPress={onPress}
         onPressIn={handlePressIn}
