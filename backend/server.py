@@ -277,6 +277,168 @@ async def startup_db():
             "sanskrit_verse": "समोऽहं सर्वभूतेषु न मे द्वेष्योऽस्ति न प्रियः।\nये भजन्ति तु मां भक्त्या मयि ते तेषु चाप्यहम्॥",
             "english_translation": "I am equal to all beings; none are hateful or dear to Me. But those who worship Me with devotion are in Me, and I am in them.",
             "guidance_text": "Loneliness comes from feeling separate. Krishna reveals that the divine presence dwells within you and all beings. You are connected to everything through this universal spirit. Even in solitude, you are held by something greater than yourself."
+        },
+        {
+            "_id": "guidance_joy_gratitude",
+            "mood_id": "joy_gratitude",
+            "title": "Offer Your Joy to the Divine",
+            "verse_reference": "Bhagavad Gita 9.26",
+            "sanskrit_verse": "पत्रं पुष्पं फलं तोयं यो मे भक्त्या प्रयच्छति।\nतदहं भक्त्युपहृतमश्नामि प्रयतात्मनः॥",
+            "english_translation": "Whoever offers Me with devotion a leaf, a flower, a fruit, or water - I accept that offering of love from the pure-hearted.",
+            "guidance_text": "Your gratitude is itself a form of worship. Krishna teaches that the simplest offering, given with love, reaches the divine. When you feel thankful, recognize that joy as a gift. Share it, express it, and let it deepen your connection to all that sustains you."
+        },
+        {
+            "_id": "guidance_joy_peace",
+            "mood_id": "joy_peace",
+            "title": "The Peace Beyond Understanding",
+            "verse_reference": "Bhagavad Gita 2.71",
+            "sanskrit_verse": "विहाय कामान्यः सर्वान्पुमांश्चरति निःस्पृहः।\nनिर्ममो निरहङ्कारः स शान्तिमधिगच्छति॥",
+            "english_translation": "One who has given up all desires for sense gratification, who lives free from desires, who has given up all sense of proprietorship and is devoid of false ego—he alone can attain real peace.",
+            "guidance_text": "True peace comes not from having everything, but from wanting nothing beyond what is. Your contentment reflects spiritual maturity. Krishna honors this state as the foundation of lasting happiness. Cherish this peace and let it guide your choices."
+        },
+        {
+            "_id": "guidance_joy_acceptance",
+            "mood_id": "joy_acceptance",
+            "title": "Equanimity in All Circumstances",
+            "verse_reference": "Bhagavad Gita 2.48",
+            "sanskrit_verse": "योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय।\nसिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते॥",
+            "english_translation": "Perform your duty with a steady mind, O Arjuna, abandoning attachment to success and failure. Such equanimity is called yoga.",
+            "guidance_text": "Acceptance is not resignation—it is wisdom. By accepting what is, you free yourself from the burden of constant resistance. Krishna teaches that equanimity in both joy and sorrow is the mark of a yogi. This acceptance allows you to act with clarity and purpose."
+        },
+        {
+            "_id": "guidance_doubt_faith",
+            "mood_id": "doubt_faith",
+            "title": "Faith Destroys Doubt",
+            "verse_reference": "Bhagavad Gita 4.40",
+            "sanskrit_verse": "अज्ञश्चाश्रद्दधानश्च संशयात्मा विनश्यति।\nनायं लोकोऽस्ति न परो न सुखं संशयात्मनः॥",
+            "english_translation": "But ignorant and faithless persons who doubt the revealed scriptures do not attain God consciousness. For the doubting soul there is happiness neither in this world nor in the next.",
+            "guidance_text": "Doubt is natural, but dwelling in it brings suffering. Krishna acknowledges that faith requires courage—believing in what cannot be proven. Your questioning shows you are thinking deeply. Now take the next step: choose faith and see where it leads. Experience will dissolve doubt better than argument."
+        },
+        {
+            "_id": "guidance_doubt_teachings",
+            "mood_id": "doubt_teachings",
+            "title": "Test the Teachings Through Practice",
+            "verse_reference": "Bhagavad Gita 18.73",
+            "sanskrit_verse": "अर्जुन उवाच\nनष्टो मोहः स्मृतिर्लब्धा त्वत्प्रसादान्मयाच्युत।\nस्थितोऽस्मि गतसन्देहः करिष्ये वचनं तव॥",
+            "english_translation": "Arjuna said: My illusion has been destroyed and I have gained understanding through Your grace. I am now firm and free from doubt, and I will act according to Your instruction.",
+            "guidance_text": "Arjuna also doubted at first—his transformation came through listening and practicing. Don't expect to understand everything immediately. Apply what resonates, observe the results in your life. The Gita's truth reveals itself through sincere practice, not mere intellectual study."
+        },
+        {
+            "_id": "guidance_doubt_self",
+            "mood_id": "doubt_self",
+            "title": "Trust Your Inner Wisdom",
+            "verse_reference": "Bhagavad Gita 6.5",
+            "sanskrit_verse": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+            "english_translation": "Elevate yourself through the power of your mind, and not degrade yourself, for the mind can be the friend and also the enemy of the self.",
+            "guidance_text": "Self-doubt weakens you. Krishna teaches that you have the power to lift yourself up or bring yourself down. When you doubt, remember: you have within you the same divine spark that powers all creation. Act with what wisdom you have, and trust that you will learn as you go."
+        },
+        {
+            "_id": "guidance_pride_achievement",
+            "mood_id": "pride_achievement",
+            "title": "You Are Not the Doer",
+            "verse_reference": "Bhagavad Gita 3.27",
+            "sanskrit_verse": "प्रकृतेः क्रियमाणानि गुणैः कर्माणि सर्वशः।\nअहङ्कारविमूढात्मा कर्ताहमिति मन्यते॥",
+            "english_translation": "All actions are performed by the modes of material nature, but the soul deluded by false ego thinks, 'I am the doer.'",
+            "guidance_text": "Your achievements came through a combination of effort, circumstances, support from others, and forces beyond your control. Krishna reminds us that ego makes us think 'I did this alone.' Recognize your role, but also honor all that made success possible. Gratitude dissolves pride."
+        },
+        {
+            "_id": "guidance_pride_knowledge",
+            "mood_id": "pride_knowledge",
+            "title": "True Knowledge Brings Humility",
+            "verse_reference": "Bhagavad Gita 13.8",
+            "sanskrit_verse": "अमानित्वमदम्भित्वमहिंसा क्षान्तिरार्जवम्।\nआचार्योपासनं शौचं स्थैर्यमात्मविनिग्रहः॥",
+            "english_translation": "Humility, modesty, nonviolence, tolerance, simplicity, approaching a bona fide spiritual master, cleanliness, steadiness, self-control—these are the qualities of true knowledge.",
+            "guidance_text": "If knowledge makes you proud, you have not truly understood. Real wisdom makes one humble, because it reveals how much remains unknown. The wise person knows that all knowledge comes from a source beyond themselves. Let your learning inspire reverence, not arrogance."
+        },
+        {
+            "_id": "guidance_pride_status",
+            "mood_id": "pride_status",
+            "title": "All Positions Are Temporary",
+            "verse_reference": "Bhagavad Gita 2.14",
+            "sanskrit_verse": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+            "english_translation": "The contact of the senses with their objects, O son of Kunti, gives rise to heat and cold, pleasure and pain. These are temporary and come and go like seasons. Learn to endure them.",
+            "guidance_text": "Status, like all worldly things, is fleeting. The position you hold today may be gone tomorrow. Krishna teaches that what matters is not your title, but your character and actions. Don't identify with your role—you are far more than any position you occupy."
+        },
+        {
+            "_id": "guidance_desire_wealth",
+            "mood_id": "desire_wealth",
+            "title": "Desire Leads to Endless Suffering",
+            "verse_reference": "Bhagavad Gita 2.62-63",
+            "sanskrit_verse": "ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते।\nसङ्गात्सञ्जायते कामः कामात्क्रोधोऽभिजायते॥",
+            "english_translation": "While contemplating the objects of the senses, a person develops attachment for them. From attachment comes desire, and from desire arises anger.",
+            "guidance_text": "The more you focus on what you want, the more enslaved you become. Krishna warns that desire is never satisfied—fulfilling one only creates another. True wealth is contentment. Ask yourself: what do you truly need? Freedom comes not from having more, but from wanting less."
+        },
+        {
+            "_id": "guidance_desire_pleasure",
+            "mood_id": "desire_pleasure",
+            "title": "Temporary Pleasures Bring Lasting Pain",
+            "verse_reference": "Bhagavad Gita 5.22",
+            "sanskrit_verse": "ये हि संस्पर्शजा भोगा दुःखयोनय एव ते।\nआद्यन्तवन्तः कौन्तेय न तेषु रमते बुधः॥",
+            "english_translation": "The pleasures that arise from contact with sense objects are sources of misery and have a beginning and an end. The wise, O son of Kunti, do not rejoice in them.",
+            "guidance_text": "Pleasures derived from the senses seem sweet at first, but they fade quickly, leaving you empty and wanting more. Krishna teaches that the wise find joy within, not in fleeting sensations. Seek lasting contentment through spiritual practice, not temporary thrills."
+        },
+        {
+            "_id": "guidance_desire_control",
+            "mood_id": "desire_control",
+            "title": "Surrender Control to Find Peace",
+            "verse_reference": "Bhagavad Gita 18.66",
+            "sanskrit_verse": "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",
+            "english_translation": "Abandon all varieties of dharma and just surrender unto Me. I shall deliver you from all sinful reactions. Do not fear.",
+            "guidance_text": "The need to control everything is exhausting and ultimately impossible. Krishna invites you to release this burden. Do your part with sincerity, but trust the larger process. Surrender doesn't mean giving up—it means acting without the anxiety of trying to control everything."
+        },
+        {
+            "_id": "guidance_envy_success",
+            "mood_id": "envy_success",
+            "title": "Each Has Their Own Path",
+            "verse_reference": "Bhagavad Gita 3.35",
+            "sanskrit_verse": "श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्।\nस्वधर्मे निधनं श्रेयः परधर्मो भयावहः॥",
+            "english_translation": "It is better to perform one's own duty imperfectly than to perform another's duty perfectly. It is better to die doing one's own duty; another's duty is fraught with danger.",
+            "guidance_text": "Comparing yourself to others is a trap. Their path is not yours. Krishna teaches that you must walk your own road, however humble it may seem. Your journey has unique meaning. Envy blinds you to your own gifts and the special contribution only you can make."
+        },
+        {
+            "_id": "guidance_envy_happiness",
+            "mood_id": "envy_happiness",
+            "title": "Rejoice in Others' Good Fortune",
+            "verse_reference": "Bhagavad Gita 12.13-14",
+            "sanskrit_verse": "अद्वेष्टा सर्वभूतानां मैत्रः करुण एव च।\nनिर्ममो निरहङ्कारः समदुःखसुखः क्षमी॥",
+            "english_translation": "One who is not envious but is a kind friend to all, who does not think himself a proprietor, who is free from false ego and equal in both happiness and distress—such a person is very dear to Me.",
+            "guidance_text": "Another person's joy does not diminish yours. Krishna values those who can celebrate others' happiness without jealousy. Practice wishing well for those you envy—it will free you. Remember, their contentment doesn't block yours. There is enough grace for everyone."
+        },
+        {
+            "_id": "guidance_envy_fortune",
+            "mood_id": "envy_fortune",
+            "title": "Your Journey Unfolds as It Should",
+            "verse_reference": "Bhagavad Gita 18.46",
+            "sanskrit_verse": "यतः प्रवृत्तिर्भूतानां येन सर्वमिदं ततम्।\nस्वकर्मणा तमभ्यर्च्य सिद्धिं विन्दति मानवः॥",
+            "english_translation": "By performing one's own duty, worshiping the Lord from whom all beings have come and by whom the whole universe is pervaded, a person attains perfection.",
+            "guidance_text": "You see only a snapshot of others' lives, not their struggles or sorrows. Krishna reminds you that each person's karma unfolds uniquely. Instead of coveting what others have, focus on fulfilling your own purpose. Your path leads somewhere meaningful, even if you can't see it yet."
+        },
+        {
+            "_id": "guidance_despair_effort",
+            "mood_id": "despair_effort",
+            "title": "No Effort Is Ever Wasted",
+            "verse_reference": "Bhagavad Gita 2.40",
+            "sanskrit_verse": "नेहाभिक्रमनाशोऽस्ति प्रत्यवायो न विद्यते।\nस्वल्पमप्यस्य धर्मस्य त्रायते महतो भयात्॥",
+            "english_translation": "In this endeavor there is no loss or diminution, and even a little advancement on this path can protect one from the most dangerous fear.",
+            "guidance_text": "When you feel nothing matters, remember Krishna's promise: no sincere effort is ever lost. Even small acts of dharma accumulate. You may not see results immediately, but every right action plants seeds. The universe wastes nothing. Your efforts matter, even when results are invisible."
+        },
+        {
+            "_id": "guidance_despair_alone",
+            "mood_id": "despair_alone",
+            "title": "The Divine Witness Sees All",
+            "verse_reference": "Bhagavad Gita 13.23",
+            "sanskrit_verse": "उपद्रष्टानुमन्ता च भर्ता भोक्ता महेश्वरः।\nपरमात्मेति चाप्युक्तो देहेऽस्मिन्पुरुषः परः॥",
+            "english_translation": "Yet in this body there is another, the transcendent Lord, who is the supreme observer, the permitter, the supporter, the experiencer, and the ultimate controller, called the Supersoul.",
+            "guidance_text": "You are never truly alone in your suffering. Krishna reveals that the divine presence within witnesses every moment of your struggle. Your pain is seen, your effort is known. This presence understands you completely, even when no human does. Find comfort in this eternal companionship."
+        },
+        {
+            "_id": "guidance_despair_future",
+            "mood_id": "despair_future",
+            "title": "Darkness Precedes Dawn",
+            "verse_reference": "Bhagavad Gita 2.69",
+            "sanskrit_verse": "या निशा सर्वभूतानां तस्यां जागर्ति संयमी।\nयस्यां जाग्रति भूतानि सा निशा पश्यतो मुनेः॥",
+            "english_translation": "What is night for all beings is the time of awakening for the self-controlled; and the time of awakening for all beings is night for the introspective sage.",
+            "guidance_text": "When you cannot see hope, it doesn't mean there is none. Sometimes the darkest hour comes before transformation. Krishna teaches that the wise see differently than others—what seems like an ending may be a beginning. Hold on. Continue doing what is right. The dawn you cannot yet see is coming."
         }
     ]
     
