@@ -28,6 +28,109 @@ interface Emotion {
   icon: string;
 }
 
+// Animated Card Component
+const AnimatedEmotionCard = ({ emotion, index, onPress }: { emotion: Emotion; index: number; onPress: () => void }) => {
+  const scaleAnim = new Animated.Value(1);
+  const fadeAnim = new Animated.Value(0);
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 400,
+      delay: index * 100,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      friction: 3,
+      tension: 40,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <Animated.View style={[styles.emotionCardWrapper, { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }]}>
+      <Pressable
+        onPress={onPress}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+      >
+        <ImageBackground
+          source={{ uri: emotionImages[emotion._id as keyof typeof emotionImages] }}
+          style={styles.emotionCardBackground}
+          imageStyle={styles.emotionCardImage}
+        >
+          <LinearGradient
+            colors={['rgba(255, 255, 255, 0.88)', 'rgba(255, 255, 255, 0.96)']}
+            style={styles.emotionCardGradient}
+          >
+            <View style={styles.emotionContent}>
+              <View style={styles.emotionHeader}>
+                <View style={styles.emotionIconContainer}>
+                  <Text style={styles.emotionIndex}>{index + 1}</Text>
+                </View>
+                <View style={styles.emotionTextContainer}>
+                  <Text style={styles.emotionName}>{emotion.name_english}</Text>
+                  <Text style={styles.emotionSanskrit}>{emotion.name_sanskrit}</Text>
+                </View>
+              </View>
+              <Text style={styles.emotionDescription}>{emotion.description}</Text>
+              <View style={styles.emotionArrow}>
+                <Text style={styles.arrowText}>→</Text>
+              </View>
+            </View>
+          </LinearGradient>
+        </ImageBackground>
+      </Pressable>
+    </Animated.View>
+  );
+};
+
+// Animated Button Component
+const AnimatedButton = ({ onPress, icon, text, style }: { onPress: () => void; icon: string; text: string; style: any }) => {
+  const scaleAnim = new Animated.Value(1);
+
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.92,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      friction: 3,
+      tension: 40,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <Animated.View style={{ flex: 1, transform: [{ scale: scaleAnim }] }}>
+      <Pressable
+        onPress={onPress}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        style={[styles.actionButton, style]}
+      >
+        <Text style={styles.buttonIcon}>{icon}</Text>
+        <Text style={styles.buttonText}>{text}</Text>
+      </Pressable>
+    </Animated.View>
+  );
+};
+
 // Emotion-specific imagery
 const emotionImages = {
   fear: 'https://images.unsplash.com/photo-1596723328596-b929cef665a9?w=800',
