@@ -238,39 +238,12 @@ export default function HomeScreen() {
               {/* Emotions Grid with Images */}
               <View style={styles.emotionsContainer}>
                 {emotions.map((emotion, index) => (
-                  <TouchableOpacity
+                  <AnimatedEmotionCard
                     key={emotion._id}
-                    style={styles.emotionCardWrapper}
+                    emotion={emotion}
+                    index={index}
                     onPress={() => handleEmotionPress(emotion._id)}
-                    activeOpacity={0.8}
-                  >
-                    <ImageBackground
-                      source={{ uri: emotionImages[emotion._id as keyof typeof emotionImages] }}
-                      style={styles.emotionCardBackground}
-                      imageStyle={styles.emotionCardImage}
-                    >
-                      <LinearGradient
-                        colors={['rgba(255, 255, 255, 0.85)', 'rgba(255, 255, 255, 0.95)']}
-                        style={styles.emotionCardGradient}
-                      >
-                        <View style={styles.emotionContent}>
-                          <View style={styles.emotionHeader}>
-                            <View style={styles.emotionIconContainer}>
-                              <Text style={styles.emotionIndex}>{index + 1}</Text>
-                            </View>
-                            <View style={styles.emotionTextContainer}>
-                              <Text style={styles.emotionName}>{emotion.name_english}</Text>
-                              <Text style={styles.emotionSanskrit}>{emotion.name_sanskrit}</Text>
-                            </View>
-                          </View>
-                          <Text style={styles.emotionDescription}>{emotion.description}</Text>
-                          <View style={styles.emotionArrow}>
-                            <Text style={styles.arrowText}>→</Text>
-                          </View>
-                        </View>
-                      </LinearGradient>
-                    </ImageBackground>
-                  </TouchableOpacity>
+                  />
                 ))}
               </View>
 
