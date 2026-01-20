@@ -89,7 +89,7 @@ const AnimatedEmotionCard = ({ emotion, index, onPress }: { emotion: Emotion; in
 
 // Animated Button Component
 const AnimatedButton = ({ onPress, icon, text, style }: { onPress: () => void; icon: string; text: string; style: any }) => {
-  const scaleAnim = new Animated.Value(1);
+  const [scaleAnim] = useState(new Animated.Value(1));
 
   const handlePressIn = () => {
     Animated.spring(scaleAnim, {
