@@ -175,6 +175,42 @@ backend:
         comment: "✅ PASSED - API returns complete guidance objects with all required fields: _id, mood_id, title, verse_reference, sanskrit_verse, english_translation, guidance_text. Verified authentic Bhagavad Gita verses with proper Sanskrit text and meaningful English translations. Tested 6 guidance entries successfully. Error handling works correctly (404 for invalid mood_id)."
 
 frontend:
+  - task: "Home Screen - Chapter wise Button"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/app/index.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added 'Chapter wise' button on home screen footer alongside 'Saved Guidance' button. Two buttons are displayed side-by-side in a row with brown (#8B7355) and blue (#6B9BD1) colors respectively. Button navigates to /chapters screen. Maintained consistent design theme with icons and large touch targets."
+
+  - task: "Chapters List Screen"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/app/chapters.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created chapters.tsx screen that displays all 18 Bhagavad Gita chapters. Shows chapter number badge, English name, Sanskrit name, and description. Includes offline caching with AsyncStorage. Navigates to chapter-detail screen when clicked. Maintains app theme with gradients and ImageBackground."
+
+  - task: "Chapter Detail Screen"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/app/chapter-detail.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created chapter-detail.tsx screen showing full chapter details including: chapter number badge, title in English and Sanskrit, description, key teaching, and sample verses with Sanskrit text and English translations. Includes offline caching and back navigation. Maintains consistent design with color-coded sections."
+
   - task: "Home Screen - Emotion Selection"
     implemented: true
     working: "NA"
