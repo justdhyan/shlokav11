@@ -492,13 +492,18 @@ async def startup_db():
         }
     ]
     
-    # Insert data
-    await db.emotions.insert_many(emotions)
-    await db.moods.insert_many(moods)
-    await db.guidances.insert_many(guidances)
-    await db.chapters.insert_many(chapters)
+    # Insert data only if not exists
+    if existing_emotions == 0:
+        await db.emotions.insert_many(emotions)
+        await db.moods.insert_many(moods)
+        await db.guidances.insert_many(guidances)
+        logger.info("Emotions, moods, and guidance data initialized")
     
-    logger.info("Sample data initialized successfully")
+    if existing_chapters == 0:
+        await db.chapters.insert_many(chapters)
+        logger.info("Chapters data initialized")
+    
+    logger.info("Sample data initialization complete")
 
 # API Routes
 @api_router.get("/")
