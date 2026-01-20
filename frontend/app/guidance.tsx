@@ -36,9 +36,14 @@ export default function GuidanceScreen() {
   useEffect(() => {
     if (moodId) {
       fetchGuidance();
-      checkBookmarkStatus();
     }
   }, [moodId]);
+
+  useEffect(() => {
+    if (guidance) {
+      checkBookmarkStatus();
+    }
+  }, [guidance]);
 
   const fetchGuidance = async () => {
     try {
