@@ -22,6 +22,7 @@ interface Guidance {
 
 export default function BookmarksScreen() {
   const [bookmarks, setBookmarks] = useState<Guidance[]>([]);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   // Refresh bookmarks when screen comes into focus
@@ -33,6 +34,7 @@ export default function BookmarksScreen() {
 
   const loadBookmarks = async () => {
     try {
+      setLoading(true);
       const bookmarksData = await AsyncStorage.getItem('bookmarks');
       if (bookmarksData) {
         setBookmarks(JSON.parse(bookmarksData));
@@ -41,6 +43,8 @@ export default function BookmarksScreen() {
       }
     } catch (error) {
       console.error('Error loading bookmarks:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
