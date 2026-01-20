@@ -525,13 +525,13 @@ async def get_guidance(mood_id: str):
         raise HTTPException(status_code=404, detail="Guidance not found for this mood")
     return str_id(guidance)
 
-@api_router.get("/chapters", response_model=List[Chapter])
+@api_router.get("/chapters")
 async def get_chapters():
     """Get all chapters of Bhagavad Gita"""
     chapters = await db.chapters.find().sort("chapter_number", 1).to_list(100)
     return [str_id(c) for c in chapters]
 
-@api_router.get("/chapters/{chapter_number}", response_model=Chapter)
+@api_router.get("/chapters/{chapter_number}")
 async def get_chapter(chapter_number: int):
     """Get a specific chapter by number"""
     chapter = await db.chapters.find_one({"chapter_number": chapter_number})
