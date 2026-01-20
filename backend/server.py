@@ -199,10 +199,295 @@ async def startup_db():
         }
     ]
     
+    # Sample chapters (all 18 chapters of Bhagavad Gita)
+    chapters = [
+        {
+            "_id": 1,
+            "chapter_number": 1,
+            "name_english": "Arjuna's Dilemma",
+            "name_sanskrit": "अर्जुनविषादयोग (Arjuna Vishada Yoga)",
+            "description": "The first chapter describes how Arjuna, overwhelmed by grief and moral confusion on the battlefield, refuses to fight.",
+            "key_teaching": "This chapter sets the stage for Krishna's teachings by showing Arjuna's spiritual crisis - a universal human experience of doubt and despair.",
+            "verses": [
+                {
+                    "verse_number": "1.30",
+                    "sanskrit": "निमित्तानि च पश्यामि विपरीतानि केशव।",
+                    "english": "I see omens of evil, O Krishna. I do not see any good in killing my kinsmen in battle."
+                }
+            ]
+        },
+        {
+            "_id": 2,
+            "chapter_number": 2,
+            "name_english": "The Eternal Reality of the Soul",
+            "name_sanskrit": "सांख्ययोग (Sankhya Yoga)",
+            "description": "Krishna explains the eternal nature of the soul and introduces the concepts of dharma and karma yoga.",
+            "key_teaching": "The soul is eternal and indestructible. Focus on your duty without attachment to results.",
+            "verses": [
+                {
+                    "verse_number": "2.20",
+                    "sanskrit": "न जायते म्रियते वा कदाचिन्नायं भूत्वा भविता वा न भूयः।",
+                    "english": "The soul is never born and never dies. It is unborn, eternal, ever-existing, and primeval."
+                },
+                {
+                    "verse_number": "2.47",
+                    "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।",
+                    "english": "You have the right to perform your duty, but you are not entitled to the fruits of your actions."
+                }
+            ]
+        },
+        {
+            "_id": 3,
+            "chapter_number": 3,
+            "name_english": "Path of Action",
+            "name_sanskrit": "कर्मयोग (Karma Yoga)",
+            "description": "Krishna explains the importance of selfless action and performing one's duty without desire for personal gain.",
+            "key_teaching": "Perform your duties as an offering to the Divine, without attachment to outcomes.",
+            "verses": [
+                {
+                    "verse_number": "3.19",
+                    "sanskrit": "तस्मादसक्तः सततं कार्यं कर्म समाचर।",
+                    "english": "Therefore, without attachment, constantly perform actions which are duty, for by performing actions without attachment, one attains the Supreme."
+                }
+            ]
+        },
+        {
+            "_id": 4,
+            "chapter_number": 4,
+            "name_english": "Path of Knowledge",
+            "name_sanskrit": "ज्ञानयोग (Jnana Yoga)",
+            "description": "Krishna reveals the divine nature of his incarnations and the liberating power of spiritual knowledge.",
+            "key_teaching": "Knowledge of the true self and the divine nature destroys all karma and leads to liberation.",
+            "verses": [
+                {
+                    "verse_number": "4.7",
+                    "sanskrit": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।",
+                    "english": "Whenever there is a decline in righteousness and rise in unrighteousness, O Arjuna, at that time I manifest myself on earth."
+                }
+            ]
+        },
+        {
+            "_id": 5,
+            "chapter_number": 5,
+            "name_english": "Path of Renunciation",
+            "name_sanskrit": "सन्न्यासयोग (Sannyasa Yoga)",
+            "description": "Krishna explains that both renunciation and selfless service lead to liberation, but selfless service is superior.",
+            "key_teaching": "True renunciation is not abandoning action, but performing action without selfish desire.",
+            "verses": [
+                {
+                    "verse_number": "5.10",
+                    "sanskrit": "ब्रह्मण्याधाय कर्माणि सङ्गं त्यक्त्वा करोति यः।",
+                    "english": "One who performs their duty without attachment, surrendering results unto the Supreme, is unaffected by sin."
+                }
+            ]
+        },
+        {
+            "_id": 6,
+            "chapter_number": 6,
+            "name_english": "Path of Meditation",
+            "name_sanskrit": "ध्यानयोग (Dhyana Yoga)",
+            "description": "Krishna describes the practice of meditation and the characteristics of a true yogi.",
+            "key_teaching": "Through meditation and self-control, one can achieve peace and ultimately unite with the Divine.",
+            "verses": [
+                {
+                    "verse_number": "6.5",
+                    "sanskrit": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।",
+                    "english": "Elevate yourself through the power of your mind, and not degrade yourself, for the mind can be the friend and also the enemy of the self."
+                }
+            ]
+        },
+        {
+            "_id": 7,
+            "chapter_number": 7,
+            "name_english": "Knowledge and Wisdom",
+            "name_sanskrit": "ज्ञानविज्ञानयोग (Jnana Vijnana Yoga)",
+            "description": "Krishna explains his divine nature and how he pervades all of creation.",
+            "key_teaching": "Understanding that God is both the material and spiritual essence of all existence.",
+            "verses": [
+                {
+                    "verse_number": "7.8",
+                    "sanskrit": "रसोऽहमप्सु कौन्तेय प्रभास्मि शशिसूर्ययोः।",
+                    "english": "I am the taste in water, O son of Kunti, and I am the light of the sun and moon."
+                }
+            ]
+        },
+        {
+            "_id": 8,
+            "chapter_number": 8,
+            "name_english": "Path to the Supreme",
+            "name_sanskrit": "अक्षरब्रह्मयोग (Aksara Brahma Yoga)",
+            "description": "Krishna explains how to attain Him through constant remembrance, especially at the time of death.",
+            "key_teaching": "Whatever one remembers at the time of death, one attains that state.",
+            "verses": [
+                {
+                    "verse_number": "8.7",
+                    "sanskrit": "तस्मात्सर्वेषु कालेषु मामनुस्मर युध्य च।",
+                    "english": "Therefore, remember Me at all times and fight. With mind and intellect fixed on Me, you will surely come to Me."
+                }
+            ]
+        },
+        {
+            "_id": 9,
+            "chapter_number": 9,
+            "name_english": "Royal Knowledge",
+            "name_sanskrit": "राजविद्याराजगुह्ययोग (Raja Vidya Raja Guhya Yoga)",
+            "description": "Krishna reveals the most confidential knowledge about devotion and His divine nature.",
+            "key_teaching": "God accepts even the smallest offering made with love and devotion.",
+            "verses": [
+                {
+                    "verse_number": "9.26",
+                    "sanskrit": "पत्रं पुष्पं फलं तोयं यो मे भक्त्या प्रयच्छति।",
+                    "english": "Whoever offers Me with devotion a leaf, a flower, a fruit, or water - I accept that offering of love from the pure-hearted."
+                }
+            ]
+        },
+        {
+            "_id": 10,
+            "chapter_number": 10,
+            "name_english": "Divine Manifestations",
+            "name_sanskrit": "विभूतियोग (Vibhuti Yoga)",
+            "description": "Krishna describes His divine manifestations and how He pervades the entire universe.",
+            "key_teaching": "God is present in all that is excellent, powerful, and beautiful in creation.",
+            "verses": [
+                {
+                    "verse_number": "10.20",
+                    "sanskrit": "अहमात्मा गुडाकेश सर्वभूताशयस्थितः।",
+                    "english": "I am the Self, O Arjuna, seated in the hearts of all beings. I am the beginning, the middle, and also the end of all beings."
+                }
+            ]
+        },
+        {
+            "_id": 11,
+            "chapter_number": 11,
+            "name_english": "Vision of the Universal Form",
+            "name_sanskrit": "विश्वरूपदर्शनयोग (Vishvarupa Darshana Yoga)",
+            "description": "Krishna reveals His cosmic form to Arjuna, showing the magnificence of the entire universe in His body.",
+            "key_teaching": "God encompasses all of existence - the creator, preserver, and destroyer of all.",
+            "verses": [
+                {
+                    "verse_number": "11.54",
+                    "sanskrit": "भक्त्या त्वनन्यया शक्य अहमेवंविधोऽर्जुन।",
+                    "english": "Only by undivided devotion can I be known and seen in this form, O Arjuna, and entered into."
+                }
+            ]
+        },
+        {
+            "_id": 12,
+            "chapter_number": 12,
+            "name_english": "Path of Devotion",
+            "name_sanskrit": "भक्तियोग (Bhakti Yoga)",
+            "description": "Krishna explains that the path of devotion is the most direct way to reach Him.",
+            "key_teaching": "Devotion to God with love and surrender is the highest path.",
+            "verses": [
+                {
+                    "verse_number": "12.8",
+                    "sanskrit": "मय्येव मन आधत्स्व मयि बुद्धिं निवेशय।",
+                    "english": "Fix your mind on Me alone and let your intellect dwell upon Me. Thereafter you will live in Me without doubt."
+                }
+            ]
+        },
+        {
+            "_id": 13,
+            "chapter_number": 13,
+            "name_english": "Field and Knower of the Field",
+            "name_sanskrit": "क्षेत्रक्षेत्रज्ञविभागयोग (Kshetra Kshetrajna Vibhaga Yoga)",
+            "description": "Krishna explains the distinction between the physical body (field) and the soul (knower of the field).",
+            "key_teaching": "Understanding the difference between the body and the eternal soul is true knowledge.",
+            "verses": [
+                {
+                    "verse_number": "13.2",
+                    "sanskrit": "क्षेत्रज्ञं चापि मां विद्धि सर्वक्षेत्रेषु भारत।",
+                    "english": "Know Me to be the Knower of the field in all fields, O Arjuna. Knowledge of the field and its Knower is true knowledge."
+                }
+            ]
+        },
+        {
+            "_id": 14,
+            "chapter_number": 14,
+            "name_english": "Three Modes of Nature",
+            "name_sanskrit": "गुणत्रयविभागयोग (Gunatraya Vibhaga Yoga)",
+            "description": "Krishna explains the three gunas (modes of nature): sattva (goodness), rajas (passion), and tamas (ignorance).",
+            "key_teaching": "Understanding the three gunas helps one transcend material nature and attain liberation.",
+            "verses": [
+                {
+                    "verse_number": "14.5",
+                    "sanskrit": "सत्त्वं रजस्तम इति गुणाः प्रकृतिसम्भवाः।",
+                    "english": "Goodness, passion, and ignorance - these three modes born of nature bind the eternal soul to the body."
+                }
+            ]
+        },
+        {
+            "_id": 15,
+            "chapter_number": 15,
+            "name_english": "The Supreme Person",
+            "name_sanskrit": "पुरुषोत्तमयोग (Purushottama Yoga)",
+            "description": "Krishna describes the imperishable tree of material existence and how to attain the supreme abode.",
+            "key_teaching": "God is beyond both the perishable and imperishable, the Supreme Person who sustains all.",
+            "verses": [
+                {
+                    "verse_number": "15.7",
+                    "sanskrit": "ममैवांशो जीवलोके जीवभूतः सनातनः।",
+                    "english": "The living entities in this world are My eternal fragmented parts, but bound by material nature, they struggle with the six senses including the mind."
+                }
+            ]
+        },
+        {
+            "_id": 16,
+            "chapter_number": 16,
+            "name_english": "Divine and Demonic Natures",
+            "name_sanskrit": "दैवासुरसम्पद्विभागयोग (Daivasura Sampad Vibhaga Yoga)",
+            "description": "Krishna contrasts divine and demonic qualities, explaining which lead to liberation and which to bondage.",
+            "key_teaching": "Cultivate divine qualities like truthfulness, compassion, and humility; avoid demonic qualities like pride, anger, and arrogance.",
+            "verses": [
+                {
+                    "verse_number": "16.3",
+                    "sanskrit": "तेजः क्षमा धृतिः शौचमद्रोहो नातिमानिता।",
+                    "english": "Vigor, forgiveness, fortitude, purity, absence of hatred, and absence of pride - these are the qualities of those endowed with divine nature."
+                }
+            ]
+        },
+        {
+            "_id": 17,
+            "chapter_number": 17,
+            "name_english": "Three Divisions of Faith",
+            "name_sanskrit": "श्रद्धात्रयविभागयोग (Shraddhatraya Vibhaga Yoga)",
+            "description": "Krishna explains how faith manifests according to one's nature and the three types of faith.",
+            "key_teaching": "Faith aligned with goodness leads to divinity; faith in passion or ignorance leads to bondage.",
+            "verses": [
+                {
+                    "verse_number": "17.3",
+                    "sanskrit": "सत्त्वानुरूपा सर्वस्य श्रद्धा भवति भारत।",
+                    "english": "The faith of all beings conforms to their mental disposition, O Arjuna. A person is known by the faith they hold."
+                }
+            ]
+        },
+        {
+            "_id": 18,
+            "chapter_number": 18,
+            "name_english": "Liberation through Renunciation",
+            "name_sanskrit": "मोक्षसंन्यासयोग (Moksha Sannyasa Yoga)",
+            "description": "The final chapter summarizes all the teachings and emphasizes complete surrender to God.",
+            "key_teaching": "Surrender all actions to God, perform your duty without attachment, and you will attain liberation.",
+            "verses": [
+                {
+                    "verse_number": "18.66",
+                    "sanskrit": "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।",
+                    "english": "Abandon all varieties of dharma and just surrender unto Me. I shall deliver you from all sinful reactions. Do not fear."
+                },
+                {
+                    "verse_number": "18.78",
+                    "sanskrit": "यत्र योगेश्वरः कृष्णो यत्र पार्थो धनुर्धरः।",
+                    "english": "Wherever there is Krishna, the Lord of Yoga, and Arjuna, the wielder of the bow, there will be fortune, victory, prosperity, and morality."
+                }
+            ]
+        }
+    ]
+    
     # Insert data
     await db.emotions.insert_many(emotions)
     await db.moods.insert_many(moods)
     await db.guidances.insert_many(guidances)
+    await db.chapters.insert_many(chapters)
     
     logger.info("Sample data initialized successfully")
 
