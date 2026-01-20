@@ -4,10 +4,11 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   ActivityIndicator,
   SafeAreaView,
   ImageBackground,
+  Animated,
+  Pressable,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,6 +24,63 @@ interface Chapter {
   description: string;
   key_teaching: string;
 }
+
+// Animated Chapter Card Component
+const AnimatedChapterCard = ({ chapter, index, onPress }: { chapter: Chapter; index: number; onPress: () => void }) => {
+  const scaleAnim = new Animated.Value(1);
+  const fadeAnim = new Animated.Value(0);
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 400,
+      delay: index * 50,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.96,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      friction: 3,
+      tension: 40,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <Animated.View style={[styles.chapterCard, { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }]}>
+      <Pressable
+        onPress={onPress}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+      >
+        <View style={styles.chapterCardInner}>
+          <View style={styles.chapterHeader}>
+            <View style={styles.chapterBadge}>
+              <Text style={styles.chapterNumber}>{chapter.chapter_number}</Text>
+            </View>
+            <View style={styles.chapterTitleContainer}>
+              <Text style={styles.chapterTitle}>{chapter.name_english}</Text>
+              <Text style={styles.chapterSanskrit}>{chapter.name_sanskrit}</Text>
+            </View>
+            <Text style={styles.arrow}>→</Text>
+          </View>
+          <Text style={styles.chapterDescription} numberOfLines={2}>
+            {chapter.description}
+          </Text>
+        </View>
+      </Pressable>
+    </Animated.View>
+  );
+};
 
 export default function ChaptersScreen() {
   const [chapters, setChapters] = useState<Chapter[]>([]);
@@ -99,53 +157,34 @@ export default function ChaptersScreen() {
             >
               {/* Header */}
               <View style={styles.header}>
-                <TouchableOpacity
+                <Pressable
                   onPress={() => router.back()}
                   style={styles.backButton}
                 >
                   <Text style={styles.backButtonText}>← Back</Text>
-                </TouchableOpacity>
-                <View style={styles.titleContainer}>
-                  <Text style={styles.title}>Bhagavad Gita</Text>
-                  <Text style={styles.subtitle}>भगवद्गीता - 18 Chapters</Text>
-                </View>
+                </Pressable>
               </View>
 
-              {/* Description */}
-              <View style={styles.descriptionContainer}>
-                <Text style={styles.descriptionText}>
+              {/* Title Section */}
+              <View style={styles.titleSection}>
+                <View style={styles.titleCard}>
+                  <Text style={styles.mainTitle}>Bhagavad Gita</Text>
+                  <Text style={styles.subtitle}>भगवद्गीता - 18 Chapters</Text>
+                </View>
+                <Text style={styles.description}>
                   Explore the timeless wisdom of Lord Krishna through all 18 chapters of the Bhagavad Gita
                 </Text>
               </View>
 
               {/* Chapters List */}
               <View style={styles.chaptersContainer}>
-                {chapters.map((chapter) => (
-                  <TouchableOpacity
+                {chapters.map((chapter, index) => (
+                  <AnimatedChapterCard
                     key={chapter._id}
-                    style={styles.chapterCard}
+                    chapter={chapter}
+                    index={index}
                     onPress={() => handleChapterPress(chapter.chapter_number)}
-                    activeOpacity={0.8}
-                  >
-                    <LinearGradient
-                      colors={['#FFFFFF', '#FEFCF8']}
-                      style={styles.chapterCardGradient}
-                    >
-                      <View style={styles.chapterNumber}>
-                        <Text style={styles.chapterNumberText}>{chapter.chapter_number}</Text>
-                      </View>
-                      <View style={styles.chapterContent}>
-                        <Text style={styles.chapterName}>{chapter.name_english}</Text>
-                        <Text style={styles.chapterSanskrit}>{chapter.name_sanskrit}</Text>
-                        <Text style={styles.chapterDescription} numberOfLines={2}>
-                          {chapter.description}
-                        </Text>
-                      </View>
-                      <View style={styles.arrowContainer}>
-                        <Text style={styles.arrow}>→</Text>
-                      </View>
-                    </LinearGradient>
-                  </TouchableOpacity>
+                  />
                 ))}
               </View>
             </ScrollView>
@@ -192,126 +231,132 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   header: {
-    paddingTop: 24,
-    paddingBottom: 24,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
+    paddingTop: 16,
   },
   backButton: {
-    marginBottom: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     paddingVertical: 12,
-    paddingHorizontal: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderRadius: 12,
+    paddingHorizontal: 20,
+    borderRadius: 25,
     alignSelf: 'flex-start',
     shadowColor: '#8B7355',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowRadius: 8,
     elevation: 3,
   },
   backButtonText: {
-    fontSize: 18,
-    color: '#8B7355',
-    fontWeight: '700',
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#5D4E37',
   },
-  titleContainer: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    paddingVertical: 20,
+  titleSection: {
     paddingHorizontal: 24,
-    borderRadius: 16,
+    paddingTop: 24,
+    paddingBottom: 16,
+    alignItems: 'center',
+  },
+  titleCard: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 20,
+    padding: 24,
+    alignItems: 'center',
     shadowColor: '#8B7355',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 5,
+    shadowRadius: 12,
+    elevation: 6,
+    borderWidth: 1,
+    borderColor: 'rgba(212, 175, 55, 0.2)',
   },
-  title: {
-    fontSize: 28,
+  mainTitle: {
+    fontSize: 32,
     fontWeight: 'bold',
     color: '#5D4E37',
-    textAlign: 'center',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 18,
     color: '#8B7355',
-    textAlign: 'center',
     fontWeight: '500',
   },
-  descriptionContainer: {
-    paddingHorizontal: 32,
-    paddingVertical: 20,
-  },
-  descriptionText: {
-    fontSize: 16,
+  description: {
+    fontSize: 15,
     color: '#6B5D4F',
     textAlign: 'center',
-    lineHeight: 24,
+    marginTop: 16,
+    lineHeight: 22,
     fontStyle: 'italic',
   },
   chaptersContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     paddingTop: 8,
   },
   chapterCard: {
     marginBottom: 16,
-    marginHorizontal: 8,
-    borderRadius: 18,
+    borderRadius: 20,
     overflow: 'hidden',
+  },
+  chapterCardInner: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 20,
+    padding: 20,
     shadowColor: '#8B7355',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
-    shadowRadius: 10,
+    shadowRadius: 12,
     elevation: 6,
+    borderWidth: 1,
+    borderColor: 'rgba(212, 175, 55, 0.15)',
   },
-  chapterCardGradient: {
+  chapterHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 18,
-    minHeight: 120,
+    marginBottom: 12,
   },
-  chapterNumber: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+  chapterBadge: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     backgroundColor: '#D4AF37',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: 14,
+    shadowColor: '#D4AF37',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
   },
-  chapterNumberText: {
-    fontSize: 22,
+  chapterNumber: {
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
-  chapterContent: {
+  chapterTitleContainer: {
     flex: 1,
-    paddingRight: 12,
   },
-  chapterName: {
-    fontSize: 20,
+  chapterTitle: {
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#5D4E37',
     marginBottom: 4,
   },
   chapterSanskrit: {
-    fontSize: 15,
+    fontSize: 14,
     color: '#8B7355',
-    marginBottom: 8,
     fontWeight: '500',
   },
-  chapterDescription: {
-    fontSize: 14,
-    color: '#6B5D4F',
-    lineHeight: 20,
-  },
-  arrowContainer: {
-    justifyContent: 'center',
-  },
   arrow: {
-    fontSize: 32,
+    fontSize: 24,
     color: '#8B7355',
     fontWeight: 'bold',
+    marginLeft: 8,
+  },
+  chapterDescription: {
+    fontSize: 15,
+    color: '#6B5D4F',
+    lineHeight: 22,
   },
 });
