@@ -27,17 +27,7 @@ interface Chapter {
 
 // Animated Chapter Card Component
 const AnimatedChapterCard = ({ chapter, index, onPress }: { chapter: Chapter; index: number; onPress: () => void }) => {
-  const scaleAnim = new Animated.Value(1);
-  const fadeAnim = new Animated.Value(0);
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 400,
-      delay: index * 50,
-      useNativeDriver: true,
-    }).start();
-  }, []);
+  const [scaleAnim] = useState(new Animated.Value(1));
 
   const handlePressIn = () => {
     Animated.spring(scaleAnim, {
@@ -56,7 +46,7 @@ const AnimatedChapterCard = ({ chapter, index, onPress }: { chapter: Chapter; in
   };
 
   return (
-    <Animated.View style={[styles.chapterCard, { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }]}>
+    <Animated.View style={[styles.chapterCard, { transform: [{ scale: scaleAnim }] }]}>
       <Pressable
         onPress={onPress}
         onPressIn={handlePressIn}
