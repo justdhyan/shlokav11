@@ -83,6 +83,13 @@ export default function ChaptersScreen() {
 
   const fetchChapters = async () => {
     try {
+      // Check if backend URL is configured
+      if (!EXPO_PUBLIC_BACKEND_URL) {
+        console.error('EXPO_PUBLIC_BACKEND_URL is not defined');
+        setLoading(false);
+        return;
+      }
+
       // Try to get from cache first
       const cached = await AsyncStorage.getItem('chapters');
       if (cached) {
