@@ -129,6 +129,12 @@ const emotionImages = {
   grief: 'https://images.unsplash.com/photo-1591757311543-5fa5af831901?w=800',
   confusion: 'https://images.unsplash.com/photo-1718179401998-ffc309805882?w=800',
   detachment: 'https://images.unsplash.com/photo-1706005528007-8f660674a83f?w=800',
+  joy: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800',
+  doubt: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800',
+  pride: 'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=800',
+  desire: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800',
+  envy: 'https://images.unsplash.com/photo-1516414447565-b14be0adf13e?w=800',
+  despair: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800',
 };
 
 export default function HomeScreen() {
