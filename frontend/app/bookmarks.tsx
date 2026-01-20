@@ -131,6 +131,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FAF7F2',
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 18,
+    color: '#8B7355',
+    fontWeight: '500',
+  },
   scrollContent: {
     paddingBottom: 40,
   },
