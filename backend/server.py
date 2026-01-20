@@ -75,13 +75,18 @@ class Chapter(BaseModel):
 # Initialize sample data
 @app.on_event("startup")
 async def startup_db():
-    # Check if data already exists
-    existing_emotions = await db.emotions.count_documents({})
+    # Clear existing data to allow updates
+    await db.emotions.delete_many({})
+    await db.moods.delete_many({})
+    await db.guidances.delete_many({})
+    
+    # Check if chapters data exists
     existing_chapters = await db.chapters.count_documents({})
     
-    if existing_emotions > 0 and existing_chapters > 0:
-        logger.info("Sample data already exists")
-        return
+    if existing_chapters > 0:
+        logger.info("Chapters data already exists, re-initializing emotions, moods, and guidances")
+    else:
+        logger.info("Initializing all data")
     
     # Sample emotions
     emotions = [
