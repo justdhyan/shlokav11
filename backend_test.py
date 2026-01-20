@@ -10,7 +10,7 @@ import sys
 from typing import List, Dict, Any
 
 # Backend URL from frontend/.env
-BACKEND_URL = "https://emotion-plus.preview.emergentagent.com/api"
+BACKEND_URL = "https://empty-content-fix-1.preview.emergentagent.com/api"
 
 class SHLOKAAPITester:
     def __init__(self):
