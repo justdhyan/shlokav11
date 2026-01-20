@@ -56,6 +56,15 @@ class Guidance(BaseModel):
 class BookmarkCreate(BaseModel):
     guidance_id: str
 
+class Chapter(BaseModel):
+    id: int = Field(alias="_id")
+    chapter_number: int
+    name_english: str
+    name_sanskrit: str
+    description: str
+    key_teaching: str
+    verses: List[dict]  # List of sample verses
+
 # Initialize sample data
 @app.on_event("startup")
 async def startup_db():
