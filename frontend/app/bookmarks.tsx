@@ -52,6 +52,17 @@ export default function BookmarksScreen() {
     router.push(`/guidance?moodId=${moodId}`);
   };
 
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#8B7355" />
+          <Text style={styles.loadingText}>Loading bookmarks...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
