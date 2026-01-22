@@ -97,7 +97,7 @@ export default function ChapterDetailScreen() {
     }
   };
 
-  if (loading) {
+  if (loading && !chapter) {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
@@ -111,6 +111,14 @@ export default function ChapterDetailScreen() {
           >
             <ActivityIndicator size="large" color="#8B7355" />
             <Text style={styles.loadingText}>Loading chapter...</Text>
+            {error && (
+              <View style={styles.errorInlineContainer}>
+                <Text style={styles.errorInlineText}>{error}</Text>
+                <Pressable onPress={fetchChapter} style={styles.retryButton}>
+                  <Text style={styles.retryButtonText}>Retry</Text>
+                </Pressable>
+              </View>
+            )}
           </LinearGradient>
         </ImageBackground>
       </SafeAreaView>
@@ -120,15 +128,31 @@ export default function ChapterDetailScreen() {
   if (!chapter) {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Chapter not found</Text>
-          <TouchableOpacity
-            onPress={() => router.back()}
-            style={styles.errorButton}
+        <ImageBackground
+          source={{ uri: 'https://images.unsplash.com/photo-1718179401998-ffc309805882?w=800' }}
+          style={styles.loadingBackground}
+          blurRadius={3}
+        >
+          <LinearGradient
+            colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
+            style={styles.loadingGradient}
           >
-            <Text style={styles.errorButtonText}>Go Back</Text>
-          </TouchableOpacity>
-        </View>
+            <Text style={styles.emptyStateText}>📖</Text>
+            <Text style={styles.emptyStateTitle}>Chapter Not Found</Text>
+            <Text style={styles.emptyStateMessage}>
+              {error || 'Unable to find this chapter.'}
+            </Text>
+            <Pressable onPress={fetchChapter} style={styles.retryButton}>
+              <Text style={styles.retryButtonText}>Try Again</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => router.back()}
+              style={[styles.retryButton, { marginTop: 12, backgroundColor: '#6B9BD1' }]}
+            >
+              <Text style={styles.retryButtonText}>Go Back</Text>
+            </Pressable>
+          </LinearGradient>
+        </ImageBackground>
       </SafeAreaView>
     );
   }
