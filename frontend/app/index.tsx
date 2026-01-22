@@ -465,7 +465,7 @@ export default function HomeScreen() {
             duration={28000}
             xRange={40}
             yRange={70}
-            color="rgba(212, 175, 55, 0.22)"
+            color="rgba(212, 175, 55, 0.45)"
             initialX={-100}
             initialY={80}
             rotate={true}
@@ -478,7 +478,7 @@ export default function HomeScreen() {
             duration={32000}
             xRange={50}
             yRange={60}
-            color="rgba(139, 115, 85, 0.19)"
+            color="rgba(139, 115, 85, 0.40)"
             initialX={width - 80}
             initialY={150}
             rotate={false}
@@ -491,7 +491,7 @@ export default function HomeScreen() {
             duration={35000}
             xRange={35}
             yRange={80}
-            color="rgba(244, 228, 193, 0.25)"
+            color="rgba(244, 228, 193, 0.50)"
             initialX={width / 2 - 120}
             initialY={height * 0.4}
             rotate={true}
@@ -504,7 +504,7 @@ export default function HomeScreen() {
             duration={30000}
             xRange={45}
             yRange={55}
-            color="rgba(212, 175, 55, 0.20)"
+            color="rgba(212, 175, 55, 0.42)"
             initialX={width * 0.15}
             initialY={height - 350}
             rotate={false}
@@ -517,7 +517,7 @@ export default function HomeScreen() {
             duration={26000}
             xRange={40}
             yRange={65}
-            color="rgba(139, 115, 85, 0.17)"
+            color="rgba(139, 115, 85, 0.38)"
             initialX={width - 130}
             initialY={height - 420}
             rotate={true}
@@ -530,7 +530,7 @@ export default function HomeScreen() {
             duration={29000}
             xRange={38}
             yRange={58}
-            color="rgba(255, 140, 0, 0.16)"
+            color="rgba(255, 140, 0, 0.35)"
             initialX={-60}
             initialY={height * 0.5}
             rotate={false}
@@ -543,7 +543,7 @@ export default function HomeScreen() {
             duration={33000}
             xRange={42}
             yRange={72}
-            color="rgba(250, 247, 242, 0.23)"
+            color="rgba(250, 247, 242, 0.48)"
             initialX={width - 110}
             initialY={height * 0.6}
             rotate={true}
