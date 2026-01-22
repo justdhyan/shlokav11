@@ -39,16 +39,17 @@ interface Emotion {
   icon: string;
 }
 
-// Floating Blur Orb Component
+// Enhanced Floating Blur Orb Component with Slow, Calming Animations
 const FloatingBlurOrb = ({ 
   size = 200, 
   delay = 0, 
-  duration = 8000,
-  xRange = 100,
-  yRange = 150,
-  color = 'rgba(212, 175, 55, 0.15)',
+  duration = 25000,
+  xRange = 60,
+  yRange = 80,
+  color = 'rgba(212, 175, 55, 0.2)',
   initialX = 0,
   initialY = 0,
+  rotate = false,
 }: {
   size?: number;
   delay?: number;
@@ -58,64 +59,109 @@ const FloatingBlurOrb = ({
   color?: string;
   initialX?: number;
   initialY?: number;
+  rotate?: boolean;
 }) => {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
   const scale = useSharedValue(1);
-  const opacity = useSharedValue(0.7);
+  const opacity = useSharedValue(0.6);
+  const rotation = useSharedValue(0);
 
   useEffect(() => {
-    // Horizontal movement
+    // Gentle horizontal wave movement - using sine-wave-like pattern
     translateX.value = withDelay(
       delay,
       withRepeat(
         withSequence(
-          withTiming(xRange, { duration: duration, easing: Easing.inOut(Easing.ease) }),
-          withTiming(-xRange, { duration: duration, easing: Easing.inOut(Easing.ease) })
+          withTiming(xRange, { 
+            duration: duration, 
+            easing: Easing.bezier(0.45, 0.05, 0.55, 0.95) // Smooth sine-like easing
+          }),
+          withTiming(-xRange * 0.7, { 
+            duration: duration, 
+            easing: Easing.bezier(0.45, 0.05, 0.55, 0.95) 
+          }),
+          withTiming(0, { 
+            duration: duration * 0.5, 
+            easing: Easing.bezier(0.45, 0.05, 0.55, 0.95) 
+          })
         ),
         -1,
-        true
+        false
       )
     );
 
-    // Vertical movement
+    // Gentle vertical flow - slower and more meditative
     translateY.value = withDelay(
       delay,
       withRepeat(
         withSequence(
-          withTiming(yRange, { duration: duration * 1.3, easing: Easing.inOut(Easing.ease) }),
-          withTiming(-yRange / 2, { duration: duration * 1.3, easing: Easing.inOut(Easing.ease) })
+          withTiming(yRange, { 
+            duration: duration * 1.5, 
+            easing: Easing.bezier(0.42, 0, 0.58, 1) // Smooth flow
+          }),
+          withTiming(-yRange * 0.5, { 
+            duration: duration * 1.5, 
+            easing: Easing.bezier(0.42, 0, 0.58, 1) 
+          })
         ),
         -1,
         true
       )
     );
 
-    // Scale pulse
+    // Subtle breathing/pulsing effect - very gentle
     scale.value = withDelay(
       delay,
       withRepeat(
         withSequence(
-          withTiming(1.3, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) }),
-          withTiming(0.85, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) })
+          withTiming(1.12, { 
+            duration: duration * 1.2, 
+            easing: Easing.bezier(0.37, 0, 0.63, 1) // Smooth breathing
+          }),
+          withTiming(0.95, { 
+            duration: duration * 1.2, 
+            easing: Easing.bezier(0.37, 0, 0.63, 1) 
+          })
         ),
         -1,
         true
       )
     );
 
-    // Opacity pulse
+    // Gentle opacity fade for ethereal effect
     opacity.value = withDelay(
       delay,
       withRepeat(
         withSequence(
-          withTiming(0.85, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) }),
-          withTiming(0.4, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) })
+          withTiming(0.7, { 
+            duration: duration * 0.9, 
+            easing: Easing.bezier(0.4, 0, 0.6, 1) 
+          }),
+          withTiming(0.5, { 
+            duration: duration * 0.9, 
+            easing: Easing.bezier(0.4, 0, 0.6, 1) 
+          })
         ),
         -1,
         true
       )
     );
+
+    // Optional slow rotation for organic, flowing feel
+    if (rotate) {
+      rotation.value = withDelay(
+        delay,
+        withRepeat(
+          withTiming(360, { 
+            duration: duration * 3, 
+            easing: Easing.linear 
+          }),
+          -1,
+          false
+        )
+      );
+    }
   }, []);
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -124,6 +170,7 @@ const FloatingBlurOrb = ({
         { translateX: translateX.value },
         { translateY: translateY.value },
         { scale: scale.value },
+        ...(rotate ? [{ rotate: `${rotation.value}deg` }] : []),
       ],
       opacity: opacity.value,
     };
@@ -143,7 +190,7 @@ const FloatingBlurOrb = ({
             borderRadius: size / 2,
             backgroundColor: color,
             // @ts-ignore - web-specific property
-            filter: 'blur(40px)',
+            filter: 'blur(50px)',
           },
           animatedStyle,
         ]}
@@ -151,7 +198,7 @@ const FloatingBlurOrb = ({
     );
   }
 
-  // For native, use BlurView
+  // For native, use BlurView with enhanced blur
   return (
     <Reanimated.View
       style={[
@@ -167,7 +214,7 @@ const FloatingBlurOrb = ({
         animatedStyle,
       ]}
     >
-      <BlurView intensity={35} tint="light" style={{ flex: 1, borderRadius: size / 2 }} />
+      <BlurView intensity={45} tint="light" style={{ flex: 1, borderRadius: size / 2 }} />
     </Reanimated.View>
   );
 };
