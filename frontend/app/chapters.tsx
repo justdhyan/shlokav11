@@ -75,6 +75,7 @@ const AnimatedChapterCard = ({ chapter, index, onPress }: { chapter: Chapter; in
 export default function ChaptersScreen() {
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -83,31 +84,50 @@ export default function ChaptersScreen() {
 
   const fetchChapters = async () => {
     try {
+      setError(null);
+      
       // Check if backend URL is configured
       if (!EXPO_PUBLIC_BACKEND_URL) {
         console.error('EXPO_PUBLIC_BACKEND_URL is not defined');
+        setError('Configuration error. Please check your setup.');
         setLoading(false);
         return;
       }
 
-      // Try to get from cache first
+      // Try to get from cache first for instant display
       const cached = await AsyncStorage.getItem('chapters');
       if (cached) {
         setChapters(JSON.parse(cached));
-        setLoading(false);
+        // Don't stop loading yet - we still want to fetch fresh data
       }
 
       // Fetch from API
       const response = await fetch(`${EXPO_PUBLIC_BACKEND_URL}/api/chapters`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+
+      if (!data || data.length === 0) {
+        throw new Error('No chapters data available');
+      }
 
       setChapters(data);
       // Cache the data
       await AsyncStorage.setItem('chapters', JSON.stringify(data));
       setLoading(false);
+      setError(null);
     } catch (error) {
       console.error('Error fetching chapters:', error);
+      setError('Unable to load chapters. Please try again.');
       setLoading(false);
+      
+      // If we don't have cached data, this is a real problem
+      if (chapters.length === 0) {
+        setError('Unable to connect to server. Please check your internet connection and try again.');
+      }
     }
   };
 
