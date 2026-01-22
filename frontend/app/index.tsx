@@ -129,6 +129,29 @@ const FloatingBlurOrb = ({
     };
   });
 
+  // For web, use a CSS-based blur approach
+  if (isWeb) {
+    return (
+      <Reanimated.View
+        style={[
+          {
+            position: 'absolute',
+            left: initialX,
+            top: initialY,
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            backgroundColor: color,
+            // @ts-ignore - web-specific property
+            filter: 'blur(40px)',
+          },
+          animatedStyle,
+        ]}
+      />
+    );
+  }
+
+  // For native, use BlurView
   return (
     <Reanimated.View
       style={[
