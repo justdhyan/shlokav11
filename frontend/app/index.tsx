@@ -200,7 +200,7 @@ export default function HomeScreen() {
     router.push(`/moods?emotionId=${emotionId}`);
   };
 
-  if (loading) {
+  if (loading && emotions.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
@@ -214,6 +214,41 @@ export default function HomeScreen() {
           >
             <ActivityIndicator size="large" color="#8B7355" />
             <Text style={styles.loadingText}>Loading wisdom...</Text>
+            {error && (
+              <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{error}</Text>
+                <Pressable onPress={fetchEmotions} style={styles.retryButton}>
+                  <Text style={styles.retryButtonText}>Retry</Text>
+                </Pressable>
+              </View>
+            )}
+          </LinearGradient>
+        </ImageBackground>
+      </SafeAreaView>
+    );
+  }
+
+  // Show empty state if no data available
+  if (!loading && emotions.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ImageBackground
+          source={{ uri: 'https://images.unsplash.com/photo-1707249935951-d92bf3a65b00?w=800' }}
+          style={styles.loadingBackground}
+          blurRadius={3}
+        >
+          <LinearGradient
+            colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
+            style={styles.loadingGradient}
+          >
+            <Text style={styles.emptyStateText}>😔</Text>
+            <Text style={styles.emptyStateTitle}>No Content Available</Text>
+            <Text style={styles.emptyStateMessage}>
+              {error || 'Unable to load emotions. Please check your connection.'}
+            </Text>
+            <Pressable onPress={fetchEmotions} style={styles.retryButton}>
+              <Text style={styles.retryButtonText}>Try Again</Text>
+            </Pressable>
           </LinearGradient>
         </ImageBackground>
       </SafeAreaView>
