@@ -37,6 +37,116 @@ interface Emotion {
   icon: string;
 }
 
+// Floating Blur Orb Component
+const FloatingBlurOrb = ({ 
+  size = 200, 
+  delay = 0, 
+  duration = 8000,
+  xRange = 100,
+  yRange = 150,
+  color = 'rgba(212, 175, 55, 0.15)',
+  initialX = 0,
+  initialY = 0,
+}: {
+  size?: number;
+  delay?: number;
+  duration?: number;
+  xRange?: number;
+  yRange?: number;
+  color?: string;
+  initialX?: number;
+  initialY?: number;
+}) => {
+  const translateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
+  const scale = useSharedValue(1);
+  const opacity = useSharedValue(0.6);
+
+  useEffect(() => {
+    // Horizontal movement
+    translateX.value = withDelay(
+      delay,
+      withRepeat(
+        withSequence(
+          withTiming(xRange, { duration: duration, easing: Easing.inOut(Easing.ease) }),
+          withTiming(-xRange, { duration: duration, easing: Easing.inOut(Easing.ease) })
+        ),
+        -1,
+        true
+      )
+    );
+
+    // Vertical movement
+    translateY.value = withDelay(
+      delay,
+      withRepeat(
+        withSequence(
+          withTiming(yRange, { duration: duration * 1.3, easing: Easing.inOut(Easing.ease) }),
+          withTiming(-yRange / 2, { duration: duration * 1.3, easing: Easing.inOut(Easing.ease) })
+        ),
+        -1,
+        true
+      )
+    );
+
+    // Scale pulse
+    scale.value = withDelay(
+      delay,
+      withRepeat(
+        withSequence(
+          withTiming(1.2, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) }),
+          withTiming(0.9, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) })
+        ),
+        -1,
+        true
+      )
+    );
+
+    // Opacity pulse
+    opacity.value = withDelay(
+      delay,
+      withRepeat(
+        withSequence(
+          withTiming(0.8, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) }),
+          withTiming(0.3, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) })
+        ),
+        -1,
+        true
+      )
+    );
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: translateX.value },
+        { translateY: translateY.value },
+        { scale: scale.value },
+      ],
+      opacity: opacity.value,
+    };
+  });
+
+  return (
+    <Reanimated.View
+      style={[
+        {
+          position: 'absolute',
+          left: initialX,
+          top: initialY,
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor: color,
+        },
+        animatedStyle,
+      ]}
+    >
+      <BlurView intensity={20} tint="light" style={{ flex: 1, borderRadius: size / 2 }} />
+    </Reanimated.View>
+  );
+};
+
 // Animated Card Component
 const AnimatedEmotionCard = ({ emotion, index, onPress }: { emotion: Emotion; index: number; onPress: () => void }) => {
   const [scaleAnim] = useState(new Animated.Value(1));
