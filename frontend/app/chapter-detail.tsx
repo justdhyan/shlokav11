@@ -34,6 +34,7 @@ interface Chapter {
 export default function ChapterDetailScreen() {
   const [chapter, setChapter] = useState<Chapter | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { chapterNumber } = useLocalSearchParams();
 
@@ -45,34 +46,53 @@ export default function ChapterDetailScreen() {
 
   const fetchChapter = async () => {
     try {
+      setError(null);
+      
       // Check if backend URL is configured
       if (!EXPO_PUBLIC_BACKEND_URL) {
         console.error('EXPO_PUBLIC_BACKEND_URL is not defined');
+        setError('Configuration error. Please check your setup.');
         setLoading(false);
         return;
       }
 
-      // Try to get from cache first
+      // Try to get from cache first for instant display
       const cacheKey = `chapter_${chapterNumber}`;
       const cached = await AsyncStorage.getItem(cacheKey);
       if (cached) {
         setChapter(JSON.parse(cached));
-        setLoading(false);
+        // Don't stop loading yet - we still want to fetch fresh data
       }
 
       // Fetch from API
       const response = await fetch(
         `${EXPO_PUBLIC_BACKEND_URL}/api/chapters/${chapterNumber}`
       );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+
+      if (!data) {
+        throw new Error('Chapter not found');
+      }
 
       setChapter(data);
       // Cache the data
       await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
       setLoading(false);
+      setError(null);
     } catch (error) {
       console.error('Error fetching chapter:', error);
+      setError('Unable to load chapter. Please try again.');
       setLoading(false);
+      
+      // If we don't have cached data, this is a real problem
+      if (!chapter) {
+        setError('Unable to connect to server. Please check your internet connection and try again.');
+      }
     }
   };
 
