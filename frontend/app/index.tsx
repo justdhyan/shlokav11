@@ -389,7 +389,7 @@ export default function HomeScreen() {
             duration={12000}
             xRange={60}
             yRange={120}
-            color="rgba(212, 175, 55, 0.12)"
+            color="rgba(212, 175, 55, 0.18)"
             initialX={-80}
             initialY={100}
           />
@@ -399,7 +399,7 @@ export default function HomeScreen() {
             duration={15000}
             xRange={80}
             yRange={100}
-            color="rgba(139, 115, 85, 0.08)"
+            color="rgba(139, 115, 85, 0.15)"
             initialX={width - 100}
             initialY={200}
           />
@@ -409,7 +409,7 @@ export default function HomeScreen() {
             duration={18000}
             xRange={50}
             yRange={140}
-            color="rgba(244, 228, 193, 0.15)"
+            color="rgba(244, 228, 193, 0.22)"
             initialX={width / 2 - 110}
             initialY={400}
           />
@@ -419,7 +419,7 @@ export default function HomeScreen() {
             duration={13000}
             xRange={70}
             yRange={90}
-            color="rgba(212, 175, 55, 0.1)"
+            color="rgba(212, 175, 55, 0.16)"
             initialX={width * 0.2}
             initialY={height - 300}
           />
@@ -429,7 +429,7 @@ export default function HomeScreen() {
             duration={16000}
             xRange={90}
             yRange={110}
-            color="rgba(139, 115, 85, 0.1)"
+            color="rgba(139, 115, 85, 0.14)"
             initialX={width - 150}
             initialY={height - 400}
           />
