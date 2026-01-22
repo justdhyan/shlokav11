@@ -60,7 +60,7 @@ const FloatingBlurOrb = ({
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
   const scale = useSharedValue(1);
-  const opacity = useSharedValue(0.6);
+  const opacity = useSharedValue(0.7);
 
   useEffect(() => {
     // Horizontal movement
@@ -94,8 +94,8 @@ const FloatingBlurOrb = ({
       delay,
       withRepeat(
         withSequence(
-          withTiming(1.2, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) }),
-          withTiming(0.9, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) })
+          withTiming(1.3, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) }),
+          withTiming(0.85, { duration: duration * 0.8, easing: Easing.inOut(Easing.ease) })
         ),
         -1,
         true
@@ -107,8 +107,8 @@ const FloatingBlurOrb = ({
       delay,
       withRepeat(
         withSequence(
-          withTiming(0.8, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) }),
-          withTiming(0.3, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) })
+          withTiming(0.85, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) }),
+          withTiming(0.4, { duration: duration * 0.6, easing: Easing.inOut(Easing.ease) })
         ),
         -1,
         true
