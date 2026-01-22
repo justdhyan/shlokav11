@@ -176,7 +176,7 @@ const FloatingBlurOrb = ({
     };
   });
 
-  // For web, use a CSS-based blur approach
+  // For web, use a CSS-based blur approach with enhanced visibility
   if (isWeb) {
     return (
       <Reanimated.View
@@ -189,8 +189,10 @@ const FloatingBlurOrb = ({
             height: size,
             borderRadius: size / 2,
             backgroundColor: color,
-            // @ts-ignore - web-specific property
-            filter: 'blur(50px)',
+            // @ts-ignore - web-specific properties
+            filter: 'blur(60px)',
+            mixBlendMode: 'normal',
+            pointerEvents: 'none',
           },
           animatedStyle,
         ]}
@@ -210,11 +212,12 @@ const FloatingBlurOrb = ({
           height: size,
           borderRadius: size / 2,
           backgroundColor: color,
+          overflow: 'hidden',
         },
         animatedStyle,
       ]}
     >
-      <BlurView intensity={45} tint="light" style={{ flex: 1, borderRadius: size / 2 }} />
+      <BlurView intensity={50} tint="light" style={{ flex: 1, borderRadius: size / 2 }} />
     </Reanimated.View>
   );
 };
