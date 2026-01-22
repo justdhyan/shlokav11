@@ -135,7 +135,7 @@ export default function ChaptersScreen() {
     router.push(`/chapter-detail?chapterNumber=${chapterNumber}`);
   };
 
-  if (loading) {
+  if (loading && chapters.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
@@ -149,6 +149,44 @@ export default function ChaptersScreen() {
           >
             <ActivityIndicator size="large" color="#8B7355" />
             <Text style={styles.loadingText}>Loading chapters...</Text>
+            {error && (
+              <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{error}</Text>
+                <Pressable onPress={fetchChapters} style={styles.retryButton}>
+                  <Text style={styles.retryButtonText}>Retry</Text>
+                </Pressable>
+              </View>
+            )}
+          </LinearGradient>
+        </ImageBackground>
+      </SafeAreaView>
+    );
+  }
+
+  // Show empty state if no data available
+  if (!loading && chapters.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ImageBackground
+          source={{ uri: 'https://images.unsplash.com/photo-1608509643848-5e00349cf077?w=800' }}
+          style={styles.loadingBackground}
+          blurRadius={3}
+        >
+          <LinearGradient
+            colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
+            style={styles.loadingGradient}
+          >
+            <Text style={styles.emptyStateText}>📖</Text>
+            <Text style={styles.emptyStateTitle}>No Chapters Available</Text>
+            <Text style={styles.emptyStateMessage}>
+              {error || 'Unable to load chapters. Please check your connection.'}
+            </Text>
+            <Pressable onPress={fetchChapters} style={styles.retryButton}>
+              <Text style={styles.retryButtonText}>Try Again</Text>
+            </Pressable>
+            <Pressable onPress={() => router.back()} style={[styles.retryButton, { marginTop: 12, backgroundColor: '#6B9BD1' }]}>
+              <Text style={styles.retryButtonText}>Go Back</Text>
+            </Pressable>
           </LinearGradient>
         </ImageBackground>
       </SafeAreaView>
