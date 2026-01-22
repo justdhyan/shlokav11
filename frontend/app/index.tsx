@@ -162,7 +162,7 @@ const FloatingBlurOrb = ({
         )
       );
     }
-  }, []);
+  }, [delay, duration, xRange, yRange, rotate]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
