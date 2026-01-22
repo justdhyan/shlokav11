@@ -453,57 +453,97 @@ export default function HomeScreen() {
         style={styles.heroBackground}
         resizeMode="cover"
       >
-        {/* Flowing Blur Animations */}
+        {/* Slow Flowing Blur Animations - Calm & Meditative */}
         <View style={styles.blurOrbsContainer}>
+          {/* Large golden orb - top left, slow and graceful */}
           <FloatingBlurOrb
-            size={250}
+            size={280}
             delay={0}
-            duration={12000}
-            xRange={60}
-            yRange={120}
-            color="rgba(212, 175, 55, 0.18)"
-            initialX={-80}
-            initialY={100}
+            duration={28000}
+            xRange={40}
+            yRange={70}
+            color="rgba(212, 175, 55, 0.22)"
+            initialX={-100}
+            initialY={80}
+            rotate={true}
           />
-          <FloatingBlurOrb
-            size={180}
-            delay={2000}
-            duration={15000}
-            xRange={80}
-            yRange={100}
-            color="rgba(139, 115, 85, 0.15)"
-            initialX={width - 100}
-            initialY={200}
-          />
-          <FloatingBlurOrb
-            size={220}
-            delay={4000}
-            duration={18000}
-            xRange={50}
-            yRange={140}
-            color="rgba(244, 228, 193, 0.22)"
-            initialX={width / 2 - 110}
-            initialY={400}
-          />
-          <FloatingBlurOrb
-            size={160}
-            delay={6000}
-            duration={13000}
-            xRange={70}
-            yRange={90}
-            color="rgba(212, 175, 55, 0.16)"
-            initialX={width * 0.2}
-            initialY={height - 300}
-          />
+          
+          {/* Warm brown orb - top right, gentle flow */}
           <FloatingBlurOrb
             size={200}
+            delay={3000}
+            duration={32000}
+            xRange={50}
+            yRange={60}
+            color="rgba(139, 115, 85, 0.19)"
+            initialX={width - 80}
+            initialY={150}
+            rotate={false}
+          />
+          
+          {/* Soft beige orb - center, very slow breathing */}
+          <FloatingBlurOrb
+            size={240}
+            delay={6000}
+            duration={35000}
+            xRange={35}
+            yRange={80}
+            color="rgba(244, 228, 193, 0.25)"
+            initialX={width / 2 - 120}
+            initialY={height * 0.4}
+            rotate={true}
+          />
+          
+          {/* Small golden orb - lower left, delicate movement */}
+          <FloatingBlurOrb
+            size={170}
+            delay={9000}
+            duration={30000}
+            xRange={45}
+            yRange={55}
+            color="rgba(212, 175, 55, 0.20)"
+            initialX={width * 0.15}
+            initialY={height - 350}
+            rotate={false}
+          />
+          
+          {/* Medium brown orb - lower right, calm drift */}
+          <FloatingBlurOrb
+            size={210}
+            delay={12000}
+            duration={26000}
+            xRange={40}
+            yRange={65}
+            color="rgba(139, 115, 85, 0.17)"
+            initialX={width - 130}
+            initialY={height - 420}
+            rotate={true}
+          />
+          
+          {/* Soft saffron orb - mid left, spiritual glow */}
+          <FloatingBlurOrb
+            size={190}
+            delay={4000}
+            duration={29000}
+            xRange={38}
+            yRange={58}
+            color="rgba(255, 140, 0, 0.16)"
+            initialX={-60}
+            initialY={height * 0.5}
+            rotate={false}
+          />
+          
+          {/* Light cream orb - mid right, ethereal presence */}
+          <FloatingBlurOrb
+            size={220}
             delay={8000}
-            duration={16000}
-            xRange={90}
-            yRange={110}
-            color="rgba(139, 115, 85, 0.14)"
-            initialX={width - 150}
-            initialY={height - 400}
+            duration={33000}
+            xRange={42}
+            yRange={72}
+            color="rgba(250, 247, 242, 0.23)"
+            initialX={width - 110}
+            initialY={height * 0.6}
+            rotate={true}
           />
         </View>
 
