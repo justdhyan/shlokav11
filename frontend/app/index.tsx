@@ -140,6 +140,7 @@ const emotionImages = {
 export default function HomeScreen() {
   const [emotions, setEmotions] = useState<Emotion[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -148,31 +149,50 @@ export default function HomeScreen() {
 
   const fetchEmotions = async () => {
     try {
+      setError(null);
+      
       // Check if backend URL is configured
       if (!EXPO_PUBLIC_BACKEND_URL) {
         console.error('EXPO_PUBLIC_BACKEND_URL is not defined');
+        setError('Configuration error. Please check your setup.');
         setLoading(false);
         return;
       }
 
-      // Try to get from cache first
+      // Try to get from cache first for instant display
       const cached = await AsyncStorage.getItem('emotions');
       if (cached) {
         setEmotions(JSON.parse(cached));
-        setLoading(false);
+        // Don't stop loading yet - we still want to fetch fresh data
       }
 
       // Fetch from API
       const response = await fetch(`${EXPO_PUBLIC_BACKEND_URL}/api/emotions`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+      
+      if (!data || data.length === 0) {
+        throw new Error('No emotions data available');
+      }
       
       setEmotions(data);
       // Cache the data
       await AsyncStorage.setItem('emotions', JSON.stringify(data));
       setLoading(false);
+      setError(null);
     } catch (error) {
       console.error('Error fetching emotions:', error);
+      setError('Unable to load emotions. Please try again.');
       setLoading(false);
+      
+      // If we don't have cached data, this is a real problem
+      if (emotions.length === 0) {
+        setError('Unable to connect to server. Please check your internet connection and try again.');
+      }
     }
   };
 
