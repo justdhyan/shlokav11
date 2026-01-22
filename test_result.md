@@ -240,6 +240,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "ANIMATIONS ADDED - Added subtle flowing blur animations to homepage using react-native-reanimated and expo-blur. Implemented 5 floating blur orbs with warm colors matching app theme (gold, brown, beige). Orbs animate with smooth horizontal/vertical movement, scale pulsing (0.85x-1.3x), and opacity fading (0.4-0.85). Each orb has different size (160-250px), speed (12-18s cycles), and staggered delays (0-8s) for natural, meditative feel. Animations positioned behind content (zIndex: 0) to not interfere with user interaction. Creates calm, spiritual atmosphere matching Bhagavad Gita theme."
+      - working: "NA"
+        agent: "main"
+        comment: "ANIMATIONS ENHANCED - Significantly improved blur animations to be slower, more calming and meditative. Now using 7 orbs (up from 5) with much slower durations (26-35 seconds vs 12-18s). Implemented smooth Bezier easing curves for wave-like, organic movements. Reduced movement ranges (35-50px horizontal, 55-80px vertical) for gentler flow. More subtle scale breathing (0.95-1.12 vs 0.85-1.3). Higher, more visible opacity (0.5-0.7 vs 0.4-0.85). Added optional rotation animation to some orbs for spiritual, flowing feel. Expanded color palette: warm gold (rgba 212,175,55), rich brown (rgba 139,115,85), soft beige (rgba 244,228,193), light cream (rgba 250,247,242), and soft saffron (rgba 255,140,0). Increased blur intensity (45 on native, 50px on web). Staggered delays 0-12s. Creates deeply calming, soothing atmosphere perfect for meditation and spiritual guidance app."
 
   - task: "Moods Screen - Mood Selection"
     implemented: true
