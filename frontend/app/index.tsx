@@ -11,6 +11,7 @@ import {
   Dimensions,
   Animated,
   Pressable,
+  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -27,6 +28,7 @@ import Reanimated, {
 } from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('window');
+const isWeb = Platform.OS === 'web';
 const EXPO_PUBLIC_BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 
 interface Emotion {
