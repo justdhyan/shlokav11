@@ -142,7 +142,7 @@ const FloatingBlurOrb = ({
         animatedStyle,
       ]}
     >
-      <BlurView intensity={20} tint="light" style={{ flex: 1, borderRadius: size / 2 }} />
+      <BlurView intensity={35} tint="light" style={{ flex: 1, borderRadius: size / 2 }} />
     </Reanimated.View>
   );
 };
