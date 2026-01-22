@@ -237,6 +237,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "ENHANCED - Updated emotion images mapping to include 6 new emotions: Joy, Doubt, Pride, Desire, Envy, Despair. Frontend will now display all 11 emotions automatically when fetching from API. Added beautiful, contextually relevant background images for each new emotion using Unsplash. Images selected to resonate with older adults and match emotional states."
+      - working: "NA"
+        agent: "main"
+        comment: "ANIMATIONS ADDED - Added subtle flowing blur animations to homepage using react-native-reanimated and expo-blur. Implemented 5 floating blur orbs with warm colors matching app theme (gold, brown, beige). Orbs animate with smooth horizontal/vertical movement, scale pulsing (0.85x-1.3x), and opacity fading (0.4-0.85). Each orb has different size (160-250px), speed (12-18s cycles), and staggered delays (0-8s) for natural, meditative feel. Animations positioned behind content (zIndex: 0) to not interfere with user interaction. Creates calm, spiritual atmosphere matching Bhagavad Gita theme."
 
   - task: "Moods Screen - Mood Selection"
     implemented: true
