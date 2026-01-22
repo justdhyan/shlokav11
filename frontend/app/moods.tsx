@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   SafeAreaView,
   ImageBackground,
+  Pressable,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,6 +26,7 @@ interface Mood {
 export default function MoodsScreen() {
   const [moods, setMoods] = useState<Mood[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { emotionId } = useLocalSearchParams();
 
@@ -36,34 +38,53 @@ export default function MoodsScreen() {
 
   const fetchMoods = async () => {
     try {
+      setError(null);
+      
       // Check if backend URL is configured
       if (!EXPO_PUBLIC_BACKEND_URL) {
         console.error('EXPO_PUBLIC_BACKEND_URL is not defined');
+        setError('Configuration error. Please check your setup.');
         setLoading(false);
         return;
       }
 
-      // Try to get from cache first
+      // Try to get from cache first for instant display
       const cacheKey = `moods_${emotionId}`;
       const cached = await AsyncStorage.getItem(cacheKey);
       if (cached) {
         setMoods(JSON.parse(cached));
-        setLoading(false);
+        // Don't stop loading yet - we still want to fetch fresh data
       }
 
       // Fetch from API
       const response = await fetch(
         `${EXPO_PUBLIC_BACKEND_URL}/api/moods/${emotionId}`
       );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+
+      if (!data || data.length === 0) {
+        throw new Error('No moods found for this emotion');
+      }
 
       setMoods(data);
       // Cache the data
       await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
       setLoading(false);
+      setError(null);
     } catch (error) {
       console.error('Error fetching moods:', error);
+      setError('Unable to load moods. Please try again.');
       setLoading(false);
+      
+      // If we don't have cached data, this is a real problem
+      if (moods.length === 0) {
+        setError('Unable to connect to server. Please check your internet connection and try again.');
+      }
     }
   };
 
@@ -71,7 +92,7 @@ export default function MoodsScreen() {
     router.push(`/guidance?moodId=${moodId}`);
   };
 
-  if (loading) {
+  if (loading && moods.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
@@ -85,6 +106,44 @@ export default function MoodsScreen() {
           >
             <ActivityIndicator size="large" color="#8B7355" />
             <Text style={styles.loadingText}>Loading moods...</Text>
+            {error && (
+              <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{error}</Text>
+                <Pressable onPress={fetchMoods} style={styles.retryButton}>
+                  <Text style={styles.retryButtonText}>Retry</Text>
+                </Pressable>
+              </View>
+            )}
+          </LinearGradient>
+        </ImageBackground>
+      </SafeAreaView>
+    );
+  }
+
+  // Show empty state if no data available
+  if (!loading && moods.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ImageBackground
+          source={{ uri: 'https://images.unsplash.com/photo-1608509643848-5e00349cf077?w=800' }}
+          style={styles.loadingBackground}
+          blurRadius={3}
+        >
+          <LinearGradient
+            colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
+            style={styles.loadingGradient}
+          >
+            <Text style={styles.emptyStateText}>🤔</Text>
+            <Text style={styles.emptyStateTitle}>No Moods Available</Text>
+            <Text style={styles.emptyStateMessage}>
+              {error || 'Unable to find moods for this emotion.'}
+            </Text>
+            <Pressable onPress={fetchMoods} style={styles.retryButton}>
+              <Text style={styles.retryButtonText}>Try Again</Text>
+            </Pressable>
+            <Pressable onPress={() => router.back()} style={[styles.retryButton, { marginTop: 12, backgroundColor: '#6B9BD1' }]}>
+              <Text style={styles.retryButtonText}>Go Back</Text>
+            </Pressable>
           </LinearGradient>
         </ImageBackground>
       </SafeAreaView>
@@ -191,6 +250,56 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#8B7355',
     fontWeight: '500',
+  },
+  errorContainer: {
+    marginTop: 24,
+    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 12,
+    marginHorizontal: 24,
+    alignItems: 'center',
+  },
+  errorText: {
+    fontSize: 16,
+    color: '#B33A3A',
+    textAlign: 'center',
+    marginBottom: 16,
+    lineHeight: 24,
+  },
+  retryButton: {
+    backgroundColor: '#8B7355',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  retryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  emptyStateText: {
+    fontSize: 64,
+    marginBottom: 16,
+  },
+  emptyStateTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#5D4E37',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  emptyStateMessage: {
+    fontSize: 16,
+    color: '#8B7355',
+    textAlign: 'center',
+    marginBottom: 24,
+    paddingHorizontal: 24,
+    lineHeight: 24,
   },
   header: {
     paddingTop: 24,

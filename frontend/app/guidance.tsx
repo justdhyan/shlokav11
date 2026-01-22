@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   Alert,
   ImageBackground,
+  Pressable,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -29,6 +30,7 @@ interface Guidance {
 export default function GuidanceScreen() {
   const [guidance, setGuidance] = useState<Guidance | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const router = useRouter();
   const { moodId } = useLocalSearchParams();
@@ -47,34 +49,53 @@ export default function GuidanceScreen() {
 
   const fetchGuidance = async () => {
     try {
+      setError(null);
+      
       // Check if backend URL is configured
       if (!EXPO_PUBLIC_BACKEND_URL) {
         console.error('EXPO_PUBLIC_BACKEND_URL is not defined');
+        setError('Configuration error. Please check your setup.');
         setLoading(false);
         return;
       }
 
-      // Try to get from cache first
+      // Try to get from cache first for instant display
       const cacheKey = `guidance_${moodId}`;
       const cached = await AsyncStorage.getItem(cacheKey);
       if (cached) {
         setGuidance(JSON.parse(cached));
-        setLoading(false);
+        // Don't stop loading yet - we still want to fetch fresh data
       }
 
       // Fetch from API
       const response = await fetch(
         `${EXPO_PUBLIC_BACKEND_URL}/api/guidance/${moodId}`
       );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+
+      if (!data) {
+        throw new Error('No guidance found for this mood');
+      }
 
       setGuidance(data);
       // Cache the data
       await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
       setLoading(false);
+      setError(null);
     } catch (error) {
       console.error('Error fetching guidance:', error);
+      setError('Unable to load guidance. Please try again.');
       setLoading(false);
+      
+      // If we don't have cached data, this is a real problem
+      if (!guidance) {
+        setError('Unable to connect to server. Please check your internet connection and try again.');
+      }
     }
   };
 
@@ -119,7 +140,7 @@ export default function GuidanceScreen() {
     }
   };
 
-  if (loading) {
+  if (loading && !guidance) {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
@@ -133,6 +154,14 @@ export default function GuidanceScreen() {
           >
             <ActivityIndicator size="large" color="#8B7355" />
             <Text style={styles.loadingText}>Loading guidance...</Text>
+            {error && (
+              <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{error}</Text>
+                <Pressable onPress={fetchGuidance} style={styles.retryButton}>
+                  <Text style={styles.retryButtonText}>Retry</Text>
+                </Pressable>
+              </View>
+            )}
           </LinearGradient>
         </ImageBackground>
       </SafeAreaView>
@@ -142,15 +171,31 @@ export default function GuidanceScreen() {
   if (!guidance) {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Guidance not found</Text>
-          <TouchableOpacity
-            onPress={() => router.back()}
-            style={styles.errorButton}
+        <ImageBackground
+          source={{ uri: 'https://images.unsplash.com/photo-1718179401998-ffc309805882?w=800' }}
+          style={styles.loadingBackground}
+          blurRadius={3}
+        >
+          <LinearGradient
+            colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
+            style={styles.loadingGradient}
           >
-            <Text style={styles.errorButtonText}>Go Back</Text>
-          </TouchableOpacity>
-        </View>
+            <Text style={styles.emptyStateText}>📿</Text>
+            <Text style={styles.emptyStateTitle}>Guidance Not Found</Text>
+            <Text style={styles.emptyStateMessage}>
+              {error || 'Unable to find guidance for this mood.'}
+            </Text>
+            <Pressable onPress={fetchGuidance} style={styles.retryButton}>
+              <Text style={styles.retryButtonText}>Try Again</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => router.back()}
+              style={[styles.retryButton, { marginTop: 12, backgroundColor: '#6B9BD1' }]}
+            >
+              <Text style={styles.retryButtonText}>Go Back</Text>
+            </Pressable>
+          </LinearGradient>
+        </ImageBackground>
       </SafeAreaView>
     );
   }
@@ -284,26 +329,54 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
+    marginTop: 24,
+    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 12,
+    marginHorizontal: 24,
     alignItems: 'center',
-    paddingHorizontal: 24,
   },
   errorText: {
-    fontSize: 20,
-    color: '#8B7355',
-    marginBottom: 24,
+    fontSize: 16,
+    color: '#B33A3A',
+    textAlign: 'center',
+    marginBottom: 16,
+    lineHeight: 24,
   },
-  errorButton: {
+  retryButton: {
     backgroundColor: '#8B7355',
     paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingHorizontal: 32,
     borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  errorButtonText: {
+  retryButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+  emptyStateText: {
+    fontSize: 64,
+    marginBottom: 16,
+  },
+  emptyStateTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#5D4E37',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  emptyStateMessage: {
+    fontSize: 16,
+    color: '#8B7355',
+    textAlign: 'center',
+    marginBottom: 24,
+    paddingHorizontal: 24,
+    lineHeight: 24,
   },
   header: {
     paddingTop: 24,
