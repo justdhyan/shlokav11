@@ -381,6 +381,60 @@ export default function HomeScreen() {
         style={styles.heroBackground}
         resizeMode="cover"
       >
+        {/* Flowing Blur Animations */}
+        <View style={styles.blurOrbsContainer}>
+          <FloatingBlurOrb
+            size={250}
+            delay={0}
+            duration={12000}
+            xRange={60}
+            yRange={120}
+            color="rgba(212, 175, 55, 0.12)"
+            initialX={-80}
+            initialY={100}
+          />
+          <FloatingBlurOrb
+            size={180}
+            delay={2000}
+            duration={15000}
+            xRange={80}
+            yRange={100}
+            color="rgba(139, 115, 85, 0.08)"
+            initialX={width - 100}
+            initialY={200}
+          />
+          <FloatingBlurOrb
+            size={220}
+            delay={4000}
+            duration={18000}
+            xRange={50}
+            yRange={140}
+            color="rgba(244, 228, 193, 0.15)"
+            initialX={width / 2 - 110}
+            initialY={400}
+          />
+          <FloatingBlurOrb
+            size={160}
+            delay={6000}
+            duration={13000}
+            xRange={70}
+            yRange={90}
+            color="rgba(212, 175, 55, 0.1)"
+            initialX={width * 0.2}
+            initialY={height - 300}
+          />
+          <FloatingBlurOrb
+            size={200}
+            delay={8000}
+            duration={16000}
+            xRange={90}
+            yRange={110}
+            color="rgba(139, 115, 85, 0.1)"
+            initialX={width - 150}
+            initialY={height - 400}
+          />
+        </View>
+
         <LinearGradient
           colors={['rgba(139, 115, 85, 0.7)', 'rgba(250, 247, 242, 0.95)', 'rgba(250, 247, 242, 1)']}
           locations={[0, 0.4, 0.7]}
