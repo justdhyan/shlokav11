@@ -27,6 +27,12 @@ interface Guidance {
   guidance_text: string;
 }
 
+interface CachedGuidance {
+  data: Guidance;
+  timestamp: number;
+  version: string;
+}
+
 export default function GuidanceScreen() {
   const [guidance, setGuidance] = useState<Guidance | null>(null);
   const [loading, setLoading] = useState(true);
