@@ -199,14 +199,22 @@ export default function GuidanceScreen() {
             colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
             style={styles.loadingGradient}
           >
+            <Text style={styles.emptyStateText}>🙏</Text>
             <ActivityIndicator size="large" color="#8B7355" />
-            <Text style={styles.loadingText}>Loading guidance...</Text>
+            <Text style={styles.loadingText}>
+              {isRetrying ? 'Reconnecting...' : 'Loading your guidance...'}
+            </Text>
+            <Text style={styles.loadingSubtext}>
+              {isRetrying ? 'Please be patient' : 'Preparing sacred wisdom for you'}
+            </Text>
             {error && (
               <View style={styles.errorContainer}>
                 <Text style={styles.errorText}>{error}</Text>
-                <Pressable onPress={fetchGuidance} style={styles.retryButton}>
-                  <Text style={styles.retryButtonText}>Retry</Text>
-                </Pressable>
+                {!isRetrying && (
+                  <Pressable onPress={() => fetchGuidance(true)} style={styles.retryButton}>
+                    <Text style={styles.retryButtonText}>Try Again</Text>
+                  </Pressable>
+                )}
               </View>
             )}
           </LinearGradient>
@@ -227,19 +235,22 @@ export default function GuidanceScreen() {
             colors={['rgba(250, 247, 242, 0.9)', 'rgba(244, 228, 193, 0.95)']}
             style={styles.loadingGradient}
           >
-            <Text style={styles.emptyStateText}>📿</Text>
-            <Text style={styles.emptyStateTitle}>Guidance Not Found</Text>
+            <Text style={styles.emptyStateText}>🙏</Text>
+            <Text style={styles.emptyStateTitle}>Having Trouble Loading</Text>
             <Text style={styles.emptyStateMessage}>
-              {error || 'Unable to find guidance for this mood.'}
+              {error || 'We are having difficulty retrieving your guidance right now.'}
             </Text>
-            <Pressable onPress={fetchGuidance} style={styles.retryButton}>
-              <Text style={styles.retryButtonText}>Try Again</Text>
+            <Text style={styles.helpText}>
+              💡 This usually means your internet connection needs attention
+            </Text>
+            <Pressable onPress={() => fetchGuidance(true)} style={styles.retryButton}>
+              <Text style={styles.retryButtonText}>🔄 Try Again</Text>
             </Pressable>
             <Pressable
               onPress={() => router.back()}
               style={[styles.retryButton, { marginTop: 12, backgroundColor: '#6B9BD1' }]}
             >
-              <Text style={styles.retryButtonText}>Go Back</Text>
+              <Text style={styles.retryButtonText}>← Go Back</Text>
             </Pressable>
           </LinearGradient>
         </ImageBackground>
