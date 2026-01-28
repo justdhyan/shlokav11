@@ -738,9 +738,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: '#FFFFFF',
     marginTop: 8,
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 3,
+    textShadow: '0px 1px 3px rgba(0, 0, 0, 0.3)',
   },
   tagline: {
     fontSize: 16,
