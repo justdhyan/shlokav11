@@ -307,12 +307,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   backButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 12,
+    alignSelf: 'flex-start',
     shadowColor: '#8B7355',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
@@ -320,10 +319,10 @@ const styles = StyleSheet.create({
     elevation: 4,
     marginBottom: 20,
   },
-  backButtonIcon: {
-    fontSize: 24,
+  backButtonText: {
+    fontSize: 18,
     color: '#8B7355',
-    fontWeight: 'bold',
+    fontWeight: '700',
   },
   titleContainer: {
     alignItems: 'center',
