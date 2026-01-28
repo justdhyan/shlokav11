@@ -271,6 +271,11 @@ export default function GuidanceScreen() {
           style={styles.gradient}
         >
           <SafeAreaView style={styles.safeArea}>
+            {error && error.includes('saved guidance') && (
+              <View style={styles.notificationBanner}>
+                <Text style={styles.notificationText}>📱 {error}</Text>
+              </View>
+            )}
             <ScrollView
               contentContainerStyle={styles.scrollContent}
               showsVerticalScrollIndicator={false}
