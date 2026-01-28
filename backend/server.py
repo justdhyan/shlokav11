@@ -455,13 +455,13 @@ async def startup_db():
             "guidance_text": "Fear of failure paralyzes action. Krishna teaches that true success lies not in outcomes, but in performing your duty with sincerity. When you are equally poised in success and failure, you are free to act courageously. Do your best and accept the result with grace. This is the way of the yogi."
         },
         {
-            "_id": "guidance_anger_others",
-            "mood_id": "anger_others",
-            "title": "See the Divine in All",
-            "verse_reference": "Bhagavad Gita 6.32",
-            "sanskrit_verse": "आत्मौपम्येन सर्वत्र समं पश्यति योऽर्जुन।\nसुखं वा यदि वा दुःखं स योगी परमो मतः॥",
-            "english_translation": "One who sees equality everywhere, and regards the happiness and distress of others as one's own—such a yogi is considered to be the highest.",
-            "guidance_text": "Others' behavior reflects their own pain and confusion. Krishna teaches compassion—to see others as yourself. When someone hurts you, remember they too are struggling. This doesn't mean accepting mistreatment, but responding with wisdom instead of rage. Your peace is too precious to give away to anger."
+            "_id": "guidance_anger_world",
+            "mood_id": "anger_world",
+            "title": "Accept What Cannot Be Changed",
+            "verse_reference": "Bhagavad Gita 2.14",
+            "sanskrit_verse": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+            "english_translation": "The contact of the senses with their objects, O son of Kunti, gives rise to heat and cold, pleasure and pain. These are temporary and come and go like seasons. Learn to endure them.",
+            "guidance_text": "The world will not always meet your expectations, and anger at this reality only increases suffering. Krishna teaches acceptance—not resignation, but understanding that change is constant and universal. Channel your energy toward what you can influence: your own actions and responses. Peace comes from accepting the world as it is while working toward what it can become."
         },
             "_id": "guidance_anger_self",
             "mood_id": "anger_self",
