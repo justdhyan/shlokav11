@@ -171,60 +171,93 @@ async def startup_db():
     
     # Sample moods for each emotion
     moods = [
-        # Fear moods
+        # Fear moods (6 total)
         {"_id": "fear_future", "emotion_id": "fear", "name": "Fear of the Future", "description": "Worried about what tomorrow will bring"},
         {"_id": "fear_death", "emotion_id": "fear", "name": "Fear of Death", "description": "Anxious about mortality and the unknown"},
         {"_id": "fear_failure", "emotion_id": "fear", "name": "Fear of Failure", "description": "Afraid of not being good enough"},
+        {"_id": "fear_illness", "emotion_id": "fear", "name": "Fear of Illness", "description": "Worried about health and disease"},
+        {"_id": "fear_abandonment", "emotion_id": "fear", "name": "Fear of Being Alone", "description": "Afraid of losing loved ones"},
+        {"_id": "fear_change", "emotion_id": "fear", "name": "Fear of Change", "description": "Scared of life's transitions"},
         
-        # Anger moods
+        # Anger moods (6 total)
         {"_id": "anger_injustice", "emotion_id": "anger", "name": "Anger at Injustice", "description": "Upset about unfair treatment"},
         {"_id": "anger_self", "emotion_id": "anger", "name": "Anger at Myself", "description": "Frustrated with my own actions"},
         {"_id": "anger_world", "emotion_id": "anger", "name": "Anger at the World", "description": "Mad at how things are"},
+        {"_id": "anger_betrayal", "emotion_id": "anger", "name": "Anger at Betrayal", "description": "Hurt by broken trust"},
+        {"_id": "anger_powerless", "emotion_id": "anger", "name": "Anger at Helplessness", "description": "Frustrated by inability to help"},
+        {"_id": "anger_disrespect", "emotion_id": "anger", "name": "Anger at Disrespect", "description": "Offended by lack of regard"},
         
-        # Grief moods
+        # Grief moods (6 total)
         {"_id": "grief_loss", "emotion_id": "grief", "name": "Loss of a Loved One", "description": "Missing someone who has passed"},
         {"_id": "grief_change", "emotion_id": "grief", "name": "Loss of What Was", "description": "Mourning how things used to be"},
         {"_id": "grief_health", "emotion_id": "grief", "name": "Loss of Health", "description": "Struggling with physical decline"},
+        {"_id": "grief_dream", "emotion_id": "grief", "name": "Loss of a Dream", "description": "Mourning unfulfilled hopes"},
+        {"_id": "grief_relationship", "emotion_id": "grief", "name": "Loss of Relationship", "description": "Grieving a ended connection"},
+        {"_id": "grief_youth", "emotion_id": "grief", "name": "Loss of Youth", "description": "Sadness about aging"},
         
-        # Confusion moods
+        # Confusion moods (6 total)
         {"_id": "confusion_purpose", "emotion_id": "confusion", "name": "Lost About Purpose", "description": "Unsure why I am here"},
         {"_id": "confusion_choice", "emotion_id": "confusion", "name": "Unable to Decide", "description": "Don't know what to do"},
         {"_id": "confusion_meaning", "emotion_id": "confusion", "name": "Questioning Meaning", "description": "Wondering if life has meaning"},
+        {"_id": "confusion_identity", "emotion_id": "confusion", "name": "Lost Sense of Self", "description": "Not sure who I am anymore"},
+        {"_id": "confusion_direction", "emotion_id": "confusion", "name": "No Clear Path", "description": "Don't know where to go"},
+        {"_id": "confusion_values", "emotion_id": "confusion", "name": "Conflicting Beliefs", "description": "Torn between different values"},
         
-        # Detachment moods
+        # Detachment moods (6 total)
         {"_id": "detachment_loneliness", "emotion_id": "detachment", "name": "Feeling Alone", "description": "Disconnected from others"},
         {"_id": "detachment_emptiness", "emotion_id": "detachment", "name": "Inner Emptiness", "description": "Nothing brings joy anymore"},
         {"_id": "detachment_world", "emotion_id": "detachment", "name": "Withdrawn from Life", "description": "Don't care about worldly things"},
+        {"_id": "detachment_numb", "emotion_id": "detachment", "name": "Feeling Numb", "description": "Can't feel emotions anymore"},
+        {"_id": "detachment_apathy", "emotion_id": "detachment", "name": "Lost Interest", "description": "Nothing seems important"},
+        {"_id": "detachment_tired", "emotion_id": "detachment", "name": "Weary of Life", "description": "Exhausted from living"},
         
-        # Joy moods
+        # Joy moods (6 total)
         {"_id": "joy_gratitude", "emotion_id": "joy", "name": "Feeling Grateful", "description": "Thankful for life's blessings"},
         {"_id": "joy_peace", "emotion_id": "joy", "name": "Inner Peace", "description": "Content and at ease with life"},
         {"_id": "joy_acceptance", "emotion_id": "joy", "name": "Accepting What Is", "description": "At peace with how things are"},
+        {"_id": "joy_serenity", "emotion_id": "joy", "name": "Deep Serenity", "description": "Calm amidst life's storms"},
+        {"_id": "joy_connection", "emotion_id": "joy", "name": "Spiritual Connection", "description": "Feeling close to the divine"},
+        {"_id": "joy_wisdom", "emotion_id": "joy", "name": "Blessed with Wisdom", "description": "Understanding life's lessons"},
         
-        # Doubt moods
+        # Doubt moods (6 total)
         {"_id": "doubt_faith", "emotion_id": "doubt", "name": "Questioning Faith", "description": "Unsure if God exists or cares"},
         {"_id": "doubt_teachings", "emotion_id": "doubt", "name": "Doubting the Path", "description": "Wondering if these teachings are true"},
         {"_id": "doubt_self", "emotion_id": "doubt", "name": "Doubting Myself", "description": "Not sure if I'm doing things right"},
+        {"_id": "doubt_goodness", "emotion_id": "doubt", "name": "Doubting Goodness", "description": "Questioning if good prevails"},
+        {"_id": "doubt_purpose", "emotion_id": "doubt", "name": "Doubting Life's Purpose", "description": "Wondering if anything matters"},
+        {"_id": "doubt_karma", "emotion_id": "doubt", "name": "Doubting Justice", "description": "Questioning if actions have consequences"},
         
-        # Pride moods
+        # Pride moods (6 total)
         {"_id": "pride_achievement", "emotion_id": "pride", "name": "Pride in Success", "description": "Feeling superior due to accomplishments"},
         {"_id": "pride_knowledge", "emotion_id": "pride", "name": "Pride in Knowledge", "description": "Thinking I know more than others"},
         {"_id": "pride_status", "emotion_id": "pride", "name": "Pride in Position", "description": "Feeling important due to my status"},
+        {"_id": "pride_appearance", "emotion_id": "pride", "name": "Pride in Appearance", "description": "Vain about how I look"},
+        {"_id": "pride_virtue", "emotion_id": "pride", "name": "Pride in Righteousness", "description": "Feeling morally superior"},
+        {"_id": "pride_independence", "emotion_id": "pride", "name": "Pride in Self-Sufficiency", "description": "Refusing to need anyone"},
         
-        # Desire moods
+        # Desire moods (6 total)
         {"_id": "desire_wealth", "emotion_id": "desire", "name": "Craving Wealth", "description": "Strong desire for money and possessions"},
         {"_id": "desire_pleasure", "emotion_id": "desire", "name": "Seeking Pleasure", "description": "Always wanting more enjoyment"},
         {"_id": "desire_control", "emotion_id": "desire", "name": "Need to Control", "description": "Wanting things to go my way"},
+        {"_id": "desire_recognition", "emotion_id": "desire", "name": "Craving Recognition", "description": "Wanting praise and attention"},
+        {"_id": "desire_comfort", "emotion_id": "desire", "name": "Attached to Comfort", "description": "Avoiding any discomfort"},
+        {"_id": "desire_security", "emotion_id": "desire", "name": "Craving Security", "description": "Needing guarantees and certainty"},
         
-        # Envy moods
+        # Envy moods (6 total)
         {"_id": "envy_success", "emotion_id": "envy", "name": "Envying Others' Success", "description": "Jealous of what others have achieved"},
         {"_id": "envy_happiness", "emotion_id": "envy", "name": "Envying Others' Joy", "description": "Wishing I had their peace and happiness"},
         {"_id": "envy_fortune", "emotion_id": "envy", "name": "Envying Others' Fortune", "description": "Comparing my life unfavorably to theirs"},
+        {"_id": "envy_youth", "emotion_id": "envy", "name": "Envying the Young", "description": "Wishing I had their energy and time"},
+        {"_id": "envy_family", "emotion_id": "envy", "name": "Envying Others' Families", "description": "Jealous of their relationships"},
+        {"_id": "envy_health", "emotion_id": "envy", "name": "Envying Others' Health", "description": "Wishing I had their vitality"},
         
-        # Despair moods
+        # Despair moods (6 total)
         {"_id": "despair_effort", "emotion_id": "despair", "name": "Feeling It's Pointless", "description": "Nothing I do seems to matter"},
         {"_id": "despair_alone", "emotion_id": "despair", "name": "No One Understands", "description": "Feeling isolated in my struggles"},
-        {"_id": "despair_future", "emotion_id": "despair", "name": "No Hope for Tomorrow", "description": "Can't see things getting better"}
+        {"_id": "despair_future", "emotion_id": "despair", "name": "No Hope for Tomorrow", "description": "Can't see things getting better"},
+        {"_id": "despair_burden", "emotion_id": "despair", "name": "Too Heavy to Bear", "description": "Life feels overwhelming"},
+        {"_id": "despair_mistakes", "emotion_id": "despair", "name": "Haunted by Regrets", "description": "Can't forgive past errors"},
+        {"_id": "despair_meaning", "emotion_id": "despair", "name": "Life Feels Meaningless", "description": "Everything seems empty"}
     ]
     
     # Sample guidance (with authentic Bhagavad Gita verses)
