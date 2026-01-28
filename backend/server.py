@@ -463,6 +463,7 @@ async def startup_db():
             "english_translation": "The contact of the senses with their objects, O son of Kunti, gives rise to heat and cold, pleasure and pain. These are temporary and come and go like seasons. Learn to endure them.",
             "guidance_text": "The world will not always meet your expectations, and anger at this reality only increases suffering. Krishna teaches acceptance—not resignation, but understanding that change is constant and universal. Channel your energy toward what you can influence: your own actions and responses. Peace comes from accepting the world as it is while working toward what it can become."
         },
+        {
             "_id": "guidance_anger_self",
             "mood_id": "anger_self",
             "title": "Uplift Yourself, Don't Condemn",
