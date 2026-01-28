@@ -798,10 +798,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     borderRadius: 24,
     overflow: 'hidden',
-    shadowColor: '#8B7355',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
+    boxShadow: '0px 6px 16px rgba(139, 115, 85, 0.3)',
     elevation: 10,
   },
   emotionCardBackground: {
