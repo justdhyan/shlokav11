@@ -76,7 +76,7 @@ export default function BookmarksScreen() {
             onPress={() => router.back()}
             style={styles.backButton}
           >
-            <Text style={styles.backButtonText}>← Back</Text>
+            <Text style={styles.backButtonText}>Back</Text>
           </TouchableOpacity>
           <Text style={styles.title}>Your Bookmarks</Text>
           <Text style={styles.subtitle}>आपके बुकमार्क</Text>
