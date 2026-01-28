@@ -173,7 +173,7 @@ export default function MoodsScreen() {
                   onPress={() => router.back()}
                   style={styles.backButton}
                 >
-                  <Text style={styles.backButtonIcon}>←</Text>
+                  <Text style={styles.backButtonText}>← Back</Text>
                 </TouchableOpacity>
                 <View style={styles.titleContainer}>
                   <Text style={styles.title}>How do you feel?</Text>
