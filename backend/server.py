@@ -558,6 +558,304 @@ async def startup_db():
             "sanskrit_verse": "ब्रह्मण्याधाय कर्माणि सङ्गं त्यक्त्वा करोति यः।\nलिप्यते न स पापेन पद्मपत्रमिवाम्भसा॥",
             "english_translation": "One who performs duties without attachment, dedicating actions to the Supreme, is not tainted by sin, just as a lotus leaf is untouched by water.",
             "guidance_text": "Feeling disconnected from the world can be wisdom, not loneliness. Krishna uses the lotus as example—it grows in water but remains dry. Engage with life fully, but don't let it pull you under. Your spiritual nature transcends worldly affairs. Participate in the world while remaining centered in your true self."
+        },
+        # New guidance entries for additional moods
+        {
+            "_id": "guidance_fear_illness",
+            "mood_id": "fear_illness",
+            "title": "The Body is Temporary, Spirit Eternal",
+            "verse_reference": "Bhagavad Gita 2.22",
+            "sanskrit_verse": "वासांसि जीर्णानि यथा विहाय नवानि गृह्णाति नरोऽपराणि।\nतथा शरीराणि विहाय जीर्णान्यन्यानि संयाति नवानि देही॥",
+            "english_translation": "As a person sheds worn-out garments and wears new ones, likewise, at the time of death, the soul casts off worn-out bodies and enters new ones.",
+            "guidance_text": "Illness reminds us of our body's fragility, but Krishna teaches that your true self is beyond illness. The body may weaken, but the soul remains untouched. Use this time to deepen your spiritual practice. Health comes and goes, but your eternal nature endures. Fear not the body's changes—honor the spirit within."
+        },
+        {
+            "_id": "guidance_fear_abandonment",
+            "mood_id": "fear_abandonment",
+            "title": "The Divine Never Abandons You",
+            "verse_reference": "Bhagavad Gita 9.31",
+            "sanskrit_verse": "कौन्तेय प्रतिजानीहि न मे भक्तः प्रणश्यति॥",
+            "english_translation": "O son of Kunti, declare it boldly that My devotee never perishes.",
+            "guidance_text": "People may come and go, but the Divine presence remains constant. Krishna promises that those who remember the Divine are never truly alone. Cultivate this inner relationship—it cannot be lost through distance or death. Even if everyone leaves, you carry within you an eternal companion who knows and loves you completely."
+        },
+        {
+            "_id": "guidance_fear_change",
+            "mood_id": "fear_change",
+            "title": "Change is Life's Constant Teacher",
+            "verse_reference": "Bhagavad Gita 2.14",
+            "sanskrit_verse": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+            "english_translation": "The contact of the senses with their objects gives rise to heat and cold, pleasure and pain. These are temporary and come and go. Learn to endure them, O Bharata.",
+            "guidance_text": "Change is inevitable—resisting it only increases suffering. Krishna teaches that all circumstances are temporary, like seasons. Winter becomes spring, sorrow becomes joy. Trust in life's rhythms. What feels like an ending may be a new beginning. Face change with courage, knowing that your adaptable spirit has survived all previous transitions."
+        },
+        {
+            "_id": "guidance_anger_betrayal",
+            "mood_id": "anger_betrayal",
+            "title": "Betrayal Cannot Touch Your Soul",
+            "verse_reference": "Bhagavad Gita 5.18",
+            "sanskrit_verse": "विद्याविनयसम्पन्ने ब्राह्मणे गवि हस्तिनि।\nशुनि चैव श्वपाके च पण्डिताः समदर्शिनः॥",
+            "english_translation": "The truly wise, with the eyes of knowledge, see equally the learned sage, the cow, the elephant, the dog, and the person of low birth.",
+            "guidance_text": "Betrayal wounds deeply, but Krishna teaches that others' actions reflect their character, not your worth. Your true self remains untarnished. Let this experience teach you wisdom without hardening your heart. Forgiveness doesn't excuse their action—it frees you from carrying the burden of their wrong. Protect yourself wisely, but don't let bitterness poison your spirit."
+        },
+        {
+            "_id": "guidance_anger_powerless",
+            "mood_id": "anger_powerless",
+            "title": "Your Duty is to Act, Not Control Results",
+            "verse_reference": "Bhagavad Gita 2.47",
+            "sanskrit_verse": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+            "english_translation": "You have the right to perform your prescribed duties, but you are not entitled to the fruits of your actions. Never consider yourself to be the cause of the results, nor be attached to inaction.",
+            "guidance_text": "Helplessness arises when we feel responsible for outcomes we cannot control. Krishna liberates us from this burden—your power lies in sincere effort, not guaranteed results. Do what you can with love and skill, then release attachment to how it unfolds. This is not giving up; it's wisdom. You are not powerless—you have the power that matters: the power to act rightly."
+        },
+        {
+            "_id": "guidance_anger_disrespect",
+            "mood_id": "anger_disrespect",
+            "title": "Your Worth Is Not Defined by Others",
+            "verse_reference": "Bhagavad Gita 12.18-19",
+            "sanskrit_verse": "समः शत्रौ च मित्रे च तथा मानापमानयोः।\nशीतोष्णसुखदुःखेषु समः सङ्गविवर्जितः॥",
+            "english_translation": "One who is equal toward friend and foe, in honor and dishonor, in heat and cold, happiness and distress—such a person is very dear to Me.",
+            "guidance_text": "Disrespect stings because we seek validation from others. Krishna teaches that the wise remain steady whether praised or criticized. Your value is inherent, not dependent on others' recognition. Those who disrespect you reveal their own limitations, not yours. Stand in your dignity without needing their approval. True respect comes from self-respect."
+        },
+        {
+            "_id": "guidance_grief_dream",
+            "mood_id": "grief_dream",
+            "title": "New Dreams Await Beyond the Old",
+            "verse_reference": "Bhagavad Gita 2.69",
+            "sanskrit_verse": "या निशा सर्वभूतानां तस्यां जागर्ति संयमी।\nयस्यां जाग्रति भूतानि सा निशा पश्यतो मुनेः॥",
+            "english_translation": "What is night for all beings is the time of awakening for the self-controlled; and the time of awakening for all beings is night for the introspective sage.",
+            "guidance_text": "When a dream dies, it feels like losing a part of yourself. Krishna teaches that endings create space for transformation. Perhaps that dream was preparing you for something greater. Grieve what you hoped for, then look with new eyes. Life has dreams for you that you haven't imagined yet. Trust that closed doors lead to open horizons."
+        },
+        {
+            "_id": "guidance_grief_relationship",
+            "mood_id": "grief_relationship",
+            "title": "Love Transcends Physical Presence",
+            "verse_reference": "Bhagavad Gita 2.23",
+            "sanskrit_verse": "नैनं छिन्दन्ति शस्त्राणि नैनं दहति पावकः।\nन चैनं क्लेदयन्त्यापो न शोषयति मारुतः॥",
+            "english_translation": "Weapons cannot cut the soul, fire cannot burn it, water cannot wet it, and wind cannot dry it.",
+            "guidance_text": "Relationships may end in form, but the love shared leaves eternal marks on the soul. Krishna teaches that true connection transcends physical presence. What you learned and how you grew through that relationship remains forever. Honor the ending, but know that real love never truly ends—it transforms. Carry forward the gifts that relationship gave you."
+        },
+        {
+            "_id": "guidance_grief_youth",
+            "mood_id": "grief_youth",
+            "title": "Age Brings Wisdom's Greater Gifts",
+            "verse_reference": "Bhagavad Gita 2.13",
+            "sanskrit_verse": "देहिनोऽस्मिन्यथा देहे कौमारं यौवनं जरा।\nतथा देहान्तरप्राप्तिर्धीरस्तत्र न मुह्यति॥",
+            "english_translation": "Just as the embodied soul continuously passes through childhood, youth, and old age, similarly, at the time of death, the soul passes into another body. The wise are not deluded by this.",
+            "guidance_text": "Youth's energy fades, but something deeper emerges—wisdom, perspective, and peace. Krishna reminds us that all bodies age; the soul does not. What you've gained in understanding and character far exceeds what you've lost in physical vitality. Your youth served its purpose. Now embrace the richness that only age can bring. The best of you is timeless."
+        },
+        {
+            "_id": "guidance_confusion_identity",
+            "mood_id": "confusion_identity",
+            "title": "Your True Self is Beyond Roles",
+            "verse_reference": "Bhagavad Gita 2.20",
+            "sanskrit_verse": "न जायते म्रियते वा कदाचिन्नायं भूत्वा भविता वा न भूयः।\nअजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे॥",
+            "english_translation": "The soul is never born and never dies. It is unborn, eternal, ever-existing, and primeval. The soul is not slain when the body is slain.",
+            "guidance_text": "You may have lost your roles—worker, spouse, parent—but these were never your true identity. Krishna reveals that your essence is eternal consciousness, beyond all labels. When external identities fall away, the authentic self emerges. This confusion is actually awakening. Who are you beyond what you do or how others see you? Discover this, and you find unshakeable peace."
+        },
+        {
+            "_id": "guidance_confusion_direction",
+            "mood_id": "confusion_direction",
+            "title": "Follow Dharma, the Path Appears",
+            "verse_reference": "Bhagavad Gita 3.35",
+            "sanskrit_verse": "श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्।\nस्वधर्मे निधनं श्रेयः परधर्मो भयावहः॥",
+            "english_translation": "It is better to perform one's own duty imperfectly than to perform another's duty perfectly. It is better to die doing one's own duty; another's duty is fraught with danger.",
+            "guidance_text": "Not knowing which way to go can be paralyzing. Krishna teaches that your path reveals itself when you follow dharma—right action in this moment. Don't wait for perfect clarity. Take the next right step, even if you can't see the full journey. Your path finds you when you walk with integrity. Direction emerges from movement, not from standing still."
+        },
+        {
+            "_id": "guidance_confusion_values",
+            "mood_id": "confusion_values",
+            "title": "Root Your Values in the Eternal",
+            "verse_reference": "Bhagavad Gita 9.30",
+            "sanskrit_verse": "अपि चेत्सुदुराचारो भजते मामनन्यभाक्।\nसाधुरेव स मन्तव्यः सम्यग्व्यवसितो हि सः॥",
+            "english_translation": "Even if the most sinful person resolves to worship Me with exclusive devotion, that person is to be considered saintly, for their resolve is properly placed.",
+            "guidance_text": "Conflicting values create inner turmoil. Krishna offers clarity: root yourself in the Divine, and lesser conflicts resolve. When you align with eternal principles—truth, compassion, service—situational confusions fall away. Not all values are equal. Prioritize spiritual truth above social convention, inner integrity above external approval. This hierarchy brings peace."
+        },
+        {
+            "_id": "guidance_detachment_numb",
+            "mood_id": "detachment_numb",
+            "title": "Feel to Heal, Then Transcend",
+            "verse_reference": "Bhagavad Gita 6.20-21",
+            "sanskrit_verse": "यत्रोपरमते चित्तं निरुद्धं योगसेवया।\nयत्र चैवात्मनात्मानं पश्यन्नात्मनि तुष्यति॥",
+            "english_translation": "When the mind, restrained by the practice of yoga, attains quietude, and when, seeing the Self by the Self, one is satisfied in the Self alone.",
+            "guidance_text": "Numbness often protects us from overwhelming pain. Krishna teaches that true detachment is not numbness—it's profound peace after fully experiencing emotion. Don't rush past your feelings. Acknowledge them, then release them. Meditation can help you feel without being consumed. Real equanimity includes all emotions, holding them lightly. You're not broken—you're protecting yourself. Healing restores feeling."
+        },
+        {
+            "_id": "guidance_detachment_apathy",
+            "mood_id": "detachment_apathy",
+            "title": "Apathy is Not Wisdom",
+            "verse_reference": "Bhagavad Gita 3.8",
+            "sanskrit_verse": "नियतं कुरु कर्म त्वं कर्म ज्यायो ह्यकर्मणः।\nशरीरयात्रापि च ते न प्रसिद्ध्येदकर्मणः॥",
+            "english_translation": "Perform your prescribed duties, for action is better than inaction. Without work, even the maintenance of your physical body would not be possible.",
+            "guidance_text": "Apathy masquerades as detachment but leads to stagnation. Krishna doesn't teach withdrawal from life—he teaches engaged action without attachment to results. Do what is yours to do, not because you care about results, but because it is right. Purpose returns when you act, even without passion. Movement creates meaning. Begin with small duties, and interest will follow."
+        },
+        {
+            "_id": "guidance_detachment_tired",
+            "mood_id": "detachment_tired",
+            "title": "Rest in the Divine, Then Rise Again",
+            "verse_reference": "Bhagavad Gita 6.17",
+            "sanskrit_verse": "युक्ताहारविहारस्य युक्तचेष्टस्य कर्मसु।\nयुक्तस्वप्नावबोधस्य योगो भवति दुःखहा॥",
+            "english_translation": "For one who is moderate in eating and recreation, regulated in work, and proper in sleep and wakefulness, yoga destroys all sorrows.",
+            "guidance_text": "Life-weariness signals that you've been carrying too much for too long. Krishna teaches balance—rest is not weakness, it's wisdom. Give yourself permission to step back and replenish. You don't have to keep fighting. Sometimes the bravest thing is to rest, trusting that life continues. Surrender your exhaustion to the Divine. When you're ready, strength will return."
+        },
+        {
+            "_id": "guidance_joy_serenity",
+            "mood_id": "joy_serenity",
+            "title": "Serenity is Your Natural State",
+            "verse_reference": "Bhagavad Gita 5.21",
+            "sanskrit_verse": "बाह्यस्पर्शेष्वसक्तात्मा विन्दत्यात्मनि यत्सुखम्।\nस ब्रह्मयोगयुक्तात्मा सुखमक्षयमश्नुते॥",
+            "english_translation": "One who is not attached to external sense pleasures realizes happiness in the Self. Engaging in meditation, such a person enjoys unlimited happiness.",
+            "guidance_text": "The serenity you feel is not a temporary mood—it's a glimpse of your true nature. Krishna teaches that lasting peace comes from within, not from circumstances. Circumstances change, but the peace within remains steady. Cherish this state and remember it during storms. You've tasted what lies at your core: unchanging, divine tranquility. Meditation deepens this connection."
+        },
+        {
+            "_id": "guidance_joy_connection",
+            "mood_id": "joy_connection",
+            "title": "Divine Connection is Your Birthright",
+            "verse_reference": "Bhagavad Gita 10.8",
+            "sanskrit_verse": "अहं सर्वस्य प्रभवो मत्तः सर्वं प्रवर्तते।\nइति मत्वा भजन्ते मां बुधा भावसमन्विताः॥",
+            "english_translation": "I am the source of all creation. Everything emanates from Me. The wise who know this perfectly worship Me with loving devotion.",
+            "guidance_text": "The connection you feel is real and sacred. Krishna confirms that the Divine dwells within and all around. This feeling of union is your soul recognizing its source. Nurture this relationship through prayer, meditation, and service. You're not imagining it—you're awakening to the truth. All separation is illusion; connection is reality."
+        },
+        {
+            "_id": "guidance_joy_wisdom",
+            "mood_id": "joy_wisdom",
+            "title": "Wisdom Brings Lasting Joy",
+            "verse_reference": "Bhagavad Gita 4.38",
+            "sanskrit_verse": "न हि ज्ञानेन सदृशं पवित्रमिह विद्यते।\nतत्स्वयं योगसंसिद्धः कालेनात्मनि विन्दति॥",
+            "english_translation": "In this world, there is nothing as purifying as divine knowledge. One who is perfected in yoga discovers this within the Self in due course of time.",
+            "guidance_text": "The joy of understanding life's deeper truths surpasses all other pleasures. Krishna honors wisdom as the highest purifier. Your insights are hard-won treasures—share them with humility. True wisdom doesn't inflate the ego; it dissolves it. You see clearly now what confusion once obscured. Use this clarity to guide yourself and others with compassion."
+        },
+        {
+            "_id": "guidance_doubt_goodness",
+            "mood_id": "doubt_goodness",
+            "title": "Goodness Prevails in the End",
+            "verse_reference": "Bhagavad Gita 4.7-8",
+            "sanskrit_verse": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",
+            "english_translation": "Whenever there is a decline in righteousness and a rise in unrighteousness, O Bharata, at that time I manifest Myself.",
+            "guidance_text": "Evil may seem to triumph temporarily, but Krishna promises that Divine justice ultimately prevails. Goodness endures beyond individual lifetimes. Your task is not to control the world's moral arc but to remain steadfast in your own integrity. Be the goodness you wish to see. Trust that righteousness has power beyond what appears. Your good actions matter eternally."
+        },
+        {
+            "_id": "guidance_doubt_purpose",
+            "mood_id": "doubt_purpose",
+            "title": "Your Existence Has Divine Purpose",
+            "verse_reference": "Bhagavad Gita 7.6",
+            "sanskrit_verse": "एतद्योनीनि भूतानि सर्वाणीत्युपधारय।\nअहं कृत्स्नस्य जगतः प्रभवः प्रलयस्तथा॥",
+            "english_translation": "Understand that all living beings are born from these two natures. I am the source of the entire creation, and into Me it all dissolves.",
+            "guidance_text": "If you exist, you have purpose—this is Krishna's teaching. You are not an accident but an expression of Divine will. Your purpose may be hidden, but it's real. Often purpose reveals itself through small daily choices, not grand revelations. Live with integrity, serve where you can, and purpose unfolds naturally. Trust that your life matters in the cosmic design."
+        },
+        {
+            "_id": "guidance_doubt_karma",
+            "mood_id": "doubt_karma",
+            "title": "Every Action Bears Fruit",
+            "verse_reference": "Bhagavad Gita 4.17",
+            "sanskrit_verse": "कर्मणो ह्यपि बोद्धव्यं बोद्धव्यं च विकर्मणः।\nअकर्मणश्च बोद्धव्यं गहना कर्मणो गतिः॥",
+            "english_translation": "The true nature of action is difficult to understand. You must understand what is action, what is wrong action, and what is inaction.",
+            "guidance_text": "Karma's workings are subtle and span lifetimes—don't expect immediate results. Krishna teaches that every action has consequences, though they may not be visible now. Good actions plant seeds that sprout in their time. Don't let delayed justice make you cynical. Live righteously not for reward but because it is right. Universal law is patient but certain."
+        },
+        {
+            "_id": "guidance_pride_appearance",
+            "mood_id": "pride_appearance",
+            "title": "Beauty Fades, Character Endures",
+            "verse_reference": "Bhagavad Gita 2.14",
+            "sanskrit_verse": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+            "english_translation": "The contact of the senses with their objects gives rise to heat and cold, pleasure and pain. These are temporary and come and go. Learn to endure them.",
+            "guidance_text": "Physical beauty is fleeting—time spares no one. Krishna teaches that all sensory experiences, including beauty, are temporary. What you see in the mirror today will change. Invest in qualities that aging enhances: wisdom, kindness, and spiritual depth. True attractiveness radiates from within. Vanity blinds you to your real value, which is timeless."
+        },
+        {
+            "_id": "guidance_pride_virtue",
+            "mood_id": "pride_virtue",
+            "title": "True Virtue Needs No Announcement",
+            "verse_reference": "Bhagavad Gita 17.14",
+            "sanskrit_verse": "देवद्विजगुरुप्राज्ञपूजनं शौचमार्जवम्।\nब्रह्मचर्यमहिंसा च शारीरं तप उच्यते॥",
+            "english_translation": "Worship of the gods, the priests, the spiritual teacher, and the wise; purity, straightforwardness, celibacy, and non-violence—these are said to be the austerity of the body.",
+            "guidance_text": "If you feel righteous compared to others, examine your heart. Krishna teaches that true virtue is humble and doesn't need recognition. Moral pride is spiritual poison—it separates you from others and from God. Everyone struggles; everyone fails. Your goodness should inspire compassion, not superiority. The truly righteous never think themselves so."
+        },
+        {
+            "_id": "guidance_pride_independence",
+            "mood_id": "pride_independence",
+            "title": "We Are All Interdependent",
+            "verse_reference": "Bhagavad Gita 3.20",
+            "sanskrit_verse": "कर्मणैव हि संसिद्धिमास्थिता जनकादयः।\nलोकसंग्रहमेवापि संपश्यन्कर्तुमर्हसि॥",
+            "english_translation": "King Janaka and others attained perfection through action alone. You should also perform your duty with a view to guide people and for the welfare of society.",
+            "guidance_text": "No one succeeds alone—we all depend on countless others. Krishna teaches that we're woven together in mutual service. Your independence is an illusion built on others' help. Accepting help is not weakness; it's wisdom. Vulnerability connects us. The truly strong know when to lean on others. Pride isolates; humility binds us in love."
+        },
+        {
+            "_id": "guidance_desire_recognition",
+            "mood_id": "desire_recognition",
+            "title": "Seek the Divine's Recognition Alone",
+            "verse_reference": "Bhagavad Gita 6.1",
+            "sanskrit_verse": "श्रीभगवानुवाच।\nअनाश्रितः कर्मफलं कार्यं कर्म करोति यः।\nस संन्यासी च योगी च न निरग्निर्न चाक्रियः॥",
+            "english_translation": "The Supreme Lord said: One who performs duties without depending on the fruits of actions is a renunciate and a yogi, not one who has merely renounced fire or activities.",
+            "guidance_text": "Craving others' approval makes you their slave. Krishna teaches that true fulfillment comes from acting rightly, regardless of recognition. The Divine sees all your efforts, acknowledged or not. Work for this audience of One. When you stop performing for human applause, you find freedom. Your worth doesn't depend on being seen; it simply is."
+        },
+        {
+            "_id": "guidance_desire_comfort",
+            "mood_id": "desire_comfort",
+            "title": "Growth Lies Beyond Comfort",
+            "verse_reference": "Bhagavad Gita 6.5",
+            "sanskrit_verse": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+            "english_translation": "Elevate yourself through the power of your mind, and not degrade yourself, for the mind can be the friend and also the enemy of the self.",
+            "guidance_text": "Attachment to comfort stunts your growth. Krishna teaches that spiritual progress requires discipline and occasional discomfort. Your comfort zone is both haven and prison. Step beyond it regularly. Challenge yourself with small austerities—not for punishment but for strength. The soul expands through stretching. Comfort has its place, but it should not rule your life."
+        },
+        {
+            "_id": "guidance_desire_security",
+            "mood_id": "desire_security",
+            "title": "True Security Lies in the Divine",
+            "verse_reference": "Bhagavad Gita 9.22",
+            "sanskrit_verse": "अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥",
+            "english_translation": "To those who are constantly devoted and who worship Me with love, I give the understanding by which they can come to Me.",
+            "guidance_text": "No worldly circumstance guarantees security—everything changes. Krishna promises that those devoted to the Divine are cared for. Real security isn't controlling circumstances; it's trusting that you'll be okay regardless of what happens. Build your foundation on faith, not bank accounts or insurance policies. When you rest in the Divine, uncertainty becomes adventure, not threat."
+        },
+        {
+            "_id": "guidance_envy_youth",
+            "mood_id": "envy_youth",
+            "title": "Every Age Has Its Blessings",
+            "verse_reference": "Bhagavad Gita 2.13",
+            "sanskrit_verse": "देहिनोऽस्मिन्यथा देहे कौमारं यौवनं जरा।\nतथा देहान्तरप्राप्तिर्धीरस्तत्र न मुह्यति॥",
+            "english_translation": "Just as the embodied soul continuously passes through childhood, youth, and old age, similarly, at the time of death, the soul passes into another body. The wise are not deluded by this.",
+            "guidance_text": "Youth has energy; age has wisdom. Krishna teaches that all life stages serve their purpose. Don't envy what you've outgrown. The young face struggles you've survived; you possess gifts they haven't earned. Each age offers unique treasures. Celebrate your season of life rather than coveting another's. Your value deepens with time, it doesn't diminish."
+        },
+        {
+            "_id": "guidance_envy_family",
+            "mood_id": "envy_family",
+            "title": "Find Family in Spiritual Community",
+            "verse_reference": "Bhagavad Gita 6.32",
+            "sanskrit_verse": "आत्मौपम्येन सर्वत्र समं पश्यति योऽर्जुन।\nसुखं वा यदि वा दुःखं स योगी परमो मतः॥",
+            "english_translation": "One who sees happiness and distress equally in all beings, comparing them to oneself, is considered the highest yogi, O Arjuna.",
+            "guidance_text": "Family comes in many forms. Krishna teaches that spiritual kinship can be stronger than blood relations. If you lack biological family, create chosen family through deep friendships and spiritual community. Your capacity to love and be loved isn't limited to genetics. Look around—family may be closer than you think, just not in expected forms. Open your heart to connection."
+        },
+        {
+            "_id": "guidance_envy_health",
+            "mood_id": "envy_health",
+            "title": "Honor Your Body's Unique Journey",
+            "verse_reference": "Bhagavad Gita 3.35",
+            "sanskrit_verse": "श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्।\nस्वधर्मे निधनं श्रेयः परधर्मो भयावहः॥",
+            "english_translation": "It is better to perform one's own duty imperfectly than to perform another's duty perfectly. It is better to die doing one's own duty; another's duty is fraught with danger.",
+            "guidance_text": "Every body has its karma, its unique challenges. Krishna teaches that comparing your health to others' brings only suffering. Work with the body you have, not the one you wish you had. Adapt, adjust, find new ways to participate in life. Your spirit is unlimited, even if your body has limits. Health isn't virtue—how you respond to your circumstances is."
+        },
+        {
+            "_id": "guidance_despair_burden",
+            "mood_id": "despair_burden",
+            "title": "Share Your Burden with the Divine",
+            "verse_reference": "Bhagavad Gita 18.66",
+            "sanskrit_verse": "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",
+            "english_translation": "Abandon all varieties of dharma and just surrender unto Me. I shall deliver you from all sinful reactions. Do not fear.",
+            "guidance_text": "When life feels too heavy, Krishna invites you to surrender. You weren't meant to carry everything alone. Share your burden through prayer, asking the Divine to help you carry what you cannot bear. Surrender isn't giving up—it's acknowledging your limits and trusting in something greater. Even the strongest need support. Let divine grace lighten your load."
+        },
+        {
+            "_id": "guidance_despair_mistakes",
+            "mood_id": "despair_mistakes",
+            "title": "Learn from the Past, Live in the Present",
+            "verse_reference": "Bhagavad Gita 4.36-37",
+            "sanskrit_verse": "अपि चेदसि पापेभ्यः सर्वेभ्यः पापकृत्तमः।\nसर्वं ज्ञानप्लवेनैव वृजिनं सन्तरिष्यसि॥",
+            "english_translation": "Even if you are the most sinful of all sinners, you will cross over the ocean of sin by the boat of divine knowledge.",
+            "guidance_text": "Regret keeps you imprisoned in the past. Krishna promises that no mistake is beyond redemption. Learn from errors, make amends where possible, then release them. Your past doesn't define your future unless you let it. Forgiveness begins with forgiving yourself. You are more than your worst moments. Every day offers a chance to begin again with wisdom earned from what went before."
+        },
+        {
+            "_id": "guidance_despair_meaning",
+            "mood_id": "despair_meaning",
+            "title": "Meaning Emerges Through Service",
+            "verse_reference": "Bhagavad Gita 12.20",
+            "sanskrit_verse": "ये तु धर्म्यामृतमिदं यथोक्तं पर्युपासते।\nश्रद्दधाना मत्परमा भक्तास्तेऽतीव मे प्रियाः॥",
+            "english_translation": "Those who follow this eternal path of dharma with faith, regarding Me as their supreme goal, are very dear to Me.",
+            "guidance_text": "Meaninglessness is the soul's cry for purpose. Krishna teaches that meaning isn't found through analysis but through devotion and service. Stop searching and start serving. Help someone today, however small the act. Meaning accumulates in caring for others and connecting with the Divine. You don't find purpose; you create it through love in action. Begin where you are."
         }
     ]
     
