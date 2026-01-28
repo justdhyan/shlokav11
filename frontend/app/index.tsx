@@ -745,9 +745,7 @@ const styles = StyleSheet.create({
     color: '#F4E4C1',
     marginTop: 12,
     fontStyle: 'italic',
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
+    textShadow: '0px 1px 2px rgba(0, 0, 0, 0.3)',
   },
   questionSection: {
     paddingHorizontal: 20,
