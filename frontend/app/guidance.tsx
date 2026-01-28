@@ -223,7 +223,7 @@ export default function GuidanceScreen() {
                   onPress={() => router.back()}
                   style={styles.backButton}
                 >
-                  <Text style={styles.backButtonIcon}>←</Text>
+                  <Text style={styles.backButtonText}>← Back</Text>
                 </TouchableOpacity>
               </View>
 
