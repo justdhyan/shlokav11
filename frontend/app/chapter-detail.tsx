@@ -180,7 +180,7 @@ export default function ChapterDetailScreen() {
                   onPress={() => router.back()}
                   style={styles.backButton}
                 >
-                  <Text style={styles.backButtonText}>← Back</Text>
+                  <Text style={styles.backButtonText}>Back</Text>
                 </TouchableOpacity>
               </View>
 
