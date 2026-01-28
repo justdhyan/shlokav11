@@ -463,7 +463,6 @@ async def startup_db():
             "english_translation": "One who sees equality everywhere, and regards the happiness and distress of others as one's own—such a yogi is considered to be the highest.",
             "guidance_text": "Others' behavior reflects their own pain and confusion. Krishna teaches compassion—to see others as yourself. When someone hurts you, remember they too are struggling. This doesn't mean accepting mistreatment, but responding with wisdom instead of rage. Your peace is too precious to give away to anger."
         },
-        {
             "_id": "guidance_anger_self",
             "mood_id": "anger_self",
             "title": "Uplift Yourself, Don't Condemn",
