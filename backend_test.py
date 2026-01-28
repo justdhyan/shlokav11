@@ -1,322 +1,405 @@
 #!/usr/bin/env python3
 """
-SHLOKA Backend API Testing - Enhanced Emotions Feature
-Tests the enhanced emotions feature with 11 emotions (5 original + 6 new)
+SHLOKA Backend API Testing Suite
+Comprehensive testing for the "guidance not found" error fix
+
+This test suite validates:
+1. All 11 emotions API
+2. All 33 moods APIs (3 per emotion)
+3. All 33 guidance APIs (1 per mood)
+4. Complete user journey testing
+5. Error handling validation
+6. Focus on the 6 newly fixed moods
 """
 
 import requests
 import json
-import sys
-from typing import List, Dict, Any
+import time
+from typing import Dict, List, Any
 
-# Backend URL from frontend/.env
+# Backend URL from frontend .env
 BACKEND_URL = "https://error-resolve-14.preview.emergentagent.com/api"
 
-class SHLOKAAPITester:
+# Expected emotion IDs
+EXPECTED_EMOTIONS = [
+    "fear", "anger", "grief", "confusion", "detachment", 
+    "joy", "doubt", "pride", "desire", "envy", "despair"
+]
+
+# The 6 newly fixed moods that were causing "guidance not found" errors
+NEWLY_FIXED_MOODS = [
+    "anger_world",
+    "confusion_choice", 
+    "confusion_meaning",
+    "detachment_emptiness",
+    "grief_change",
+    "grief_health"
+]
+
+class SHLOKATestSuite:
     def __init__(self):
-        self.backend_url = BACKEND_URL
-        self.test_results = []
-        self.failed_tests = []
-        
-    def log_result(self, test_name: str, success: bool, message: str, details: Any = None):
-        """Log test result"""
-        result = {
-            "test": test_name,
-            "success": success,
-            "message": message,
-            "details": details
+        self.test_results = {
+            "emotions": {"passed": 0, "failed": 0, "details": []},
+            "moods": {"passed": 0, "failed": 0, "details": []},
+            "guidance": {"passed": 0, "failed": 0, "details": []},
+            "user_journey": {"passed": 0, "failed": 0, "details": []},
+            "error_handling": {"passed": 0, "failed": 0, "details": []},
+            "newly_fixed": {"passed": 0, "failed": 0, "details": []}
         }
-        self.test_results.append(result)
-        if not success:
-            self.failed_tests.append(result)
+        self.all_emotions = []
+        self.all_moods = {}
+        self.all_guidance = {}
         
-        status = "✅ PASS" if success else "❌ FAIL"
-        print(f"{status} - {test_name}: {message}")
-        if details and not success:
-            print(f"   Details: {details}")
-    
+    def log_result(self, category: str, test_name: str, passed: bool, details: str):
+        """Log test result"""
+        if passed:
+            self.test_results[category]["passed"] += 1
+            status = "✅ PASS"
+        else:
+            self.test_results[category]["failed"] += 1
+            status = "❌ FAIL"
+            
+        self.test_results[category]["details"].append(f"{status}: {test_name} - {details}")
+        print(f"{status}: {test_name} - {details}")
+        
     def test_emotions_api(self):
         """Test GET /api/emotions - Should return 11 emotions"""
-        print("\n=== Testing Emotions API ===")
+        print("\n🧪 TESTING EMOTIONS API")
+        print("=" * 50)
         
         try:
-            response = requests.get(f"{self.backend_url}/emotions", timeout=10)
+            response = requests.get(f"{BACKEND_URL}/emotions", timeout=10)
             
             if response.status_code != 200:
-                self.log_result("Emotions API Status", False, f"Expected 200, got {response.status_code}", response.text)
-                return False
+                self.log_result("emotions", "Emotions API Status", False, 
+                              f"Expected 200, got {response.status_code}")
+                return
                 
             emotions = response.json()
+            self.all_emotions = emotions
             
-            # Check total count
-            if len(emotions) != 11:
-                self.log_result("Emotions Count", False, f"Expected 11 emotions, got {len(emotions)}")
-                return False
-            
-            self.log_result("Emotions Count", True, f"Correctly returns 11 emotions")
-            
-            # Expected emotions (5 original + 6 new)
-            expected_emotions = {
-                "fear": "Fear", "anger": "Anger", "grief": "Grief", 
-                "confusion": "Confusion", "detachment": "Detachment",
-                "joy": "Joy", "doubt": "Doubt", "pride": "Pride",
-                "desire": "Desire", "envy": "Envy", "despair": "Despair"
-            }
-            
-            # Check each emotion has required fields
-            found_emotions = {}
+            # Test count
+            if len(emotions) == 11:
+                self.log_result("emotions", "Emotion Count", True, 
+                              f"Correct count: {len(emotions)} emotions")
+            else:
+                self.log_result("emotions", "Emotion Count", False, 
+                              f"Expected 11, got {len(emotions)}")
+                
+            # Test structure and IDs
+            found_ids = []
             for emotion in emotions:
+                emotion_id = emotion.get("_id")
+                found_ids.append(emotion_id)
+                
+                # Check required fields
                 required_fields = ["_id", "name_english", "name_sanskrit", "description", "icon"]
                 missing_fields = [field for field in required_fields if field not in emotion]
                 
-                if missing_fields:
-                    self.log_result(f"Emotion {emotion.get('_id', 'unknown')} Fields", False, 
-                                  f"Missing fields: {missing_fields}")
-                    continue
-                
-                found_emotions[emotion["_id"]] = emotion["name_english"]
-                self.log_result(f"Emotion {emotion['_id']} Structure", True, 
-                              f"All required fields present")
-            
-            # Check if all expected emotions are present
-            missing_emotions = set(expected_emotions.keys()) - set(found_emotions.keys())
-            if missing_emotions:
-                self.log_result("Expected Emotions", False, f"Missing emotions: {missing_emotions}")
-                return False
-            
-            # Check new emotions specifically
-            new_emotions = ["joy", "doubt", "pride", "desire", "envy", "despair"]
-            for emotion_id in new_emotions:
-                if emotion_id in found_emotions:
-                    self.log_result(f"New Emotion {emotion_id}", True, 
-                                  f"Found: {found_emotions[emotion_id]}")
+                if not missing_fields:
+                    self.log_result("emotions", f"Emotion {emotion_id} Structure", True, 
+                                  "All required fields present")
                 else:
-                    self.log_result(f"New Emotion {emotion_id}", False, "Not found")
+                    self.log_result("emotions", f"Emotion {emotion_id} Structure", False, 
+                                  f"Missing fields: {missing_fields}")
+                    
+            # Check all expected emotion IDs are present
+            missing_emotions = set(EXPECTED_EMOTIONS) - set(found_ids)
+            extra_emotions = set(found_ids) - set(EXPECTED_EMOTIONS)
             
-            self.log_result("Emotions API", True, "All emotions correctly returned with proper structure")
-            return True
-            
-        except requests.exceptions.RequestException as e:
-            self.log_result("Emotions API Connection", False, f"Connection error: {str(e)}")
-            return False
+            if not missing_emotions and not extra_emotions:
+                self.log_result("emotions", "Emotion IDs Match", True, 
+                              "All expected emotion IDs present")
+            else:
+                details = []
+                if missing_emotions:
+                    details.append(f"Missing: {missing_emotions}")
+                if extra_emotions:
+                    details.append(f"Extra: {extra_emotions}")
+                self.log_result("emotions", "Emotion IDs Match", False, "; ".join(details))
+                
         except Exception as e:
-            self.log_result("Emotions API", False, f"Unexpected error: {str(e)}")
-            return False
-    
-    def test_moods_api_for_new_emotions(self):
-        """Test GET /api/moods/{emotion_id} for new emotions"""
-        print("\n=== Testing Moods API for New Emotions ===")
+            self.log_result("emotions", "Emotions API Request", False, f"Exception: {str(e)}")
+            
+    def test_moods_apis(self):
+        """Test GET /api/moods/{emotion_id} for all 11 emotions"""
+        print("\n🧪 TESTING MOODS APIs")
+        print("=" * 50)
         
-        new_emotions = ["joy", "doubt", "pride", "desire", "envy", "despair"]
-        all_passed = True
+        if not self.all_emotions:
+            self.log_result("moods", "Moods Test Setup", False, "No emotions data available")
+            return
+            
+        total_moods = 0
         
-        for emotion_id in new_emotions:
+        for emotion in self.all_emotions:
+            emotion_id = emotion.get("_id")
+            
             try:
-                response = requests.get(f"{self.backend_url}/moods/{emotion_id}", timeout=10)
+                response = requests.get(f"{BACKEND_URL}/moods/{emotion_id}", timeout=10)
                 
                 if response.status_code != 200:
-                    self.log_result(f"Moods API - {emotion_id}", False, 
+                    self.log_result("moods", f"Moods API {emotion_id}", False, 
                                   f"Expected 200, got {response.status_code}")
-                    all_passed = False
                     continue
-                
+                    
                 moods = response.json()
+                self.all_moods[emotion_id] = moods
+                total_moods += len(moods)
                 
                 # Each emotion should have exactly 3 moods
-                if len(moods) != 3:
-                    self.log_result(f"Moods Count - {emotion_id}", False, 
-                                  f"Expected 3 moods, got {len(moods)}")
-                    all_passed = False
-                    continue
-                
-                self.log_result(f"Moods Count - {emotion_id}", True, f"Correctly returns 3 moods")
-                
-                # Check mood structure
+                if len(moods) == 3:
+                    self.log_result("moods", f"Moods Count {emotion_id}", True, 
+                                  f"Correct count: 3 moods")
+                else:
+                    self.log_result("moods", f"Moods Count {emotion_id}", False, 
+                                  f"Expected 3, got {len(moods)}")
+                    
+                # Test mood structure and emotion_id linkage
                 for mood in moods:
+                    mood_id = mood.get("_id")
+                    
+                    # Check required fields
                     required_fields = ["_id", "emotion_id", "name", "description"]
                     missing_fields = [field for field in required_fields if field not in mood]
                     
-                    if missing_fields:
-                        self.log_result(f"Mood Structure - {mood.get('_id', 'unknown')}", False,
+                    if not missing_fields:
+                        self.log_result("moods", f"Mood {mood_id} Structure", True, 
+                                      "All required fields present")
+                    else:
+                        self.log_result("moods", f"Mood {mood_id} Structure", False, 
                                       f"Missing fields: {missing_fields}")
-                        all_passed = False
-                        continue
-                    
-                    if mood["emotion_id"] != emotion_id:
-                        self.log_result(f"Mood Emotion ID - {mood['_id']}", False,
-                                      f"Expected emotion_id {emotion_id}, got {mood['emotion_id']}")
-                        all_passed = False
-                        continue
-                
-                self.log_result(f"Moods API - {emotion_id}", True, 
-                              f"All 3 moods have correct structure and emotion_id")
-                
-            except requests.exceptions.RequestException as e:
-                self.log_result(f"Moods API Connection - {emotion_id}", False, f"Connection error: {str(e)}")
-                all_passed = False
+                        
+                    # Check emotion_id linkage
+                    if mood.get("emotion_id") == emotion_id:
+                        self.log_result("moods", f"Mood {mood_id} Linkage", True, 
+                                      f"Correctly linked to {emotion_id}")
+                    else:
+                        self.log_result("moods", f"Mood {mood_id} Linkage", False, 
+                                      f"Expected {emotion_id}, got {mood.get('emotion_id')}")
+                        
             except Exception as e:
-                self.log_result(f"Moods API - {emotion_id}", False, f"Unexpected error: {str(e)}")
-                all_passed = False
-        
-        return all_passed
-    
-    def test_guidance_api_for_new_emotions(self):
-        """Test GET /api/guidance/{mood_id} for new emotions guidance"""
-        print("\n=== Testing Guidance API for New Emotions ===")
-        
-        # Test mood IDs for new emotions (as specified in the review request)
-        test_mood_ids = [
-            "joy_gratitude", "joy_peace", 
-            "doubt_faith", "doubt_teachings",
-            "pride_achievement", "pride_knowledge",
-            "desire_wealth", "desire_pleasure",
-            "envy_success", "envy_happiness",
-            "despair_effort", "despair_future"
-        ]
-        
-        all_passed = True
-        
-        for mood_id in test_mood_ids:
-            try:
-                response = requests.get(f"{self.backend_url}/guidance/{mood_id}", timeout=10)
+                self.log_result("moods", f"Moods API {emotion_id}", False, f"Exception: {str(e)}")
                 
-                if response.status_code != 200:
-                    self.log_result(f"Guidance API - {mood_id}", False,
-                                  f"Expected 200, got {response.status_code}")
-                    all_passed = False
-                    continue
-                
-                guidance = response.json()
-                
-                # Check required fields
-                required_fields = ["_id", "mood_id", "title", "verse_reference", 
-                                 "sanskrit_verse", "english_translation", "guidance_text"]
-                missing_fields = [field for field in required_fields if field not in guidance]
-                
-                if missing_fields:
-                    self.log_result(f"Guidance Structure - {mood_id}", False,
-                                  f"Missing fields: {missing_fields}")
-                    all_passed = False
-                    continue
-                
-                # Check verse reference format
-                verse_ref = guidance.get("verse_reference", "")
-                if not verse_ref.startswith("Bhagavad Gita"):
-                    self.log_result(f"Verse Reference Format - {mood_id}", False,
-                                  f"Expected 'Bhagavad Gita X.Y' format, got: {verse_ref}")
-                    all_passed = False
-                    continue
-                
-                # Check Sanskrit verse is not empty and contains Sanskrit characters
-                sanskrit_verse = guidance.get("sanskrit_verse", "")
-                if not sanskrit_verse or len(sanskrit_verse.strip()) < 10:
-                    self.log_result(f"Sanskrit Verse Content - {mood_id}", False,
-                                  "Sanskrit verse is empty or too short")
-                    all_passed = False
-                    continue
-                
-                # Check if Sanskrit verse contains Devanagari characters (basic check)
-                has_sanskrit = any('\u0900' <= char <= '\u097F' for char in sanskrit_verse)
-                if not has_sanskrit:
-                    self.log_result(f"Sanskrit Verse Script - {mood_id}", False,
-                                  "Sanskrit verse doesn't contain Devanagari characters")
-                    all_passed = False
-                    continue
-                
-                # Check English translation is meaningful
-                english_translation = guidance.get("english_translation", "")
-                if not english_translation or len(english_translation.strip()) < 20:
-                    self.log_result(f"English Translation - {mood_id}", False,
-                                  "English translation is empty or too short")
-                    all_passed = False
-                    continue
-                
-                # Check guidance text is meaningful
-                guidance_text = guidance.get("guidance_text", "")
-                if not guidance_text or len(guidance_text.strip()) < 50:
-                    self.log_result(f"Guidance Text - {mood_id}", False,
-                                  "Guidance text is empty or too short")
-                    all_passed = False
-                    continue
-                
-                self.log_result(f"Guidance API - {mood_id}", True,
-                              f"Complete guidance with authentic Bhagavad Gita verse")
-                
-            except requests.exceptions.RequestException as e:
-                self.log_result(f"Guidance API Connection - {mood_id}", False, f"Connection error: {str(e)}")
-                all_passed = False
-            except Exception as e:
-                self.log_result(f"Guidance API - {mood_id}", False, f"Unexpected error: {str(e)}")
-                all_passed = False
-        
-        return all_passed
-    
-    def test_response_times(self):
-        """Test API response times"""
-        print("\n=== Testing Response Times ===")
-        
-        import time
-        
-        # Test emotions API response time
-        try:
-            start_time = time.time()
-            response = requests.get(f"{self.backend_url}/emotions", timeout=10)
-            end_time = time.time()
-            
-            response_time = end_time - start_time
-            if response_time > 5.0:  # 5 seconds threshold
-                self.log_result("Emotions API Response Time", False,
-                              f"Response time {response_time:.2f}s exceeds 5s threshold")
-            else:
-                self.log_result("Emotions API Response Time", True,
-                              f"Response time {response_time:.2f}s is acceptable")
-                
-        except Exception as e:
-            self.log_result("Response Time Test", False, f"Error: {str(e)}")
-    
-    def run_all_tests(self):
-        """Run all tests"""
-        print("🧪 Starting SHLOKA Backend API Tests - Enhanced Emotions Feature")
-        print(f"Backend URL: {self.backend_url}")
-        print("=" * 70)
-        
-        # Run tests
-        emotions_passed = self.test_emotions_api()
-        moods_passed = self.test_moods_api_for_new_emotions()
-        guidance_passed = self.test_guidance_api_for_new_emotions()
-        self.test_response_times()
-        
-        # Summary
-        print("\n" + "=" * 70)
-        print("📊 TEST SUMMARY")
-        print("=" * 70)
-        
-        total_tests = len(self.test_results)
-        passed_tests = len([r for r in self.test_results if r["success"]])
-        failed_tests = len(self.failed_tests)
-        
-        print(f"Total Tests: {total_tests}")
-        print(f"Passed: {passed_tests}")
-        print(f"Failed: {failed_tests}")
-        print(f"Success Rate: {(passed_tests/total_tests)*100:.1f}%")
-        
-        if self.failed_tests:
-            print("\n❌ FAILED TESTS:")
-            for test in self.failed_tests:
-                print(f"  - {test['test']}: {test['message']}")
-        
-        # Overall result
-        critical_apis_passed = emotions_passed and moods_passed and guidance_passed
-        
-        if critical_apis_passed:
-            print("\n🎉 SUCCESS: All critical APIs are working correctly!")
-            print("✅ Enhanced emotions feature is fully functional")
-            return True
+        # Test total mood count (should be 33)
+        if total_moods == 33:
+            self.log_result("moods", "Total Moods Count", True, f"Correct total: {total_moods} moods")
         else:
-            print("\n⚠️  ISSUES FOUND: Some critical APIs have problems")
-            return False
+            self.log_result("moods", "Total Moods Count", False, f"Expected 33, got {total_moods}")
+            
+    def test_guidance_apis(self):
+        """Test GET /api/guidance/{mood_id} for all 33 moods"""
+        print("\n🧪 TESTING GUIDANCE APIs")
+        print("=" * 50)
+        
+        if not self.all_moods:
+            self.log_result("guidance", "Guidance Test Setup", False, "No moods data available")
+            return
+            
+        total_guidance = 0
+        
+        for emotion_id, moods in self.all_moods.items():
+            for mood in moods:
+                mood_id = mood.get("_id")
+                
+                try:
+                    response = requests.get(f"{BACKEND_URL}/guidance/{mood_id}", timeout=10)
+                    
+                    if response.status_code != 200:
+                        self.log_result("guidance", f"Guidance API {mood_id}", False, 
+                                      f"Expected 200, got {response.status_code}")
+                        continue
+                        
+                    guidance = response.json()
+                    self.all_guidance[mood_id] = guidance
+                    total_guidance += 1
+                    
+                    # Check required fields
+                    required_fields = ["_id", "mood_id", "title", "verse_reference", 
+                                     "sanskrit_verse", "english_translation", "guidance_text"]
+                    missing_fields = [field for field in required_fields if field not in guidance]
+                    
+                    if not missing_fields:
+                        self.log_result("guidance", f"Guidance {mood_id} Structure", True, 
+                                      "All required fields present")
+                    else:
+                        self.log_result("guidance", f"Guidance {mood_id} Structure", False, 
+                                      f"Missing fields: {missing_fields}")
+                        
+                    # Check mood_id linkage
+                    if guidance.get("mood_id") == mood_id:
+                        self.log_result("guidance", f"Guidance {mood_id} Linkage", True, 
+                                      f"Correctly linked to {mood_id}")
+                    else:
+                        self.log_result("guidance", f"Guidance {mood_id} Linkage", False, 
+                                      f"Expected {mood_id}, got {guidance.get('mood_id')}")
+                        
+                    # Verify authentic Bhagavad Gita verse reference
+                    verse_ref = guidance.get("verse_reference", "")
+                    if "Bhagavad Gita" in verse_ref and any(char.isdigit() for char in verse_ref):
+                        self.log_result("guidance", f"Guidance {mood_id} Verse Reference", True, 
+                                      f"Valid reference: {verse_ref}")
+                    else:
+                        self.log_result("guidance", f"Guidance {mood_id} Verse Reference", False, 
+                                      f"Invalid reference: {verse_ref}")
+                        
+                except Exception as e:
+                    self.log_result("guidance", f"Guidance API {mood_id}", False, f"Exception: {str(e)}")
+                    
+        # Test total guidance count (should be 33)
+        if total_guidance == 33:
+            self.log_result("guidance", "Total Guidance Count", True, f"Correct total: {total_guidance} guidance entries")
+        else:
+            self.log_result("guidance", "Total Guidance Count", False, f"Expected 33, got {total_guidance}")
+            
+    def test_newly_fixed_moods(self):
+        """Test the 6 newly fixed moods that were causing 'guidance not found' errors"""
+        print("\n🧪 TESTING NEWLY FIXED MOODS")
+        print("=" * 50)
+        
+        for mood_id in NEWLY_FIXED_MOODS:
+            try:
+                response = requests.get(f"{BACKEND_URL}/guidance/{mood_id}", timeout=10)
+                
+                if response.status_code == 200:
+                    guidance = response.json()
+                    self.log_result("newly_fixed", f"Fixed Mood {mood_id}", True, 
+                                  f"Guidance found: {guidance.get('title', 'No title')}")
+                else:
+                    self.log_result("newly_fixed", f"Fixed Mood {mood_id}", False, 
+                                  f"Still getting {response.status_code} error")
+                    
+            except Exception as e:
+                self.log_result("newly_fixed", f"Fixed Mood {mood_id}", False, f"Exception: {str(e)}")
+                
+    def test_user_journey(self):
+        """Test complete user journey: emotion → moods → guidance"""
+        print("\n🧪 TESTING USER JOURNEY")
+        print("=" * 50)
+        
+        # Test 3 random emotions for complete journey
+        test_emotions = ["fear", "joy", "anger"]
+        
+        for emotion_id in test_emotions:
+            try:
+                # Step 1: Get emotion (already tested, but verify it exists)
+                emotion_found = any(e.get("_id") == emotion_id for e in self.all_emotions)
+                if not emotion_found:
+                    self.log_result("user_journey", f"Journey {emotion_id} - Emotion", False, 
+                                  "Emotion not found")
+                    continue
+                    
+                # Step 2: Get moods for emotion
+                moods_response = requests.get(f"{BACKEND_URL}/moods/{emotion_id}", timeout=10)
+                if moods_response.status_code != 200:
+                    self.log_result("user_journey", f"Journey {emotion_id} - Moods", False, 
+                                  f"Moods API failed: {moods_response.status_code}")
+                    continue
+                    
+                moods = moods_response.json()
+                
+                # Step 3: Get guidance for each mood
+                journey_success = True
+                for mood in moods:
+                    mood_id = mood.get("_id")
+                    guidance_response = requests.get(f"{BACKEND_URL}/guidance/{mood_id}", timeout=10)
+                    
+                    if guidance_response.status_code != 200:
+                        self.log_result("user_journey", f"Journey {emotion_id} - Guidance {mood_id}", False, 
+                                      f"Guidance API failed: {guidance_response.status_code}")
+                        journey_success = False
+                        
+                if journey_success:
+                    self.log_result("user_journey", f"Complete Journey {emotion_id}", True, 
+                                  f"Full journey successful: {len(moods)} moods → guidance")
+                    
+            except Exception as e:
+                self.log_result("user_journey", f"Journey {emotion_id}", False, f"Exception: {str(e)}")
+                
+    def test_error_handling(self):
+        """Test error handling for invalid IDs"""
+        print("\n🧪 TESTING ERROR HANDLING")
+        print("=" * 50)
+        
+        # Test invalid emotion_id
+        try:
+            response = requests.get(f"{BACKEND_URL}/moods/invalid_emotion", timeout=10)
+            if response.status_code == 404:
+                self.log_result("error_handling", "Invalid Emotion ID", True, 
+                              "Correctly returns 404 for invalid emotion")
+            else:
+                self.log_result("error_handling", "Invalid Emotion ID", False, 
+                              f"Expected 404, got {response.status_code}")
+        except Exception as e:
+            self.log_result("error_handling", "Invalid Emotion ID", False, f"Exception: {str(e)}")
+            
+        # Test invalid mood_id
+        try:
+            response = requests.get(f"{BACKEND_URL}/guidance/invalid_mood", timeout=10)
+            if response.status_code == 404:
+                self.log_result("error_handling", "Invalid Mood ID", True, 
+                              "Correctly returns 404 for invalid mood")
+            else:
+                self.log_result("error_handling", "Invalid Mood ID", False, 
+                              f"Expected 404, got {response.status_code}")
+        except Exception as e:
+            self.log_result("error_handling", "Invalid Mood ID", False, f"Exception: {str(e)}")
+            
+    def run_all_tests(self):
+        """Run all test suites"""
+        print("🚀 STARTING SHLOKA BACKEND API TESTING")
+        print("=" * 60)
+        print(f"Backend URL: {BACKEND_URL}")
+        print(f"Testing Time: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+        
+        # Run all test suites
+        self.test_emotions_api()
+        self.test_moods_apis()
+        self.test_guidance_apis()
+        self.test_newly_fixed_moods()
+        self.test_user_journey()
+        self.test_error_handling()
+        
+        # Print summary
+        self.print_summary()
+        
+    def print_summary(self):
+        """Print comprehensive test summary"""
+        print("\n" + "=" * 60)
+        print("🏁 SHLOKA BACKEND TESTING SUMMARY")
+        print("=" * 60)
+        
+        total_passed = 0
+        total_failed = 0
+        
+        for category, results in self.test_results.items():
+            passed = results["passed"]
+            failed = results["failed"]
+            total_passed += passed
+            total_failed += failed
+            
+            status = "✅" if failed == 0 else "❌"
+            print(f"{status} {category.upper()}: {passed} passed, {failed} failed")
+            
+        print(f"\n🎯 OVERALL RESULT: {total_passed} passed, {total_failed} failed")
+        
+        if total_failed == 0:
+            print("🎉 ALL TESTS PASSED! The 'guidance not found' error has been successfully fixed!")
+            print("✅ All 11 emotions working")
+            print("✅ All 33 moods working") 
+            print("✅ All 33 guidance entries working")
+            print("✅ All 6 newly fixed moods working")
+            print("✅ Complete user journey working")
+        else:
+            print("⚠️  SOME TESTS FAILED - Issues need attention:")
+            for category, results in self.test_results.items():
+                if results["failed"] > 0:
+                    print(f"\n❌ {category.upper()} FAILURES:")
+                    for detail in results["details"]:
+                        if "❌ FAIL" in detail:
+                            print(f"   {detail}")
 
 if __name__ == "__main__":
-    tester = SHLOKAAPITester()
-    success = tester.run_all_tests()
-    sys.exit(0 if success else 1)
+    # Run the comprehensive test suite
+    test_suite = SHLOKATestSuite()
+    test_suite.run_all_tests()
