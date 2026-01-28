@@ -81,17 +81,40 @@ export default function GuidanceScreen() {
         return;
       }
 
-      // Try to get from cache first for instant display
+      // Try to get from cache first
       const cacheKey = `guidance_${moodId}`;
       const cached = await AsyncStorage.getItem(cacheKey);
+      
       if (cached) {
-        const cachedData = JSON.parse(cached);
-        setGuidance(cachedData);
-        // If we have cached data, we can stop loading immediately
-        // and update in background
-        if (isRetry) {
-          setLoading(false);
-          setIsRetrying(false);
+        try {
+          const cachedObj: CachedGuidance = JSON.parse(cached);
+          const now = Date.now();
+          const age = now - cachedObj.timestamp;
+          
+          // Check if cache is expired (older than 7 days)
+          if (age > CACHE_EXPIRY_MS) {
+            console.log('Cache expired, will fetch fresh data');
+            await AsyncStorage.removeItem(cacheKey);
+          } else {
+            // Use cached data immediately
+            setGuidance(cachedObj.data);
+            setCacheAge(age);
+            setIsStale(age > CACHE_STALE_MS);
+            setIsCachedData(true);
+            
+            // If cache is stale (older than 24 hours), try to refresh in background
+            if (age > CACHE_STALE_MS && !isRetry) {
+              console.log('Cache is stale, refreshing in background');
+            } else if (!isRetry) {
+              // Cache is fresh, no need to fetch
+              setLoading(false);
+              setIsRetrying(false);
+              return;
+            }
+          }
+        } catch (parseError) {
+          console.error('Error parsing cached data:', parseError);
+          await AsyncStorage.removeItem(cacheKey);
         }
       }
 
@@ -112,6 +135,7 @@ export default function GuidanceScreen() {
           console.log('Using cached data due to server error');
           setLoading(false);
           setIsRetrying(false);
+          setError('Showing saved guidance. Server temporarily unavailable.');
           return;
         }
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -123,9 +147,19 @@ export default function GuidanceScreen() {
         throw new Error('Invalid guidance data received');
       }
 
+      // Save to cache with timestamp
+      const cacheObj: CachedGuidance = {
+        data: data,
+        timestamp: Date.now(),
+        version: CACHE_VERSION
+      };
+      
       setGuidance(data);
-      // Cache the data
-      await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
+      setCacheAge(0);
+      setIsStale(false);
+      setIsCachedData(false);
+      
+      await AsyncStorage.setItem(cacheKey, JSON.stringify(cacheObj));
       setLoading(false);
       setIsRetrying(false);
       setError(null);
