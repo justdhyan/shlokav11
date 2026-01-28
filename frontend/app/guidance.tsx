@@ -32,6 +32,8 @@ export default function GuidanceScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+  const [isRetrying, setIsRetrying] = useState(false);
   const router = useRouter();
   const { moodId } = useLocalSearchParams();
 
@@ -47,8 +49,15 @@ export default function GuidanceScreen() {
     }
   }, [guidance]);
 
-  const fetchGuidance = async () => {
+  const fetchGuidance = async (isRetry = false) => {
     try {
+      if (isRetry) {
+        setIsRetrying(true);
+        setRetryCount(prev => prev + 1);
+      } else {
+        setRetryCount(0);
+      }
+      
       setError(null);
       
       // Check if backend URL is configured
@@ -56,6 +65,7 @@ export default function GuidanceScreen() {
         console.error('EXPO_PUBLIC_BACKEND_URL is not defined');
         setError('Configuration error. Please check your setup.');
         setLoading(false);
+        setIsRetrying(false);
         return;
       }
 
@@ -63,39 +73,76 @@ export default function GuidanceScreen() {
       const cacheKey = `guidance_${moodId}`;
       const cached = await AsyncStorage.getItem(cacheKey);
       if (cached) {
-        setGuidance(JSON.parse(cached));
-        // Don't stop loading yet - we still want to fetch fresh data
+        const cachedData = JSON.parse(cached);
+        setGuidance(cachedData);
+        // If we have cached data, we can stop loading immediately
+        // and update in background
+        if (isRetry) {
+          setLoading(false);
+          setIsRetrying(false);
+        }
       }
 
-      // Fetch from API
+      // Fetch from API with longer timeout for slow connections
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       const response = await fetch(
-        `${EXPO_PUBLIC_BACKEND_URL}/api/guidance/${moodId}`
+        `${EXPO_PUBLIC_BACKEND_URL}/api/guidance/${moodId}`,
+        { signal: controller.signal }
       );
       
+      clearTimeout(timeoutId);
+      
       if (!response.ok) {
+        // If we have cached data and get a network error, just use cached
+        if (cached && response.status >= 500) {
+          console.log('Using cached data due to server error');
+          setLoading(false);
+          setIsRetrying(false);
+          return;
+        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       const data = await response.json();
 
-      if (!data) {
-        throw new Error('No guidance found for this mood');
+      if (!data || !data.title) {
+        throw new Error('Invalid guidance data received');
       }
 
       setGuidance(data);
       // Cache the data
       await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
       setLoading(false);
+      setIsRetrying(false);
       setError(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching guidance:', error);
-      setError('Unable to load guidance. Please try again.');
-      setLoading(false);
       
-      // If we don't have cached data, this is a real problem
-      if (!guidance) {
-        setError('Unable to connect to server. Please check your internet connection and try again.');
+      // If we have cached data, use it and show a gentle notice
+      if (guidance) {
+        setError('Showing saved guidance. Network unavailable.');
+        setLoading(false);
+        setIsRetrying(false);
+        return;
       }
+      
+      // More user-friendly error messages
+      if (error.name === 'AbortError') {
+        setError('Connection is slow. Please wait...');
+        // Auto-retry once for timeouts
+        if (retryCount < 1) {
+          setTimeout(() => fetchGuidance(true), 1000);
+        }
+      } else if (error.message.includes('Failed to fetch') || error.message.includes('Network')) {
+        setError('Please check your internet connection and try again.');
+      } else {
+        setError('Having trouble loading guidance. Please try again.');
+      }
+      
+      setLoading(false);
+      setIsRetrying(false);
     }
   };
 
