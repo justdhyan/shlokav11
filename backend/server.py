@@ -473,49 +473,49 @@ async def startup_db():
             "guidance_text": "Self-directed anger is self-destruction. Krishna teaches that you must be your own ally, not your enemy. Yes, you have made mistakes—everyone does. Learn from them and move forward. Treat yourself with the same kindness you would offer a dear friend who is struggling. You deserve your own compassion."
         },
         {
-            "_id": "guidance_grief_past",
-            "mood_id": "grief_past",
-            "title": "The Past Cannot Be Changed",
-            "verse_reference": "Bhagavad Gita 2.22",
-            "sanskrit_verse": "वासांसि जीर्णानि यथा विहाय नवानि गृह्णाति नरोऽपराणि।\nतथा शरीराणि विहाय जीर्णान्यन्यानि संयाति नवानि देही॥",
-            "english_translation": "As a person sheds worn-out garments and wears new ones, likewise, at the time of death, the soul casts off its worn-out body and enters a new one.",
-            "guidance_text": "The past is like old clothes—it has served its purpose and must be released. Krishna teaches that clinging to what was prevents you from embracing what can be. Your memories have shaped you, but they need not imprison you. Honor the past, learn from it, and let it go. New life awaits."
+            "_id": "guidance_grief_change",
+            "mood_id": "grief_change",
+            "title": "Change is the Nature of Life",
+            "verse_reference": "Bhagavad Gita 2.27",
+            "sanskrit_verse": "जातस्य हि ध्रुवो मृत्युर्ध्रुवं जन्म मृतस्य च।\nतस्मादपरिहार्येऽर्थे न त्वं शोचितुमर्हसि॥",
+            "english_translation": "For one who has taken birth, death is certain; and for one who has died, birth is certain. Therefore, you should not lament over the inevitable.",
+            "guidance_text": "The way things were cannot remain forever—this is the law of existence. Krishna teaches that change, though painful, is natural and necessary. Honor what you had, but do not resist life's flow. Even as you grieve, new possibilities are emerging. The essence of what you loved remains, transformed but not lost."
         },
         {
-            "_id": "guidance_grief_mistakes",
-            "mood_id": "grief_mistakes",
-            "title": "Mistakes Are Teachers",
-            "verse_reference": "Bhagavad Gita 4.37",
-            "sanskrit_verse": "यथैधांसि समिद्धोऽग्निर्भस्मसात्कुरुतेऽर्जुन।\nज्ञानाग्निः सर्वकर्माणि भस्मसात्कुरुते तथा॥",
-            "english_translation": "Just as a blazing fire reduces wood to ashes, O Arjuna, so does the fire of knowledge burn to ashes all reactions to material activities.",
-            "guidance_text": "Your past mistakes can be transformed through understanding. Krishna teaches that the fire of wisdom burns away the consequences of past errors. What you did cannot be undone, but you can learn and grow from it. Forgive yourself. Your mistakes do not define you—what you do next does."
+            "_id": "guidance_grief_health",
+            "mood_id": "grief_health",
+            "title": "The Body Changes, the Soul Remains",
+            "verse_reference": "Bhagavad Gita 2.13",
+            "sanskrit_verse": "देहिनोऽस्मिन्यथा देहे कौमारं यौवनं जरा।\nतथा देहान्तरप्राप्तिर्धीरस्तत्र न मुह्यति॥",
+            "english_translation": "Just as the embodied soul continuously passes through childhood, youth, and old age, similarly, at the time of death, the soul passes into another body. The wise are not deluded by this.",
+            "guidance_text": "Physical decline is difficult to accept, but Krishna reminds us that the body is temporary while the soul endures. You are more than your physical form. Find new ways to contribute and connect that honor your current state. Wisdom and presence do not diminish with age—they often deepen. Your value is not measured by physical strength."
         },
         {
-            "_id": "guidance_confusion_relationships",
-            "mood_id": "confusion_relationships",
-            "title": "Love Without Attachment",
-            "verse_reference": "Bhagavad Gita 13.10",
-            "sanskrit_verse": "असक्तिरनभिष्वङ्गः पुत्रदारगृहादिषु।\nनित्यं च समचित्तत्वमिष्टानिष्टोपपत्तिषु॥",
-            "english_translation": "Being free from attachment to children, spouse, home, and so forth, and remaining equipoised in pleasant and unpleasant events.",
-            "guidance_text": "Relationships confuse us when we expect them to complete us. Krishna teaches loving without possessing, caring without controlling. Each person is on their own journey. Your role is to support, not to own or fix them. Love them as they are, not as you wish they were. This brings peace to all relationships."
+            "_id": "guidance_confusion_choice",
+            "mood_id": "confusion_choice",
+            "title": "Act with What You Know Now",
+            "verse_reference": "Bhagavad Gita 3.19",
+            "sanskrit_verse": "तस्मादसक्तः सततं कार्यं कर्म समाचर।\nअसक्तो ह्याचरन्कर्म परमाप्नोति पूरुषः॥",
+            "english_translation": "Therefore, without attachment, constantly perform actions which are duty, for by performing actions without attachment, one attains the Supreme.",
+            "guidance_text": "Indecision often masks fear of making the wrong choice. Krishna teaches that action, even imperfect, is better than paralysis. Make the best decision you can with what you know now. Learn as you go. Most paths lead somewhere worthwhile when walked with sincerity. The important thing is to move forward."
         },
         {
-            "_id": "guidance_confusion_path",
-            "mood_id": "confusion_path",
-            "title": "Many Paths Lead to the Same Goal",
-            "verse_reference": "Bhagavad Gita 4.11",
-            "sanskrit_verse": "ये यथा मां प्रपद्यन्ते तांस्तथैव भजाम्यहम्।\nमम वर्त्मानुवर्तन्ते मनुष्याः पार्थ सर्वशः॥",
-            "english_translation": "In whatever way people surrender unto Me, I reciprocate accordingly. Everyone follows My path, in all respects, O son of Pritha.",
-            "guidance_text": "There is no single right path for everyone. Krishna honors all sincere approaches to the Divine. Your spiritual journey is unique to you. What matters is not the specific practices you follow, but the sincerity of your seeking. Trust your heart and walk with faith. All paths of genuine devotion lead home."
+            "_id": "guidance_confusion_meaning",
+            "mood_id": "confusion_meaning",
+            "title": "Meaning is Created Through Action",
+            "verse_reference": "Bhagavad Gita 3.20",
+            "sanskrit_verse": "कर्मणैव हि संसिद्धिमास्थिता जनकादयः।\nलोकसंग्रहमेवापि संपश्यन्कर्तुमर्हसि॥",
+            "english_translation": "King Janaka and others attained perfection through action alone. You should also perform your duty with a view to guide people and for the welfare of society.",
+            "guidance_text": "Life's meaning is not found by thinking alone—it emerges through doing. Krishna teaches that purpose reveals itself in service and action. Instead of seeking a grand meaning, begin with small acts of kindness and duty. Meaning accumulates in how you treat others and fulfill your responsibilities. Do good, and purpose will follow."
         },
         {
-            "_id": "guidance_detachment_connection",
-            "mood_id": "detachment_connection",
-            "title": "Connection Through Selfless Service",
-            "verse_reference": "Bhagavad Gita 12.13",
-            "sanskrit_verse": "अद्वेष्टा सर्वभूतानां मैत्रः करुण एव च।\nनिर्ममो निरहङ्कारः समदुःखसुखः क्षमी॥",
-            "english_translation": "One who is not envious but is a kind friend to all, who does not think himself a proprietor, who is free from false ego—such a person is very dear to Me.",
-            "guidance_text": "True connection comes through service, not through neediness. Krishna values those who offer kindness without expecting anything in return. When you serve others selflessly, you discover deep connection. Your loneliness dissolves not by demanding love, but by giving it freely. Become a friend to all beings."
+            "_id": "guidance_detachment_emptiness",
+            "mood_id": "detachment_emptiness",
+            "title": "Fill Emptiness with the Divine",
+            "verse_reference": "Bhagavad Gita 9.22",
+            "sanskrit_verse": "अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥",
+            "english_translation": "To those who are constantly devoted and who worship Me with love, I give the understanding by which they can come to Me.",
+            "guidance_text": "The emptiness you feel is the soul's longing for connection with something greater. Krishna promises that those who turn to the Divine with devotion will find fulfillment. What worldly pleasures once filled, they no longer can. This void is an invitation—fill it not with more possessions or distractions, but with spiritual practice, prayer, and service. The Divine fills all emptiness."
         },
         {
             "_id": "guidance_detachment_world",
