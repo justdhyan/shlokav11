@@ -360,6 +360,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FAF7F2',
   },
+  notificationBanner: {
+    backgroundColor: 'rgba(107, 155, 209, 0.15)',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(107, 155, 209, 0.3)',
+  },
+  notificationText: {
+    fontSize: 14,
+    color: '#5B7C99',
+    textAlign: 'center',
+    fontWeight: '500',
+  },
   backgroundImage: {
     flex: 1,
     width: '100%',
