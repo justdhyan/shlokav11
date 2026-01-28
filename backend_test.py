@@ -18,7 +18,7 @@ import time
 from typing import Dict, List, Any
 
 # Backend URL from frontend .env
-BACKEND_URL = "https://error-resolve-14.preview.emergentagent.com/api"
+BACKEND_URL = "https://back-ui-normalize.preview.emergentagent.com/api"
 
 # Expected emotion IDs
 EXPECTED_EMOTIONS = [
