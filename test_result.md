@@ -185,6 +185,12 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ NEW EMOTIONS GUIDANCE TESTED - Comprehensive testing completed for all 12 new guidance entries (2 per new emotion). All guidance entries have authentic Bhagavad Gita verses with proper Sanskrit Devanagari script, correct verse references (Bhagavad Gita X.Y format), meaningful English translations, and contextual guidance text. Tested mood IDs: joy_gratitude, joy_peace, doubt_faith, doubt_teachings, pride_achievement, pride_knowledge, desire_wealth, desire_pleasure, envy_success, envy_happiness, despair_effort, despair_future. All passed successfully."
+      - working: false
+        agent: "user"
+        comment: "USER REPORTED: 'guidance not found' error while accessing each option. Some moods were not returning guidance, causing 404 errors for users."
+      - working: true
+        agent: "main"
+        comment: "🔧 FIXED - Conducted 3-phase fix for 'guidance not found' error. PHASE 1: Audited and found 6 moods without guidance (anger_world, confusion_choice, confusion_meaning, detachment_emptiness, grief_change, grief_health) and 6 orphaned guidance entries. PHASE 2: Removed orphaned entries and created 6 new authentic Bhagavad Gita guidance entries using verses BG 2.14, 2.27, 2.13, 3.19, 3.20, and 9.22. PHASE 3: Tested all 33 mood→guidance flows - 100% success rate. All 11 emotions → 33 moods → 33 guidances now working perfectly. Complete user journey validated. No more 'guidance not found' errors."
 
 frontend:
   - task: "Home Screen - Chapter wise Button"
