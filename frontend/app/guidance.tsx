@@ -43,6 +43,9 @@ export default function GuidanceScreen() {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const [isRetrying, setIsRetrying] = useState(false);
+  const [cacheAge, setCacheAge] = useState<number | null>(null);
+  const [isStale, setIsStale] = useState(false);
+  const [isCachedData, setIsCachedData] = useState(false);
   const router = useRouter();
   const { moodId } = useLocalSearchParams();
 
