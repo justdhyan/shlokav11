@@ -444,6 +444,87 @@ async def startup_db():
             "sanskrit_verse": "या निशा सर्वभूतानां तस्यां जागर्ति संयमी।\nयस्यां जाग्रति भूतानि सा निशा पश्यतो मुनेः॥",
             "english_translation": "What is night for all beings is the time of awakening for the self-controlled; and the time of awakening for all beings is night for the introspective sage.",
             "guidance_text": "When you cannot see hope, it doesn't mean there is none. Sometimes the darkest hour comes before transformation. Krishna teaches that the wise see differently than others—what seems like an ending may be a beginning. Hold on. Continue doing what is right. The dawn you cannot yet see is coming."
+        },
+        {
+            "_id": "guidance_fear_failure",
+            "mood_id": "fear_failure",
+            "title": "Success and Failure Are the Same",
+            "verse_reference": "Bhagavad Gita 2.48",
+            "sanskrit_verse": "योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय।\nसिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते॥",
+            "english_translation": "Perform your duty with a steady mind, abandoning attachment to success and failure. Such equanimity is called yoga.",
+            "guidance_text": "Fear of failure paralyzes action. Krishna teaches that true success lies not in outcomes, but in performing your duty with sincerity. When you are equally poised in success and failure, you are free to act courageously. Do your best and accept the result with grace. This is the way of the yogi."
+        },
+        {
+            "_id": "guidance_anger_others",
+            "mood_id": "anger_others",
+            "title": "See the Divine in All",
+            "verse_reference": "Bhagavad Gita 6.32",
+            "sanskrit_verse": "आत्मौपम्येन सर्वत्र समं पश्यति योऽर्जुन।\nसुखं वा यदि वा दुःखं स योगी परमो मतः॥",
+            "english_translation": "One who sees equality everywhere, and regards the happiness and distress of others as one's own—such a yogi is considered to be the highest.",
+            "guidance_text": "Others' behavior reflects their own pain and confusion. Krishna teaches compassion—to see others as yourself. When someone hurts you, remember they too are struggling. This doesn't mean accepting mistreatment, but responding with wisdom instead of rage. Your peace is too precious to give away to anger."
+        },
+        {
+            "_id": "guidance_anger_self",
+            "mood_id": "anger_self",
+            "title": "Uplift Yourself, Don't Condemn",
+            "verse_reference": "Bhagavad Gita 6.5",
+            "sanskrit_verse": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+            "english_translation": "Elevate yourself through the power of your mind, and not degrade yourself, for the mind can be the friend and also the enemy of the self.",
+            "guidance_text": "Self-directed anger is self-destruction. Krishna teaches that you must be your own ally, not your enemy. Yes, you have made mistakes—everyone does. Learn from them and move forward. Treat yourself with the same kindness you would offer a dear friend who is struggling. You deserve your own compassion."
+        },
+        {
+            "_id": "guidance_grief_past",
+            "mood_id": "grief_past",
+            "title": "The Past Cannot Be Changed",
+            "verse_reference": "Bhagavad Gita 2.22",
+            "sanskrit_verse": "वासांसि जीर्णानि यथा विहाय नवानि गृह्णाति नरोऽपराणि।\nतथा शरीराणि विहाय जीर्णान्यन्यानि संयाति नवानि देही॥",
+            "english_translation": "As a person sheds worn-out garments and wears new ones, likewise, at the time of death, the soul casts off its worn-out body and enters a new one.",
+            "guidance_text": "The past is like old clothes—it has served its purpose and must be released. Krishna teaches that clinging to what was prevents you from embracing what can be. Your memories have shaped you, but they need not imprison you. Honor the past, learn from it, and let it go. New life awaits."
+        },
+        {
+            "_id": "guidance_grief_mistakes",
+            "mood_id": "grief_mistakes",
+            "title": "Mistakes Are Teachers",
+            "verse_reference": "Bhagavad Gita 4.37",
+            "sanskrit_verse": "यथैधांसि समिद्धोऽग्निर्भस्मसात्कुरुतेऽर्जुन।\nज्ञानाग्निः सर्वकर्माणि भस्मसात्कुरुते तथा॥",
+            "english_translation": "Just as a blazing fire reduces wood to ashes, O Arjuna, so does the fire of knowledge burn to ashes all reactions to material activities.",
+            "guidance_text": "Your past mistakes can be transformed through understanding. Krishna teaches that the fire of wisdom burns away the consequences of past errors. What you did cannot be undone, but you can learn and grow from it. Forgive yourself. Your mistakes do not define you—what you do next does."
+        },
+        {
+            "_id": "guidance_confusion_relationships",
+            "mood_id": "confusion_relationships",
+            "title": "Love Without Attachment",
+            "verse_reference": "Bhagavad Gita 13.10",
+            "sanskrit_verse": "असक्तिरनभिष्वङ्गः पुत्रदारगृहादिषु।\nनित्यं च समचित्तत्वमिष्टानिष्टोपपत्तिषु॥",
+            "english_translation": "Being free from attachment to children, spouse, home, and so forth, and remaining equipoised in pleasant and unpleasant events.",
+            "guidance_text": "Relationships confuse us when we expect them to complete us. Krishna teaches loving without possessing, caring without controlling. Each person is on their own journey. Your role is to support, not to own or fix them. Love them as they are, not as you wish they were. This brings peace to all relationships."
+        },
+        {
+            "_id": "guidance_confusion_path",
+            "mood_id": "confusion_path",
+            "title": "Many Paths Lead to the Same Goal",
+            "verse_reference": "Bhagavad Gita 4.11",
+            "sanskrit_verse": "ये यथा मां प्रपद्यन्ते तांस्तथैव भजाम्यहम्।\nमम वर्त्मानुवर्तन्ते मनुष्याः पार्थ सर्वशः॥",
+            "english_translation": "In whatever way people surrender unto Me, I reciprocate accordingly. Everyone follows My path, in all respects, O son of Pritha.",
+            "guidance_text": "There is no single right path for everyone. Krishna honors all sincere approaches to the Divine. Your spiritual journey is unique to you. What matters is not the specific practices you follow, but the sincerity of your seeking. Trust your heart and walk with faith. All paths of genuine devotion lead home."
+        },
+        {
+            "_id": "guidance_detachment_connection",
+            "mood_id": "detachment_connection",
+            "title": "Connection Through Selfless Service",
+            "verse_reference": "Bhagavad Gita 12.13",
+            "sanskrit_verse": "अद्वेष्टा सर्वभूतानां मैत्रः करुण एव च।\nनिर्ममो निरहङ्कारः समदुःखसुखः क्षमी॥",
+            "english_translation": "One who is not envious but is a kind friend to all, who does not think himself a proprietor, who is free from false ego—such a person is very dear to Me.",
+            "guidance_text": "True connection comes through service, not through neediness. Krishna values those who offer kindness without expecting anything in return. When you serve others selflessly, you discover deep connection. Your loneliness dissolves not by demanding love, but by giving it freely. Become a friend to all beings."
+        },
+        {
+            "_id": "guidance_detachment_world",
+            "mood_id": "detachment_world",
+            "title": "Be in the World, Not of It",
+            "verse_reference": "Bhagavad Gita 5.10",
+            "sanskrit_verse": "ब्रह्मण्याधाय कर्माणि सङ्गं त्यक्त्वा करोति यः।\nलिप्यते न स पापेन पद्मपत्रमिवाम्भसा॥",
+            "english_translation": "One who performs duties without attachment, dedicating actions to the Supreme, is not tainted by sin, just as a lotus leaf is untouched by water.",
+            "guidance_text": "Feeling disconnected from the world can be wisdom, not loneliness. Krishna uses the lotus as example—it grows in water but remains dry. Engage with life fully, but don't let it pull you under. Your spiritual nature transcends worldly affairs. Participate in the world while remaining centered in your true self."
         }
     ]
     
