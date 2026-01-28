@@ -564,7 +564,7 @@ export default function HomeScreen() {
               <View style={styles.heroSection}>
                 <View style={styles.heroContent}>
                   <Text style={styles.appName}>SHLOKA</Text>
-                  <Text style={styles.appNameSanskrit}>श्लोक</Text>
+                  <Text style={styles.appNameSanskrit}>श्लोका</Text>
                   <Text style={styles.tagline}>Wisdom from the Bhagavad Gita</Text>
                 </View>
               </View>
